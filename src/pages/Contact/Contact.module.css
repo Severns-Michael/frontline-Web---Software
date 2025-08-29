@@ -1,0 +1,7 @@
+.wrap { padding: 2rem 0; }
+.form { display: grid; gap: 1rem; max-width: 720px; }
+label { display: block; margin-bottom: .25rem; font-weight: 600; }
+input, textarea { width: 100%; padding: .8rem 1rem; border-radius: .75rem; border: 1px solid rgba(255,255,255,.12); background: #0e1220; color: var(--text); }
+input:focus, textarea:focus { outline: 3px solid var(--brand); outline-offset: 2px; }
+span[role="alert"] { color: #ffb4b4; font-size: .9rem; }
+.success { color: var(--accent); font-weight: 600; }
