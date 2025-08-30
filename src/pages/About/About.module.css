@@ -1,1 +1,77 @@
-.wrap { padding: 2rem 0; display: grid; gap: 1rem; }
+/* Hero band */
+.hero {
+  padding: 5rem 0 3rem;
+  text-align: center;
+  background:
+    radial-gradient(800px 400px at 70% -10%, rgba(255,255,255,.06), transparent),
+    linear-gradient(180deg, #0b0d12, #121621);
+}
+.badge {
+  display: inline-block; font-size: .85rem; padding: .3rem .6rem; border-radius: 999px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); margin-bottom: 1rem;
+}
+.hero h1 { margin: 0 0 .5rem; }
+.accent { color: var(--brand); }
+.sub { color: var(--muted); max-width: 820px; margin: 0 auto; }
+
+/* Story + stats */
+.story { background: #0e1320; padding: 2.5rem 0; }
+.storyGrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 900px) { .storyGrid { grid-template-columns: 1fr; } }
+.h2 { font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); margin: 0 0 1rem; }
+
+.statCards {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+.statNum { display: block; font-size: 1.8rem; font-weight: 800; }
+.statLabel { display: block; color: var(--muted); }
+
+/* Values */
+.values { background: #0c111d; padding: 2.5rem 0; text-align: center; }
+.kicker { color: var(--muted); margin: .25rem 0 1.5rem; }
+.valueGrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.valueCard {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* Team */
+.team { background: #0e1320; padding: 2.5rem 0; text-align: center; }
+.teamGrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem; margin-top: 1rem;
+}
+.teamCard {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.avatar {
+  width: 64px; height: 64px; margin: 0 auto .75rem; border-radius: 999px;
+  display: grid; place-items: center; font-weight: 800;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+}
+.role { color: var(--brand); font-weight: 600; margin: .25rem 0; }
+.bio { color: var(--muted); }
+.chips {
+  list-style: none; padding: 0; margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center;
+}
+.chips li {
+  font-size: .8rem; padding: .25rem .5rem; border-radius: 999px;
+  background: #f7ff00; color: #0b0d12; /* subtle neon like your reference */
+}

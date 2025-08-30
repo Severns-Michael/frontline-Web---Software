@@ -7,7 +7,7 @@ return (
 <header className={styles.header}>
 <div className="container">
 <div className={styles.row}>
-<Link to="/" className={styles.logo} aria-label="MS Labs Web Solutions home">MS Labs</Link>
+<Link to="/" className={styles.logo} aria-label="Frontline Web & Software home">Frontline Web & Software</Link>
 <nav aria-label="Primary">
 <ul className={styles.nav}>
 <li><NavLink to="/about">About</NavLink></li>

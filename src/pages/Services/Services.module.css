@@ -1,2 +1,106 @@
-.wrap { padding: 2rem 0; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; padding-left: 0; list-style: none; }
+/* Hero */
+.hero {
+  padding: 5rem 0 3rem;
+  text-align: center;
+  background:
+    radial-gradient(800px 400px at 70% -10%, rgba(255,255,255,.06), transparent),
+    linear-gradient(180deg, #0b0d12, #121621);
+}
+.badge {
+  display: inline-block; font-size: .85rem; padding: .3rem .6rem; border-radius: 999px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); margin-bottom: 1rem;
+}
+.accent { color: var(--brand); }
+.sub { color: var(--muted); max-width: 900px; margin: .25rem auto 0; }
+
+/* Bands + layout */
+.bandSoft { background: #0e1320; padding: 2.5rem 0; }
+.grid {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Card */
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: grid; gap: .85rem;
+  position: relative;
+}
+.cardHead { display: flex; gap: .9rem; align-items: center; }
+.icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  display: grid; place-items: center; font-size: 1.1rem;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+}
+.cardSub { color: var(--muted); margin: .15rem 0 0; }
+.meta {
+  display: flex; gap: 1.25rem; align-items: center; list-style: none; padding: 0; margin: 0;
+  color: var(--muted);
+}
+.block h4 { margin: .25rem 0 .5rem; }
+.bullets { margin: 0; padding-left: 1.1rem; opacity: .9; }
+
+/* Chips */
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.chips li {
+  font-size: .8rem; padding: .25rem .55rem; border-radius: 999px;
+  background: #f7ff00; color: #0b0d12;
+}
+
+/* Popular ribbon */
+.popular { border-color: rgba(106,166,255,.7); box-shadow: 0 0 0 2px rgba(106,166,255,.35) inset; }
+.ribbon {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--brand); color: #0b0d12; font-weight: 700;
+  padding: .2rem .6rem; border-radius: 999px; font-size: .8rem;
+  border: 1px solid rgba(0,0,0,.2);
+}
+
+/* Action bar */
+.actionBar {
+  margin-top: .25rem; border-radius: 12px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: .6rem .8rem; display: flex; justify-content: flex-end;
+}
+.cta, .ctaPrimary { text-decoration: none; font-weight: 700; }
+.cta { color: var(--text); }
+.ctaPrimary {
+  background: var(--brand); color: #0b0d12; padding: .5rem .8rem; border-radius: 10px;
+}
+
+/* Process */
+.process { padding: 2.5rem 0; background: #0c111d; text-align: center; }
+.h2 { font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); margin: 0 0 .5rem; }
+.kicker { color: var(--muted); margin: 0 0 1.25rem; }
+.processRow {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;
+}
+.processRow li {
+  background: var(--surface); border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius); padding: 1rem;
+}
+.stepNum {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); margin-bottom: .5rem;
+}
+
+/* Support band */
+.support { padding: 3rem 0; background: #0b0f1a; text-align: center; }
+.supportIcon {
+  width: 56px; height: 56px; border-radius: 999px; margin: 0 auto .5rem;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+}
+.supportRow {
+  list-style: none; padding: 0; margin: 1rem 0 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;
+}
+.supportRow li { background: var(--surface); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 1rem; }
+
+/* Final CTA */
+.finalCta { padding: 2.5rem 0; background: #0e1320; text-align: center; }

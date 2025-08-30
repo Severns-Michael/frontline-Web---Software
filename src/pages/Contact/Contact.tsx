@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import * as RHF from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { leadService } from '../../lib/leads.service'
@@ -7,97 +7,169 @@ import type { Lead } from '../../types/lead'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Contact.module.css'
 
-const LeadSchema = z.object({
+const PROJECT_TYPES = ['Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const
+const BUDGETS       = ['$2k–$5k', '$5k–$10k', '$10k–$25k', '$25k+'] as const
+const TIMELINES     = ['2–4 weeks', '4–8 weeks', '8–12 weeks', '12+ weeks'] as const
+
+
+const Schema = z.object({
   name: z.string().min(2, 'Please enter your full name'),
   email: z.string().email('Enter a valid email'),
   phone: z.string().optional(),
   company: z.string().optional(),
-  message: z.string().min(10, 'Tell us a bit more so we can help').max(1000)
-})
+projectType: z
+  .string()
+  .min(1, 'Select a project type')
+  .refine(v => (PROJECT_TYPES as readonly string[]).includes(v), { message: 'Select a project type' }),
 
-type LeadForm = z.infer<typeof LeadSchema>
+budget: z
+  .string()
+  .min(1, 'Select a budget')
+  .refine(v => (BUDGETS as readonly string[]).includes(v), { message: 'Select a budget' }),
+
+timeline: z
+  .string()
+  .min(1, 'Select a timeline')
+  .refine(v => (TIMELINES as readonly string[]).includes(v), { message: 'Select a timeline' }),
+  message: z.string().min(20, 'Tell us a bit more so we can help (min 20 chars)').max(1500)
+})
+type Form = z.infer<typeof Schema>
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = RHF.useForm<LeadForm>({
-    resolver: zodResolver(LeadSchema),
-    mode: 'onBlur'
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<Form>({
+    resolver: zodResolver(Schema), mode: 'onBlur'
   })
 
-  async function onSubmit(values: LeadForm) {
+  async function onSubmit(values: Form) {
     setSent(false)
-    try {
-      const payload: Lead = { ...values, source: 'website' }
-      await leadService.createLead(payload)
-      reset()
-      setSent(true)
-    } catch (err) {
-      console.error(err)
-      alert('Something went wrong sending your message. Please try again.')
-    }
+    const payload: Lead = { ...values, source: 'website' }
+    await leadService.createLead(payload)
+    reset()
+    setSent(true)
   }
 
   return (
-    <section className={styles.wrap}>
-      <SEO title="Contact" />
-      <h1>Contact</h1>
-      <p>Tell us about your project. We’ll reply within one business day.</p>
+    <>
+      <SEO title="Contact" description="Tell us about your project. Free consultation and a fast, detailed proposal." />
 
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            autoComplete="name"
-            {...register('name')}
-            aria-invalid={!!errors.name}
-            aria-describedby={errors.name ? 'name-error' : undefined}
-          />
-          {errors.name && <span id="name-error" role="alert">{errors.name.message}</span>}
+      {/* HERO */}
+      <section className={styles.hero}>
+        <div className="container">
+          <div className={styles.badge}>Get In Touch</div>
+          <h1>Let’s Build Something <span className={styles.accent}>Amazing</span> Together</h1>
+          <p className={styles.sub}>
+            Ready to start your project? Tell us about your vision and we’ll provide a free consultation
+            and a detailed project proposal.
+          </p>
         </div>
+      </section>
 
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            {...register('email')}
-            aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? 'email-error' : undefined}
-          />
-          {errors.email && <span id="email-error" role="alert">{errors.email.message}</span>}
+      {/* BODY */}
+      <section className={styles.bodyBand}>
+        <div className="container">
+          <div className={styles.grid}>
+            {/* FORM CARD */}
+            <article className={`card ${styles.formCard}`}>
+              <header>
+                <h2 className={styles.h2}>Project Inquiry Form</h2>
+                <p className={styles.kicker}>Tell us about your project and we’ll provide a free consultation.</p>
+              </header>
+
+              <form onSubmit={handleSubmit(onSubmit)} noValidate className={styles.form}>
+                <div className={styles.twoCol}>
+                  <div>
+                    <label htmlFor="name">Full Name *</label>
+                    <input id="name" type="text" autoComplete="name" {...register('name')} aria-invalid={!!errors.name} />
+                    {errors.name && <span role="alert">{errors.name.message}</span>}
+                  </div>
+                  <div>
+                    <label htmlFor="email">Email Address *</label>
+                    <input id="email" type="email" autoComplete="email" {...register('email')} aria-invalid={!!errors.email} />
+                    {errors.email && <span role="alert">{errors.email.message}</span>}
+                  </div>
+                </div>
+
+                <div className={styles.twoCol}>
+                  <div>
+                    <label htmlFor="phone">Phone Number</label>
+                    <input id="phone" type="tel" autoComplete="tel" {...register('phone')} />
+                  </div>
+                  <div>
+                    <label htmlFor="company">Company Name</label>
+                    <input id="company" type="text" autoComplete="organization" {...register('company')} />
+                  </div>
+                </div>
+
+                <div className={styles.twoCol}>
+                  <div>
+                    <label htmlFor="projectType">Project Type *</label>
+                    <select id="projectType" {...register('projectType')} aria-invalid={!!errors.projectType}>
+                      <option value="">Select your project type</option>
+                      {PROJECT_TYPES.map(pt => <option key={pt} value={pt}>{pt}</option>)}
+                    </select>
+                    {errors.projectType && <span role="alert">{errors.projectType.message}</span>}
+                  </div>
+                  <div>
+                    <label htmlFor="budget">Project Budget *</label>
+                    <select id="budget" {...register('budget')} aria-invalid={!!errors.budget}>
+                      <option value="">Select your budget range</option>
+                      {BUDGETS.map(b => <option key={b} value={b}>{b}</option>)}
+                    </select>
+                    {errors.budget && <span role="alert">{errors.budget.message}</span>}
+                  </div>
+                </div>
+
+                <div className={styles.singleCol}>
+                  <div>
+                    <label htmlFor="timeline">Timeline *</label>
+                    <select id="timeline" {...register('timeline')} aria-invalid={!!errors.timeline}>
+                      <option value="">When do you need this?</option>
+                      {TIMELINES.map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                    {errors.timeline && <span role="alert">{errors.timeline.message}</span>}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message">Project Description *</label>
+                  <textarea id="message" rows={6} {...register('message')} aria-invalid={!!errors.message}
+                    placeholder="Tell us about your goals, requirements, and any specific features you need..." />
+                  {errors.message && <span role="alert">{errors.message.message}</span>}
+                </div>
+
+                <button className={styles.submit} disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending…' : 'Send Inquiry  →'}
+                </button>
+
+                {sent && <p className={styles.success} aria-live="polite">Thanks! We’ll reply within one business day.</p>}
+              </form>
+            </article>
+
+            {/* INFO COLUMN */}
+            <aside className={styles.infoCol} aria-label="Contact information">
+              <div className={`card ${styles.infoCard}`}>
+                <h3>Get In Touch</h3>
+                <ul className={styles.contactList}>
+                  <li>📧 <a href="mailto:hello@yourstudio.com">hello@yourstudio.com</a></li>
+                  <li>📞 <a href="tel:+15551234567">+1 (555) 123-4567</a></li>
+                  <li>📍 123 Tech Street, San Francisco, CA 94102</li>
+                </ul>
+              </div>
+
+              <div className={`card ${styles.noteBlue}`}>
+                <h3>Quick Response</h3>
+                <p>We typically respond within 24 hours and can schedule a consultation call within 48 hours.</p>
+              </div>
+
+              <div className={`card ${styles.noteGreen}`}>
+                <h3>Free Consultation</h3>
+                <p>Every project starts with a free consultation where we discuss goals and provide honest recommendations.</p>
+              </div>
+            </aside>
+          </div>
         </div>
-
-        <div>
-          <label htmlFor="phone">Phone <small>(optional)</small></label>
-          <input id="phone" type="tel" autoComplete="tel" {...register('phone')} />
-        </div>
-
-        <div>
-          <label htmlFor="company">Company <small>(optional)</small></label>
-          <input id="company" type="text" autoComplete="organization" {...register('company')} />
-        </div>
-
-        <div>
-          <label htmlFor="message">Project details</label>
-          <textarea
-            id="message"
-            rows={6}
-            {...register('message')}
-            aria-invalid={!!errors.message}
-            aria-describedby={errors.message ? 'message-error' : undefined}
-          />
-          {errors.message && <span id="message-error" role="alert">{errors.message.message}</span>}
-        </div>
-
-        <button className="button" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Sending…' : 'Send message'}
-        </button>
-
-        {sent && <p className={styles.success} aria-live="polite">Message sent ✓</p>}
-      </form>
-    </section>
+      </section>
+    </>
   )
 }
