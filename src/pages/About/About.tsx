@@ -12,13 +12,13 @@ export default function About() {
       {/* HERO */}
       <section className={styles.hero}>
         <div className="container">
-          <div className={styles.badge}>About MS Labs</div>
+          <div className={styles.badge}>About Frontline Web & Software</div>
           <h1>
             We’re Passionate About Building <span className={styles.accent}>Amazing Software</span>
           </h1>
           <p className={styles.sub}>
             Since 2019, we’ve helped small businesses leverage technology to grow faster, serve
-            customers better, and compete with larger companies.
+            customers better, and compete with larger companies.// new missong statement
           </p>
         </div>
       </section>
@@ -30,36 +30,36 @@ export default function About() {
             <div>
               <h2 className={styles.h2}>Our Story</h2>
               <p>
-                MS Labs was founded with a simple mission: make enterprise-level technology
+                Frontline Web & Software was founded with a simple mission: make enterprise-level technology
                 accessible to small businesses. Too many great teams were stuck with outdated
                 websites and manual workflows that slowed them down.
               </p>
               <p>
                 What started as a small dev shop has grown into a full-service web development
                 partner. We’ve helped restaurants streamline orders, contractors capture more
-                leads, and local brands scale online with lightweight, maintainable software.
+                leads, and local brands scale online with lightweight, maintainable software. // need reworked
               </p>
               <p>
-                Today, we’re proud to have completed 50+ projects and helped clients generate real
+                Today, we’re proud to have completed 50+ projects and helped clients generate real// needs reworked
                 results through better technology and clean code.
               </p>
             </div>
 
             <ul className={styles.statCards}>
               <li className={styles.card}>
-                <span className={styles.statNum}>50+</span>
+                <span className={styles.statNum}>0 </span>
                 <span className={styles.statLabel}>Projects Delivered</span>
               </li>
               <li className={styles.card}>
-                <span className={styles.statNum}>98%</span>
+                <span className={styles.statNum}>0%</span>
                 <span className={styles.statLabel}>Client Satisfaction</span>
               </li>
               <li className={styles.card}>
-                <span className={styles.statNum}>5+</span>
+                <span className={styles.statNum}>2+</span>
                 <span className={styles.statLabel}>Years Experience</span>
               </li>
               <li className={styles.card}>
-                <span className={styles.statNum}>30+</span>
+                <span className={styles.statNum}>0</span>
                 <span className={styles.statLabel}>Happy Clients</span>
               </li>
             </ul>
@@ -111,7 +111,9 @@ export default function About() {
                 2+ years building scalable web apps for startups and small businesses.
               </p>
               <ul className={styles.chips}>
-                <li>React</li><li>Node.js</li><li>Postgres</li><li>AWS</li>
+                <li>React</li> <li>Vue</li>
+                <li>TypeScript</li> <li> javaScript</li> <li>java</li> <li>Node.js</li> <li>Html</li> <li>Css</li>
+                <li>Postgres</li><li>Suprabase</li> <li>Prisma</li>
               </ul>
             </article>
           </div>

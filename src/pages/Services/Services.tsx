@@ -29,12 +29,12 @@ export default function Services() {
       <section className={styles.bandSoft} aria-label="Service packages">
         <div className={`container ${styles.grid}`}>
           {/* Websites */}
-          <article className={styles.card}>
+          <article className={styles.card}> 
             <header className={styles.cardHead}>
               <div className={styles.icon}>🌐</div>
               <div>
                 <h3>Website Development</h3>
-                <p className={styles.cardSub}>Professional websites that convert</p>
+                <p className={styles.cardSub}>Professional websites for a indvidual or buisness</p>
               </div>
             </header>
 
@@ -61,7 +61,7 @@ export default function Services() {
             <div className={styles.block}>
               <h4>Technologies:</h4>
               <ul className={styles.chips}>
-                <li>React</li><li>Node.js</li><li>PostgreSQL</li><li>AWS</li>
+                <li>React</li><li>TypeScript</li><li>Html</li><li>Css</li> <li>Netlify</li> <li>vite</li>
               </ul>
             </div>
 

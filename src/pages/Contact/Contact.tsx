@@ -151,9 +151,9 @@ export default function Contact() {
               <div className={`card ${styles.infoCard}`}>
                 <h3>Get In Touch</h3>
                 <ul className={styles.contactList}>
-                  <li>📧 <a href="mailto:hello@yourstudio.com">hello@yourstudio.com</a></li>
-                  <li>📞 <a href="tel:+15551234567">+1 (555) 123-4567</a></li>
-                  <li>📍 123 Tech Street, San Francisco, CA 94102</li>
+                  <li>📧 <a href="mailto:frontline.web.and.software@gmail.com">frontline.web.and.software@gmail.com</a></li>
+                  <li>📞 <a href="tel:+4192616857">(419) 261-6857</a></li>
+                  <li>📍 Based in Pocatello, ID</li>
                 </ul>
               </div>
 

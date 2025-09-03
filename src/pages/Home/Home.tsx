@@ -10,12 +10,12 @@ export default function Home() {
         description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
       />
 
-      {/* HERO */}
+      {/* HERO  need to add visual on right side laptop/ phone */}
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroGrid}>
             <div className={styles.heroCopy}>
-              <div className={styles.badge}>Trusted by 30+ Small Businesses</div>
+              <div className={styles.badge}>Veteran Owned and Operated</div>
               <h1>Custom-Coded Websites & Software for Small Businesses</h1>
               <p className={styles.sub}>
                 Transform your business with custom websites, mobile apps, and SaaS platforms.
@@ -30,7 +30,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES (VALUES) */}
+      {/* SERVICES (VALUES) redfine scope of work/  */}
       <section className={`${styles.values} ${styles.bandSoft}`} aria-labelledby="values-title">
         <div className="container">
           <h2 id="values-title" className={styles.h2}>Everything You Need to Grow Online</h2>
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS STRIP */}
+      {/* STATS STRIP  change to something to give more trust since im new and dont have costmers*/ }
       <section className={`${styles.stats} ${styles.bandDark}`} aria-label="Key stats">
         <div className="container">
           <ul className={styles.statsRow}>
