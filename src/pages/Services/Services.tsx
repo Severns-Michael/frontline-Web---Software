@@ -1,244 +1,256 @@
 import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
-import styles from './Services.module.css'
+import styles from './Services.module.css' // use the CSS you pasted
 
 export default function Services() {
   return (
     <>
       <SEO
-        title="Services"
-        description="Complete digital solutions for growing businesses — websites, mobile apps, SaaS, and e-commerce."
+        title="Services & Pricing | Frontline Web & Software"
+        description="Starter websites, business websites with SEO, e-commerce stores, and custom web apps. Veteran-owned. Clean code, no bloat."
       />
 
       {/* HERO */}
       <section className={styles.hero}>
         <div className="container">
-          <div className={styles.badge}>Our Services</div>
+          <p className={styles.badge}>Veteran Owned • Clean, Custom Code</p>
           <h1>
-            Complete Digital Solutions <br />
-            <span className={styles.accent}>For Growing Businesses</span>
+            What We <span className={styles.accent}>Build</span>
           </h1>
           <p className={styles.sub}>
-            From simple websites to complex SaaS platforms, we build technology that helps your
-            business scale and compete.
+            Starter sites, business sites with SEO, online stores, and custom web apps—built fast,
+            accessible, and SEO-ready. No page builders or cookie-cutter templates.
           </p>
         </div>
       </section>
 
-      {/* SERVICE CARDS */}
-      <section className={styles.bandSoft} aria-label="Service packages">
-        <div className={`container ${styles.grid}`}>
-          {/* Websites */}
-          <article className={styles.card}> 
-            <header className={styles.cardHead}>
-              <div className={styles.icon}>🌐</div>
-              <div>
-                <h3>Website Development</h3>
-                <p className={styles.cardSub}>Professional websites for a indvidual or buisness</p>
+      {/* WEBSITES */}
+      <section className={styles.bandSoft}>
+        <div className="container">
+          <h2>Websites</h2>
+          <div className={styles.grid}>
+            {/* Starter Website */}
+            <article className={styles.card}>
+              <div className={styles.cardHead}>
+                <span className={styles.icon}>🌐</span>
+                <div>
+                  <h3>Starter Website</h3>
+                  <p className={styles.cardSub}>Entry point for small businesses</p>
+                </div>
               </div>
-            </header>
 
-            <ul className={styles.meta}>
-              <li>Starting at <strong>$2,500</strong></li>
-              <li>2–4 weeks</li>
-            </ul>
-
-            <p>
-              Custom websites built with modern technologies, optimized for performance and
-              conversions.
-            </p>
-
-            <div className={styles.block}>
-              <h4>What’s Included:</h4>
               <ul className={styles.bullets}>
-                <li>Responsive mobile-first design</li>
-                <li>SEO optimization</li>
-                <li>Content management system</li>
-                <li>Contact forms & lead capture</li>
+                <li>1–5 pages (Home, About, Services, Contact)</li>
+                <li>Mobile-friendly, SEO-ready, fast load times</li>
+                <li>Google Analytics + Business Profile setup</li>
+                <li>Hosting & domain setup</li>
               </ul>
-            </div>
 
-            <div className={styles.block}>
-              <h4>Technologies:</h4>
-              <ul className={styles.chips}>
-                <li>React</li><li>TypeScript</li><li>Html</li><li>Css</li> <li>Netlify</li> <li>vite</li>
+              <ul className={styles.meta}>
+                <li>Budget: $500–1,500</li>
+                <li>Timeline: ~1–2 weeks</li>
               </ul>
-            </div>
 
-            <div className={styles.actionBar}>
-              <Link to="/contact" className={styles.cta}>Get Started →</Link>
-            </div>
-          </article>
-
-          {/* Mobile (Most popular) */}
-          <article className={`${styles.card} ${styles.popular}`} aria-label="Most popular">
-            <div className={styles.ribbon}>Most Popular</div>
-
-            <header className={styles.cardHead}>
-              <div className={styles.icon}>📱</div>
-              <div>
-                <h3>Mobile App Development</h3>
-                <p className={styles.cardSub}>Native iOS & Android apps</p>
+              <div className={styles.actionBar}>
+                <Link to="/contact" className={styles.ctaPrimary}>Get a Free Quote</Link>
               </div>
-            </header>
+            </article>
 
-            <ul className={styles.meta}>
-              <li>Starting at <strong>$8,000</strong></li>
-              <li>6–12 weeks</li>
-            </ul>
-
-            <p>Native mobile applications with smooth performance and great user experience.</p>
-
-            <div className={styles.block}>
-              <h4>What’s Included:</h4>
-              <ul className={styles.bullets}>
-                <li>iOS and Android development</li>
-                <li>React Native option for cross-platform</li>
-                <li>App Store / Play submission assistance</li>
-                <li>Push notifications</li>
-              </ul>
-            </div>
-
-            <div className={styles.block}>
-              <h4>Technologies:</h4>
-              <ul className={styles.chips}>
-                <li>React Native</li><li>Swift</li><li>Kotlin</li><li>Firebase</li>
-              </ul>
-            </div>
-
-            <div className={styles.actionBar}>
-              <Link to="/contact" className={styles.ctaPrimary}>Get Started →</Link>
-            </div>
-          </article>
-
-          {/* SaaS */}
-          <article className={styles.card}>
-            <header className={styles.cardHead}>
-              <div className={styles.icon}>☁️</div>
-              <div>
-                <h3>SaaS Platform Development</h3>
-                <p className={styles.cardSub}>Scalable software solutions</p>
+            {/* Business Website + SEO (Popular) */}
+            <article className={`${styles.card} ${styles.popular}`}>
+              <span className={styles.ribbon}>Most Popular</span>
+              <div className={styles.cardHead}>
+                <span className={styles.icon}>🚀</span>
+                <div>
+                  <h3>Business Website + SEO</h3>
+                  <p className={styles.cardSub}>For growing teams and local rank</p>
+                </div>
               </div>
-            </header>
 
-            <ul className={styles.meta}>
-              <li>Starting at <strong>$15,000</strong></li>
-              <li>8–16 weeks</li>
-            </ul>
-
-            <p>
-              Custom SaaS platforms with user management, billing, and advanced features.
-            </p>
-
-            <div className={styles.block}>
-              <h4>What’s Included:</h4>
               <ul className={styles.bullets}>
-                <li>Multi-tenant architecture</li>
-                <li>User management & authentication</li>
-                <li>Subscription billing integration</li>
-                <li>Admin dashboard & API development</li>
+                <li>5–10+ pages, custom branding</li>
+                <li>Advanced SEO (keywords, metadata, performance)</li>
+                <li>Lead capture forms & email integration</li>
+                <li>Optional blog/news section</li>
+                <li>Maintenance plan ($50–200/mo)</li>
               </ul>
-            </div>
 
-            <div className={styles.block}>
-              <h4>Technologies:</h4>
-              <ul className={styles.chips}>
-                <li>React</li><li>Node.js</li><li>PostgreSQL</li><li>AWS</li>
+              <ul className={styles.meta}>
+                <li>Budget: $2,000–4,000</li>
+                <li>Timeline: ~2–4 weeks</li>
               </ul>
-            </div>
 
-            <div className={styles.actionBar}>
-              <Link to="/contact" className={styles.cta}>Get Started →</Link>
-            </div>
-          </article>
-
-          {/* E-commerce */}
-          <article className={styles.card}>
-            <header className={styles.cardHead}>
-              <div className={styles.icon}>🛒</div>
-              <div>
-                <h3>E-commerce Solutions</h3>
-                <p className={styles.cardSub}>Online stores that sell</p>
+              <div className={styles.actionBar}>
+                <Link to="/contact" className={styles.ctaPrimary}>Start a Project</Link>
+                <Link to="/portfolio" className={styles.cta}>See Work</Link>
               </div>
-            </header>
+            </article>
+          </div>
+        </div>
+      </section>
 
-            <ul className={styles.meta}>
-              <li>Starting at <strong>$4,000</strong></li>
-              <li>3–6 weeks</li>
-            </ul>
+      {/* E-COMMERCE */}
+      <section className={styles.bandSoft}>
+        <div className="container">
+          <h2>E-Commerce</h2>
+          <div className={styles.grid}>
+            {/* Starter Store */}
+            <article className={styles.card}>
+              <div className={styles.cardHead}>
+                <span className={styles.icon}>🛒</span>
+                <div>
+                  <h3>Starter Online Store</h3>
+                  <p className={styles.cardSub}>Simple catalog with checkout</p>
+                </div>
+              </div>
 
-            <p>
-              Complete e-commerce builds with secure payments and inventory management.
-            </p>
-
-            <div className={styles.block}>
-              <h4>What’s Included:</h4>
               <ul className={styles.bullets}>
-                <li>Product catalog management</li>
-                <li>Secure payment processing</li>
-                <li>Inventory & order management</li>
-                <li>Email marketing integration</li>
+                <li>10–20 products</li>
+                <li>Shopify or WooCommerce setup</li>
+                <li>Stripe/PayPal checkout</li>
+                <li>Basic SEO & analytics</li>
+                <li>Maintenance ($50–100/mo)</li>
               </ul>
-            </div>
 
-            <div className={styles.block}>
-              <h4>Technologies:</h4>
-              <ul className={styles.chips}>
-                <li>Shopify</li><li>Stripe</li><li>WooCommerce</li><li>PayPal</li>
+              <ul className={styles.meta}>
+                <li>Budget: $1,500–3,000</li>
+                <li>Timeline: ~2–3 weeks</li>
               </ul>
-            </div>
 
-            <div className={styles.actionBar}>
-              <Link to="/contact" className={styles.cta}>Get Started →</Link>
-            </div>
-          </article>
+              <div className={styles.actionBar}>
+                <Link to="/contact" className={styles.ctaPrimary}>Get a Free Quote</Link>
+              </div>
+            </article>
+
+            {/* Standard Store */}
+            <article className={styles.card}>
+              <div className={styles.cardHead}>
+                <span className={styles.icon}>🏬</span>
+                <div>
+                  <h3>Standard Online Store</h3>
+                  <p className={styles.cardSub}>Scalable store with filters & accounts</p>
+                </div>
+              </div>
+
+              <ul className={styles.bullets}>
+                <li>20–200 products, categories, filters, search</li>
+                <li>Shipping rules & taxes</li>
+                <li>Customer accounts (optional)</li>
+                <li>Order emails & notifications</li>
+                <li>Maintenance ($100–250/mo)</li>
+              </ul>
+
+              <ul className={styles.meta}>
+                <li>Budget: $3,500–7,500</li>
+                <li>Timeline: ~3–6 weeks</li>
+              </ul>
+
+              <p className={styles.cardSub}>
+                Advanced stores (subscriptions, custom dashboards, deep integrations) start at $8k+.
+              </p>
+
+              <div className={styles.actionBar}>
+                <Link to="/contact" className={styles.ctaPrimary}>Plan My Store</Link>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* WEB APPS & CUSTOM SOFTWARE */}
+      <section className={styles.bandSoft}>
+        <div className="container">
+          <h2>Web Apps & Custom Software</h2>
+          <div className={styles.grid}>
+            <article className={styles.card}>
+              <div className={styles.cardHead}>
+                <span className={styles.icon}>⚙️</span>
+                <div>
+                  <h3>Common Builds</h3>
+                  <p className={styles.cardSub}>Tailored tools for your workflow</p>
+                </div>
+              </div>
+
+              <div className="block">
+                <h4>Use Cases</h4>
+                <ul className={styles.bullets}>
+                  <li>Client/Customer Portals (logins, invoices, documents)</li>
+                  <li>Booking & Scheduling Systems</li>
+                  <li>Quote Calculators & Smart Forms</li>
+                  <li>Dashboards (analytics, KPIs, simple CRMs)</li>
+                  <li>Invoice & Payment Systems</li>
+                </ul>
+              </div>
+
+              <ul className={styles.meta}>
+                <li>Integrations: Stripe, QuickBooks, Shopify, etc.</li>
+                <li>Pricing from $5k+ (scope-based)</li>
+              </ul>
+
+              <div className={styles.actionBar}>
+                <Link to="/contact" className={styles.ctaPrimary}>Discuss Your App</Link>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* ADD-ONS */}
+      <section className={styles.bandSoft}>
+        <div className="container">
+          <h2>Marketing & Growth Add-Ons</h2>
+          <div className={styles.grid}>
+            <article className={styles.card}>
+              <div className={styles.cardHead}>
+                <span className={styles.icon}>📈</span>
+                <div>
+                  <h3>SEO, Analytics & Campaigns</h3>
+                  <p className={styles.cardSub}>Upsells that move the needle</p>
+                </div>
+              </div>
+
+              <ul className={styles.bullets}>
+                <li>SEO optimization (on-page, speed, metadata, keywords)</li>
+                <li>Google Analytics & event tracking setup</li>
+                <li>Email capture + automations (Mailchimp, Resend, Postmark)</li>
+                <li>Basic ad setup (Google/Facebook)</li>
+                <li>Local SEO boost (maps, reviews, directories)</li>
+              </ul>
+
+              <div className={styles.actionBar}>
+                <Link to="/contact" className={styles.ctaPrimary}>Add to My Build</Link>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
       {/* PROCESS */}
       <section className={styles.process}>
         <div className="container">
-          <h2 className={styles.h2}>Our Development Process</h2>
-          <p className={styles.kicker}>
-            A proven approach that ensures quality results and happy clients
-          </p>
+          <h2 className={styles.h2}>How We Work</h2>
+          <p className={styles.kicker}>Simple, transparent, and fast.</p>
           <ul className={styles.processRow}>
             <li>
-              <span className={styles.stepNum}>01</span>
-              <strong>Discovery & Planning</strong>
-              <p>Consultation to define goals, scope, and technical requirements.</p>
+              <div className={styles.stepNum}>01</div>
+              <strong>Discovery</strong>
+              <p className={styles.cardSub}>Clarify goals, scope, and success metrics.</p>
             </li>
             <li>
-              <span className={styles.stepNum}>02</span>
-              <strong>Design & Prototyping</strong>
-              <p>Wireframes → high-fidelity UI and interactive prototypes.</p>
+              <div className={styles.stepNum}>02</div>
+              <strong>Design</strong>
+              <p className={styles.cardSub}>Wireframes & UI—fast feedback loops.</p>
             </li>
             <li>
-              <span className={styles.stepNum}>03</span>
-              <strong>Development & Testing</strong>
-              <p>Best practices, clean code, and thorough QA at every stage.</p>
+              <div className={styles.stepNum}>03</div>
+              <strong>Build & Test</strong>
+              <p className={styles.cardSub}>Clean code, accessibility, performance.</p>
             </li>
             <li>
-              <span className={styles.stepNum}>04</span>
+              <div className={styles.stepNum}>04</div>
               <strong>Launch & Support</strong>
-              <p>Deployment, analytics, and ongoing support to keep you growing.</p>
+              <p className={styles.cardSub}>Deploy + optional care plans.</p>
             </li>
-          </ul>
-        </div>
-      </section>
-
-      {/* SUPPORT BAND */}
-      <section className={styles.support}>
-        <div className="container">
-          <div className={styles.supportIcon}>🎧</div>
-          <h2 className={styles.h2}>Ongoing Support & Maintenance</h2>
-          <p className={styles.kicker}>
-            We don’t just build and disappear. Every project includes options for continuous care.
-          </p>
-          <ul className={styles.supportRow}>
-            <li><strong>24/7 Monitoring</strong><p>Uptime and performance oversight.</p></li>
-            <li><strong>Security Updates</strong><p>Regular patches and dependency updates.</p></li>
-            <li><strong>Technical Support</strong><p>Direct access to our dev team.</p></li>
           </ul>
         </div>
       </section>
@@ -246,9 +258,12 @@ export default function Services() {
       {/* FINAL CTA */}
       <section className={styles.finalCta}>
         <div className="container">
-          <h2 className={styles.h2}>Ready to Start Your Project?</h2>
-          <p className={styles.kicker}>Let’s discuss requirements and tailor a solution for your business.</p>
-          <Link to="/contact" className="button">Get a Free Consultation →</Link>
+          <h2>Ready to get started?</h2>
+          <p className={styles.sub}>Tell us about your project—get a free quote and timeline.</p>
+          <div style={{ display: 'flex', gap: '.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/contact" className={styles.ctaPrimary}>Start Your Project</Link>
+            <Link to="/portfolio" className={styles.cta}>View Our Work</Link>
+          </div>
         </div>
       </section>
     </>

@@ -8,9 +8,10 @@ export default function Home() {
       <SEO
         title="Custom Web & Software"
         description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
+        
       />
 
-      {/* HERO  need to add visual on right side laptop/ phone */}
+      {/* HERO  with right-side visual */}
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroGrid}>
@@ -18,12 +19,20 @@ export default function Home() {
               <div className={styles.badge}>Veteran Owned and Operated</div>
               <h1>Custom-Coded Websites & Software for Small Businesses</h1>
               <p className={styles.sub}>
-                Transform your business with custom websites, mobile apps, and SaaS platforms.
+                Transform your business with custom websites and lightweight web apps.
                 Performance, accessibility, and SEO baked in — no page builders, no bloat.
               </p>
               <div className={styles.ctaRow}>
                 <Link to="/contact" className="button">Start Your Project</Link>
-                <Link to="/portfolio" className={styles.secondaryCta}>View Our Work</Link>
+                <Link to="/work" className={styles.secondaryCta}>View Our Work</Link>
+              </div>
+            </div>
+
+            {/* NEW: visual */}
+            <div className={styles.heroVisual} aria-hidden>
+              <div className={styles.deviceStack}>
+                <div className={styles.laptop}>Laptop mock</div>
+                <div className={styles.phone}>Phone</div>
               </div>
             </div>
           </div>
@@ -72,18 +81,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS STRIP  change to something to give more trust since im new and dont have costmers*/ }
-      <section className={`${styles.stats} ${styles.bandDark}`} aria-label="Key stats">
+     {/* PROOF STRIP (trust without testimonials) */}
+      <section className={`${styles.proof} ${styles.bandDark}`} aria-labelledby="proof-title">
         <div className="container">
-          <ul className={styles.statsRow}>
-            <li><strong>50+</strong><span>Projects Completed</span></li>
-            <li><strong>30+</strong><span>Happy Clients</span></li>
-            <li><strong>5+</strong><span>Years Experience</span></li>
-            <li><strong>24/7</strong><span>Support Available</span></li>
+          <h2 id="proof-title" className={styles.h2}>Built for trust, performance, and clarity</h2>
+
+          <ul className={styles.proofGrid} role="list">
+            <li className={styles.proofItem}>
+              <strong>Performance targets</strong>
+              <p>LCP ≤ 2.5s • CLS ≤ 0.1 • INP ≤ 200ms. We measure before & after launch.</p>
+            </li>
+            <li className={styles.proofItem}>
+              <strong>Accessibility first</strong>
+              <p>Semantic HTML, color contrast, keyboard focus, alt text—baked in.</p>
+            </li>
+            <li className={styles.proofItem}>
+              <strong>Privacy-friendly analytics</strong>
+              <p>Goal tracking without creepy scripts. Opt-out ready.</p>
+            </li>
+            <li className={styles.proofItem}>
+              <strong>Clear scope & pricing</strong>
+              <p>No page builders, no bloat. Defined deliverables & revision rounds.</p>
+            </li>
+            <li className={styles.proofItem}>
+              <strong>Launch checklist</strong>
+              <p>Sitemap + robots, OpenGraph, schema, backups, and uptime monitoring.</p>
+            </li>
+            <li className={styles.proofItem}>
+              <strong>Veteran-owned, Idaho-based</strong>
+              <p>Local partner with a process you’ll understand.</p>
+            </li>
           </ul>
         </div>
       </section>
-
       {/* FINAL CTA */}
       <section className={styles.finalCta}>
         <div className="container">
