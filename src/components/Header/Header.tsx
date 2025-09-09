@@ -31,10 +31,9 @@ export default function Header() {
 
   return (
     <header ref={headerRef} className={`${styles.header} ${scrolled ? styles.scrolled : ''}`} role="banner">
-      <a href="#main" className={styles.skip}>Skip to content</a>
       <div className="container">
         <div className={styles.row}>
-          <Link to="/" className={styles.logo} onClick={() => setOpen(false)}>
+          <Link to="/" className={styles.logo } onClick={() => setOpen(false)}>
             Frontline Web &amp; Software
           </Link>
 

@@ -21,7 +21,8 @@ export default function Home() {
                   <div className={styles.badge}>Based in USA</div>
                 </div>
                 
-                <h1>Custom-Coded Websites & Software for Small Businesses</h1>
+                <h1>Custom-Coded Websites & Software for </h1>
+                <h1 className={`accent`}> Small Businesses</h1>
                 <p className={styles.sub}>
                   Transform your business with custom websites and lightweight web apps.
                   Performance, accessibility, and SEO baked in — no page builders, no bloat.
@@ -58,8 +59,9 @@ export default function Home() {
         {/* PROBLEMS WE SOLVE */}
 <section id="problems" className={`${styles.bandSoft} vh snap anchor`} aria-labelledby="problems-title">
   <div className="container">
-    <h2 id="problems-title" className={styles.h2}>Fix the stuff that hurts revenue</h2>
-    <p className={styles.lead}>Most small businesses lose customers to slow sites, clunky forms, and poor Google visibility. We fix that.</p>
+    <h1 id="problems-title" className={`${styles.h1}`}>Fix the stuff that hurts<span className={`${styles.h1} accent`}> Revenue</span></h1>
+  
+    <p className={styles.sub}>Most small businesses lose customers to slow sites, clunky forms, and poor Google visibility. We fix that.</p>
 
     <ul className={styles.miniProof} role="list">
       <li>Slow load times</li>
@@ -74,28 +76,28 @@ export default function Home() {
 {/* WHAT YOU GET */}
 <section id="capabilities" className={`${styles.bandDark}  vh snap anchor`} aria-labelledby="capabilities-title">
   <div className="container">
-    <h2 id="capabilities-title" className={styles.h2}>What you get with every build</h2>
-    <p className={styles.lead}>Fast, mobile-ready websites with clean code, built to rank — and support after launch.</p>
+    <h2 id="capabilities-title" className={styles.h1}>What you get with every <span className={`${styles.h1} accent`} >Build</span></h2>
+    <p className={styles.sub}>Fast, mobile-ready websites with clean code, built to rank — and support after launch.</p>
 
     <div className={styles.tileGrid}>
       <article className="card">
-        <div className={styles.cardHead}><h3>Looks great on every device</h3></div>
-        <p>Designed mobile-first so customers can browse and book from phones, tablets, and desktops without pinching or zooming.</p>
+        <div className={`${styles.cardHead} accent`}><h3>Looks great on every device</h3></div>
+        <p className={styles.sub}>Designed mobile-first so customers can browse and book from phones, tablets, and desktops without pinching or zooming.</p>
       </article>
 
       <article className="card">
-        <div className={styles.cardHead}><h3>Clean, custom code</h3></div>
-        <p>No page-builder bloat. Modern React/TypeScript (or Vue/JS) and best-practice markup so your site stays fast and easy to maintain.</p>
+        <div className={`${styles.cardHead} accent`}><h3>Clean, custom code</h3></div>
+        <p className={styles.sub}>No page-builder bloat. Modern React/TypeScript (or Vue/JS) and best-practice markup so your site stays fast and easy to maintain.</p>
       </article>
 
       <article className="card">
-        <div className={styles.cardHead}><h3>SEO from day one</h3></div>
-        <p>Proper titles, meta, schema, sitemap, robots.txt, and Search Console/Analytics set-up so customers actually find you.</p>
+        <div className={`${styles.cardHead} accent`}><h3>SEO from day one</h3></div>
+        <p className={styles.sub}>Proper titles, meta, schema, sitemap, robots.txt, and Search Console/Analytics set-up so customers actually find you.</p>
       </article>
 
       <article className="card">
-        <div className={styles.cardHead}><h3>Post-launch care</h3></div>
-        <p>We don’t launch and disappear. Updates, uptime checks, backups, and quick support to keep things humming.</p>
+        <div className={`${styles.cardHead} accent`}><h3>Post-launch care</h3></div>
+        <p className={styles.sub}>We don’t launch and disappear. Updates, uptime checks, backups, and quick support to keep things humming.</p>
       </article>
     </div>
   </div>
@@ -104,22 +106,19 @@ export default function Home() {
 {/* PROCESS */}
 <section id="process" className={`${styles.bandSoft}  vh snap anchor`} aria-labelledby="process-title">
   <div className="container">
-    <h2 id="process-title" className={styles.h2}>A simple, no-stress process</h2>
+    <h2 id="process-title" className={styles.h1}>A Simple, No-Stress <span className={`${styles.h1} accent`}>Process</span></h2>
     <div className={styles.processGrid}>
       <article className="card">
-        <div className={styles.step}>1</div>
-        <h3>Plan</h3>
-        <p>Quick call to learn your goals, pages, and must-haves. We share a fixed scope and timeline so there are no surprises.</p>
+        <h2 className="accent">Plan</h2>
+        <p className={styles.lead}>Quick call to learn your goals, pages, and must-haves. We share a fixed scope and timeline so there are no surprises.</p>
       </article>
       <article className="card">
-        <div className={styles.step}>2</div>
-        <h3>Build</h3>
-        <p>Design + development in weekly check-ins. You see progress as we go and give feedback early.</p>
+        <h2 className="accent">Build</h2>
+        <p className={styles.lead}>Design + development in weekly check-ins. You see progress as we go and give feedback early.</p>
       </article>
       <article className="card">
-        <div className={styles.step}>3</div>
-        <h3>Launch & grow</h3>
-        <p>Performance tuned, SEO-ready, tracked with analytics. We iterate post-launch to keep results climbing.</p>
+        <h2 className="accent">Launch & grow</h2>
+        <p className={styles.lead}>Performance tuned, SEO-ready, tracked with analytics. We iterate post-launch to keep results climbing.</p>
       </article>
     </div>
     <div className={styles.sectionFoot}>
@@ -131,28 +130,28 @@ export default function Home() {
 {/* PORTFOLIO */}
 <section id="work" className={`${styles.bandDark} vh snap anchor`} aria-labelledby="work-title">
   <div className="container">
-    <h2 id="work-title" className={styles.h2}>Recent work</h2>
-    <p className={styles.lead}>A few projects showing speed, clarity, and conversions.</p>
+    <h2 id="work-title" className={styles.h1}>Recent <span className={`${styles.h1} accent`}>Work</span></h2>
+    <p className={styles.sub}>A few projects showing speed, clarity, and conversions.</p>
 
     <div className={styles.portfolioGrid}>
       <article className="card">
         <img src="/assets/portfolio/site-a.webp" alt="Project A homepage screenshot" className={styles.thumb}/>
-        <h3>Local Barber — bookings that convert</h3>
-        <p>Mobile booking + fast load times. Increased appointment requests ~40% after launch.</p>
+        <h3 className={`${styles.h3} accent`}>Local Barber — bookings that convert</h3>
+        <p className={`${styles.lead} `}>Mobile booking + fast load times. Increased appointment requests ~40% after launch.</p>
         <Link to="/portfolio/barber" className={styles.secondaryCta}>See case study</Link>
       </article>
 
       <article className="card">
         <img src="/assets/portfolio/site-b.webp" alt="Project B homepage screenshot" className={styles.thumb}/>
-        <h3>Café — online menu & orders</h3>
-        <p>Clear menu UX and simple checkout. Reduced abandoned orders and boosted repeat visits.</p>
+        <h3 className={`${styles.h3} accent`}>Café — online menu & orders</h3>
+        <p className={`${styles.lead} `}>Clear menu UX and simple checkout. Reduced abandoned orders and boosted repeat visits.</p>
         <Link to="/portfolio/cafe" className={styles.secondaryCta}>See case study</Link>
       </article>
 
       <article className="card">
         <img src="/assets/portfolio/site-c.webp" alt="Project C homepage screenshot" className={styles.thumb}/>
-        <h3>Contractor — lead generation</h3>
-        <p>SEO landing pages for each service + neighborhood. More qualified calls, fewer tire-kickers.</p>
+        <h3 className={`${styles.h3} accent`}>Contractor — lead generation</h3>
+        <p className={`${styles.lead} `}>SEO landing pages for each service + neighborhood. More qualified calls, fewer tire-kickers.</p>
         <Link to="/portfolio/contractor" className={styles.secondaryCta}>See case study</Link>
       </article>
     </div>
