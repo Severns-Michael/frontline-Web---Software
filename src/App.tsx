@@ -1,11 +1,16 @@
 import { AppRoutes } from './routes'
-import { Layout } from './components/Layout/Layout'
-
+import Header from './components/Header/Header'
+import { Footer } from './components/Footer/Footer'
+import './styles/global.css'
 
 export default function App() {
-return (
-<Layout>
-<AppRoutes />
-</Layout>
-)
+  return (
+    <>
+      <Header />
+      <main id="main">
+        <AppRoutes />
+      </main>
+      <Footer />
+    </>
+  )
 }
