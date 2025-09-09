@@ -42,50 +42,88 @@
   border: 1px solid rgba(255,255,255,.16);
 }
 
-/* Device mock */
-.heroVisual { display:flex; justify-content:center; }
-.deviceStack {
-  position: relative;
-  width: clamp(260px, 60vw, 560px);
-  height: clamp(180px, 34vw, 360px);
+/* --- HERO: carousel device area --- */
+.heroVisual{ display:flex; justify-content:center; }
+
+.deviceCarousel{
+  position:relative;
+  width: clamp(280px, 60vw, 580px);
+  aspect-ratio: 16/10;
+  /* subtle glow backdrop */
+  isolation:isolate;
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,.35));
 }
 
-/* Laptop "frame" */
-.laptopFrame {
-  position: absolute; inset: 0;
-  border-radius: 16px;
+/* if using your gradient frames instead of PNG frame images: */
+.deviceCarousel::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:16px;
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border: 1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.12);
+}
+.deviceCarousel::after{
+  content:"";
+  position:absolute; width:34%; height:64%;
+  right:-4%; bottom:-6%;
+  border-radius:24px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.12);
+  transform: rotate(-6deg);
   box-shadow: 0 20px 60px rgba(0,0,0,.35);
 }
 
-/* Phone "frame" */
-.phoneFrame {
-  position: absolute;
-  width: 34%; height: 64%;
-  right: -4%; bottom: -6%;
-  border-radius: 24px;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
-  transform: rotate(-6deg);
+/* slides stack */
+.slides{ position:absolute; inset:0; }
+.slide{
+  position:absolute; inset:0; opacity:0; pointer-events:none;
+  transition: opacity .45s ease;
+}
+.slide.active{ opacity:1; pointer-events:auto; }
+
+/* laptop/phone screen windows (match your old insets) */
+.screenLaptop{
+  position:absolute; inset:6% 6% 18% 6%;
+  width:auto; height:auto; max-width:100%; max-height:100%;
+  object-fit:cover; border-radius:12px;
+}
+.screenPhone{
+  position:absolute; width:32%; height:58%;
+  right:-2.5%; bottom:-3%;
+  object-fit:cover; border-radius:18px; transform: rotate(-6deg);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
 }
 
-/* Screens inside frames */
-.deviceImgLaptop {
-  position: absolute;
-  inset: 6% 6% 18% 6%;       /* inner screen area */
-  border-radius: 12px;
-  object-fit: cover;
-  width: auto; height: auto; max-width: 100%; max-height: 100%;
+/* dots + caption */
+.carouselMeta{
+  position:absolute; left:0; right:0; bottom:-42px;
+  display:grid; gap:6px; justify-items:center;
 }
-.deviceImgPhone {
-  position: absolute;
-  width: 32%; height: 58%;
-  right: -2.5%; bottom: -3%;
-  border-radius: 18px;
-  object-fit: cover;
-  transform: rotate(-6deg);
+.dots{ display:flex; gap:8px; }
+.dot{
+  width:8px; height:8px; border-radius:999px;
+  background: rgba(255,255,255,.3);
+  border:1px solid rgba(255,255,255,.4);
+  cursor:pointer;
+}
+.dotActive{ background: var(--brand); border-color: var(--brand); }
+
+.caption{
+  display:flex; gap:10px; align-items:baseline; font-size:.95rem;
+}
+.captionTitle{ font-weight:700; }
+.captionKpi{ color: var(--brand); font-weight:800; }
+
+/* gentle float for the whole device (prefers-reduced-motion respected by OS) */
+@media (prefers-reduced-motion: no-preference){
+  .deviceCarousel{ animation: float 6s ease-in-out infinite; }
+  @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+}
+
+/* responsive tweaks */
+@media (max-width: 520px){
+  .carouselMeta{ bottom:-36px; }
+  .caption{ font-size:.9rem; }
 }
 
 /* Bands */
@@ -279,3 +317,90 @@
 }
 .faq details[open] summary::after{ transform: rotate(90deg); }
 .faq p{ margin:.6rem 0 0; color:var(--muted); }
+
+/* headings alignment options */
+.sectionHead{display:grid;gap:.5rem;margin:0 0 1rem;}
+.alignCenter{text-align:center; align-items:center;}
+.alignRight{text-align:right; align-items:end;}
+
+/* feature rows (alternating, no cards) */
+.featureList{display:grid; gap:16px; margin:0; padding:0; list-style:none;}
+.feature{
+  display:grid; grid-template-columns:48px 1fr; gap:14px; align-items:start;
+  padding:14px 16px; border-left:3px solid color-mix(in oklab, var(--brand), white 25%);
+  background: linear-gradient(90deg, rgba(255,255,255,.035), rgba(255,255,255,0));
+  border-radius:12px; transition:transform .12s ease, background .15s ease;
+}
+.feature:hover{ transform: translateY(-2px); background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,0)); }
+
+.featureIcon{
+  width:48px; height:48px; display:grid; place-items:center; border-radius:12px;
+  background: rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.10);
+  color: var(--brand);
+}
+.featureIcon svg{ width:22px; height:22px; }
+
+.featureBody h3{ margin:0 0 .25rem; }
+
+/* stagger for motion */
+@media (min-width: 900px){
+  .feature:nth-child(odd){ translate:-1.5% 2px; }
+  .feature:nth-child(even){ translate:1.5% 6px; }
+}
+
+
+
+/* stagger animation */
+.outcomeList li:nth-child(1) .meter::after{ animation-delay:.05s; }
+.outcomeList li:nth-child(2) .meter::after{ animation-delay:.15s; }
+.outcomeList li:nth-child(3) .meter::after{ animation-delay:.25s; }
+
+/* Sticky scrollytelling layout */
+.focusGrid{
+  display:grid;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  gap: clamp(20px, 4vw, 44px);
+  align-items:start;
+}
+.stickyCol{
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
+  align-self:start;
+}
+
+/* The list stream (no cards) */
+.focusList{ list-style:none; margin:0; padding:0; display:grid; gap:20px; }
+.focusItem{
+  padding:18px 18px 20px;
+  border-left:3px solid color-mix(in oklab, var(--brand), white 25%);
+  background: linear-gradient(90deg, rgba(255,255,255,.035), rgba(255,255,255,0));
+  border-radius:12px;
+  transition: transform .12s ease, background .15s ease, border-color .15s ease;
+}
+.focusItem:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+  border-color: color-mix(in oklab, var(--brand), white 10%);
+}
+
+/* tiny accent label */
+.kicker{
+  display:inline-block;
+  font-weight:800;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: var(--brand);
+  opacity:.9;
+  margin-bottom:.25rem;
+}
+
+/* asymmetry nudges */
+.pushL{ translate:-1.5% 0; }
+.pushR{ translate: 1.5% 0; }
+@media (max-width: 900px){
+  .focusGrid{ grid-template-columns: 1fr; }
+  .pushL,.pushR{ translate:0 0; }
+  .stickyCol{ position:static; }
+}
+
