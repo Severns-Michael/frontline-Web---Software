@@ -1,78 +1,148 @@
-/* Hero band */
-.hero {
+/* Hero */
+.hero{
   padding: 5rem 0 3rem;
   text-align: center;
   background:
     radial-gradient(800px 400px at 70% -10%, rgba(255,255,255,.06), transparent),
     linear-gradient(180deg, #0b0d12, #121621);
 }
-.badge {
-  display: inline-block; font-size: .85rem; padding: .3rem .6rem; border-radius: 999px;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); margin-bottom: 1rem;
+.badgeRow{ display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:.75rem; }
+.badge{
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-size:.85rem; padding:.35rem .6rem; border-radius:999px;
+  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
 }
-.hero h1 { margin: 0 0 .5rem; }
-.accent { color: var(--brand); }
-.sub { color: var(--muted); max-width: 820px; margin: 0 auto; }
+.h1{ margin:0 0 .5rem; font-size:clamp(2.2rem,1.4rem + 2.4vw,3.2rem); line-height:1.05; letter-spacing:-0.01em; }
+.accent{ color: var(--brand); }
+.sub{ color: var(--muted); max-width: 820px; margin: .25rem auto 0; }
 
-/* Story + stats */
-.story { background: #0e1320; padding: 2.5rem 0; }
-.storyGrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
-@media (max-width: 900px) { .storyGrid { grid-template-columns: 1fr; } }
-.h2 { font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); margin: 0 0 1rem; }
+/* Sections */
+.section{ padding: 2.5rem 0; }
+.bandSoft{ background:#0e1320; }
+.bandDark{ background:#0c111d; }
+.h2{ font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); margin: 0 0 1rem; }
+.lead{ color: var(--muted); margin: .25rem 0 1rem; max-width: 820px; }
 
-.statCards {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+/* Lists & cards */
+.gridList{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem; list-style:none; padding:0; margin:0;
 }
-.card {
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,.08);
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid color-mix(in oklab,#fff,transparent 90%);
   border-radius: var(--radius);
-  padding: 1.25rem;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,.2);
+  padding: 1.1rem;
 }
-.statNum { display: block; font-size: 1.8rem; font-weight: 800; }
-.statLabel { display: block; color: var(--muted); }
+.card h3{ margin:0 0 .35rem; }
 
-/* Values */
-.values { background: #0c111d; padding: 2.5rem 0; text-align: center; }
-.kicker { color: var(--muted); margin: .25rem 0 1.5rem; }
-.valueGrid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+.checkList{
+  list-style:none; padding:0; margin:0;
+  display:grid; gap:.6rem;
 }
-.valueCard {
-  background: var(--surface);
+.checkList li{
+  padding:.6rem .8rem; border:1px solid var(--border);
+  border-radius:12px; background: rgba(255,255,255,.04);
+}
+
+/* Link row */
+.linkRow{
+  display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;
+  margin-top:.6rem;
+}
+.linkRow a{ color: var(--brand); }
+
+
+/* Final CTA */
+.finalCta{ padding: 3rem 0; background:#0b0f1a; }
+.finalCard{
+  text-align:center; padding:2rem; border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
   border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius);
-  padding: 1.25rem;
+  display:grid; gap:.75rem;
+}
+.ctaRow{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
+.secondaryCta{
+  padding:.85rem 1.1rem; border-radius:999px; border:1px solid var(--border-strong);
+  background: color-mix(in oklab, var(--surface), transparent 60%);
 }
 
-/* Team */
-.team { background: #0e1320; padding: 2.5rem 0; text-align: center; }
-.teamGrid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem; margin-top: 1rem;
-}
-.teamCard {
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-}
-.avatar {
-  width: 64px; height: 64px; margin: 0 auto .75rem; border-radius: 999px;
-  display: grid; place-items: center; font-weight: 800;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-}
-.role { color: var(--brand); font-weight: 600; margin: .25rem 0; }
-.bio { color: var(--muted); }
-.chips {
-  list-style: none; padding: 0; margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center;
-}
-.chips li {
-  font-size: .8rem; padding: .25rem .5rem; border-radius: 999px;
-  background: #f7ff00; color: #0b0d12; /* subtle neon like your reference */
+/* --- Bio Hero (single image right) --- */
+.bioHero{
+  padding: 5rem 0 3.5rem;
+  background:
+    radial-gradient(800px 400px at 70% -10%, rgba(255,255,255,.06), transparent),
+    linear-gradient(180deg, #0b0d12, #121621);
 }
 
+.bioGrid{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 2rem;
+  align-items: center;
+}
+@media (max-width: 980px){
+  .bioGrid{ grid-template-columns: 1fr; }
+}
+
+.bioCopy{ text-align:left; }
+@media (max-width:980px){ .bioCopy{ text-align:center; } }
+
+.kicker{
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-size:.85rem;
+  color: color-mix(in oklab, var(--brand), transparent 35%);
+  margin: 0 0 .35rem;
+}
+
+.h1{
+  margin: 0 0 .6rem;
+  font-size: clamp(2.2rem,1.4rem + 2.4vw,3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.intro{ color: var(--muted); max-width: 720px; margin:.5rem 0 1.25rem; }
+.accent{ color: var(--brand); }
+
+/* Badges reuse */
+.badgeRow{ display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:.8rem; }
+.badge{
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-size:.85rem; padding:.35rem .6rem; border-radius:999px;
+  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+}
+
+/* Portrait on the right */
+.portraitWrap{
+  margin:0; justify-self:center; text-align:center; position:relative;
+}
+.portrait{
+  width: clamp(240px, 40vw, 440px);
+  height: auto;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.35),
+    0 0 0 1px rgba(255,255,255,.06) inset;
+  object-fit: cover;
+  background:#0c111d;
+}
+.caption{ color: var(--muted); font-size:.9rem; margin-top:.5rem; }
+
+/* CTA row + glow button */
+.ctaRow{ display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; margin-top:.5rem; }
+@media (max-width:980px){ .ctaRow{ justify-content:center; } }
+
+.glowCta{
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 0 8px color-mix(in oklab, var(--brand), transparent 85%);
+  transition: box-shadow .18s ease, transform .12s ease;
+}
+.glowCta:hover{ transform: translateY(-1px); box-shadow: 0 14px 36px rgba(0,0,0,.38), 0 0 0 10px color-mix(in oklab, var(--brand), transparent 80%); }
+
+/* Secondary CTA (keep your existing style if already defined) */
+.secondaryCta{
+  padding:.9rem 1.1rem; border-radius:999px; border:1px solid var(--border-strong);
+  background: color-mix(in oklab, var(--surface), transparent 60%);
+}
