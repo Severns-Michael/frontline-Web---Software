@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Services.module.css'
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function Services() {
-  const [active, setActive] = useState<'websites' | 'ecommerce' | 'apps'>('websites');
+  const [active, setActive] = useState<'websites' | 'ecommerce' | 'apps'>('websites')
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function Services() {
         description="Custom-coded websites, e-commerce, and web apps for local business. One-time build or simple subscription."
       />
 
-      {/* HERO */}
+      {/* HERO + LINEUP (tabs) */}
       <section className={`${styles.hero} anchor`}>
         <div className="container">
           <div className={styles.badgeRow}>
@@ -21,206 +21,201 @@ export default function Services() {
             <span className={styles.badge}>USA-based</span>
             <span className={styles.badge}>No page builders</span>
           </div>
-          <h1 className={styles.h1}>Services <span className="accent">&amp; Pricing</span></h1>
-          <p className={styles.sub}>
-            Custom-coded websites, e-commerce, and web apps—fast, accessible, SEO-ready.
-          </p>
-          <nav className={styles.quickNav} aria-label="Section links">
-            <a href="#lineup">Lineup</a>
-            <a href="#addons">Add-ons</a>
-            <a href="#care">Care &amp; Hosting</a>
-            <a href="#process">Process</a>
-          </nav>
-        </div>
-      </section>
 
-      {/* LINEUP */}
-      <section id="lineup" className={`${styles.bandSoft} anchor`}>
-        <div className="container">
-          <h2 className={styles.h2}>Pick what fits your business</h2>
-          <p className={styles.lead}>Same quality across the board—different shapes to match your goals.</p>
+          <h1 className={styles.h1}>Services &amp;<span className="accent"> Pricing</span></h1>
+          <p className={styles.sub}>Custom-coded websites, e-commerce, and web apps—fast and accessible.</p>
 
-          {/* Segmented control */}
+          {/* Tabs */}
           <div className={styles.segmented} role="tablist" aria-label="Service categories">
             <button
               role="tab"
               aria-selected={active === 'websites'}
               className={`${styles.segment} ${active === 'websites' ? styles.active : ''}`}
               onClick={() => setActive('websites')}
-            >Websites</button>
-
+            >
+              Websites
+            </button>
             <button
               role="tab"
               aria-selected={active === 'ecommerce'}
               className={`${styles.segment} ${active === 'ecommerce' ? styles.active : ''}`}
               onClick={() => setActive('ecommerce')}
-            >E-commerce</button>
-
+            >
+              E-commerce
+            </button>
             <button
               role="tab"
               aria-selected={active === 'apps'}
               className={`${styles.segment} ${active === 'apps' ? styles.active : ''}`}
               onClick={() => setActive('apps')}
-            >Web Apps</button>
+            >
+              Web Apps
+            </button>
           </div>
 
-          {/* Tab body */}
-          <div style={{ marginTop: '1rem' }}>
-            {/* Websites */}
+          {/* Tab container card */}
+          <div className={styles.tabShell} role="tabpanel" aria-label="Selected service">
+            {/* WEBSITES */}
             {active === 'websites' && (
-              <article className={`${styles.card} ${styles.panel}`}>
-                <header className={styles.cardHead}>
-                  <div>
-                    <h3>Websites</h3>
-                    <p className={styles.cardSub}>Clean, fast, and built to convert</p>
-                  </div>
+              <>
+                <header className={styles.panelHead}>
+                  <h2 className={styles.panelTitle}>Websites</h2>
+                  <p className={styles.panelSub}>Clean, fast, and built to last</p>
                 </header>
 
-                <div className={styles.planGrid} role="list">
+                <div className={styles.plansRow}>
                   {/* Lump Sum */}
-                  <div className={styles.plan} role="listitem">
+                  <article className={styles.plan}>
                     <div className={styles.planHead}>
-                      <span className={styles.planTitle}>Lump Sum</span>
-                      <span className={styles.pricePill}>Typical: $3,000</span>
+                      <h3 className={styles.planTitle}>Lump Sum</h3>
                     </div>
-                    <ul className={styles.bullets}>
-                      <li>Up to <strong>5 pages</strong></li>
-                      <li>Performance, accessibility, SEO hygiene</li>
-                      <li>Analytics &amp; Search Console</li>
-                      <li>Weekly updates; clear handoff</li>
-                    </ul>
-                    <ul className={styles.meta}>
-                      <li>Timeline: ~1–2 weeks (after content)</li>
-                      <li>Ownership: <strong>you own the code</strong></li>
-                    </ul>
-                    <div className={styles.actionBar}>
-                      <Link to="/contact" className={`button ${styles.ctaPrimary}`}>Start Lump Sum</Link>
+
+                    <div className={styles.planMain}>
+                      <div className={styles.planKicker}>Includes</div>
+                      <ul className={styles.featureList}>
+                        <li>Design</li>
+                        <li>Development</li>
+                        <li>+25/mo hosting</li>
+                        <li>+40/mo unlimted edits</li>
+
+                      </ul>
                     </div>
-                  </div>
+
+                    <div className={styles.pricePill}>$3,500</div>
+                  </article>
 
                   {/* Subscription */}
-                  <div className={`${styles.plan} ${styles.planEmphasis}`} role="listitem">
+                  <article className={`${styles.plan} ${styles.planEmphasis}`}>
                     <div className={styles.planHead}>
-                      <span className={styles.planTitle}>Subscription</span>
-                      <span className={styles.pricePill}>$165/mo × 12</span>
+                      <h3 className={styles.planTitle}>Website Monthly</h3>
                     </div>
-                    <ul className={styles.bullets}>
-                      <li>Up to <strong>5 pages</strong></li>
-                      <li>Hosting included (the $25 is baked in)</li>
-                      <li><strong>30 min/mo</strong> small edits</li>
-                      <li>Monitoring, backups, updates</li>
-                    </ul>
-                    <ul className={styles.meta}>
-                      <li>Ownership: licensed while subscribed</li>
-                      <li><strong>No buyout</strong>; month-to-month after 12</li>
-                    </ul>
-                    <div className={styles.actionBar}>
-                      <Link to="/contact" className={`button ${styles.ctaPrimary}`}>Start Subscription</Link>
-                    </div>
-                  </div>
-                </div>
 
-                <div>
-                  <p className={styles.addonNote}>Add-ons: <strong>+$100/page</strong> • <strong>+$300 blog</strong> (listing + post template)</p>
-                  <p className={styles.termsNote}>
-                    Lump Sum → you own the code at final payment. Subscription → license to use while active; Frontline owns the code; no buyout.
-                    We’ll export your content/assets on request.
-                  </p>
+                    <div className={styles.planMain}>
+                      <div className={styles.planKicker}>Includes</div>
+                      <ul className={styles.featureList}>
+                        <li>Design</li>
+                        <li>Development</li>
+                        <li>hosting</li>
+                        <li>unlimted edits</li>
+                        <li>SSL, backups, updates</li>
+                        <li>24/7 Spport</li>
+
+                      </ul>
+                    </div>
+
+                    <div className={styles.pricePill}>$165 Per Month</div>
+                  </article>
                 </div>
-              </article>
+              </>
             )}
 
-            {/* E-commerce */}
+            {/* E-COMMERCE */}
             {active === 'ecommerce' && (
-              <article className={`${styles.card} ${styles.panel}`}>
-                <header className={styles.cardHead}>
-                  <div>
-                    <h3>E-commerce</h3>
-                    <p className={styles.cardSub}>Shopify or WooCommerce—kept lean</p>
-                  </div>
+              <>
+                <header className={styles.panelHead}>
+                  <h2 className={styles.panelTitle}>E-commerce</h2>
+                  <p className={styles.panelSub}>Shopify or WooCommerce—kept lean</p>
                 </header>
 
-                <div className={styles.planGrid} role="list">
-                  <div className={styles.plan} role="listitem">
+                <div className={styles.plansRow}>
+                  <article className={styles.plan}>
                     <div className={styles.planHead}>
-                      <span className={styles.planTitle}>Starter Store</span>
-                      <span className={styles.pricePill}>$1.5k–$3k</span>
+                      <h3 className={styles.planTitle}>Starter Store</h3>
                     </div>
-                    <ul className={styles.bullets}>
-                      <li>10–20 products, simple catalog</li>
-                      <li>Stripe/PayPal checkout</li>
-                      <li>Basic SEO &amp; Analytics</li>
-                    </ul>
-                    <div className={styles.actionBar}>
-                      <Link to="/contact" className={`button ${styles.ctaPrimary}`}>Plan my store</Link>
-                    </div>
-                  </div>
 
-                  <div className={styles.plan} role="listitem">
+                    <div className={styles.planMain}>
+                      <div className={styles.planKicker}>Includes</div>
+                      <ul className={styles.featureList}>
+                        <li>10–20 products, simple catalog</li>
+                        <li>Stripe/PayPal checkout</li>
+                        <li>Design & Development</li>
+                        <li>+25/mo hosting</li>
+                        <li>+40/mo unlimted edits</li>
+                      </ul>
+                    </div>
+
+                    <div className={styles.pricePill}>$1.5k–$3k</div>
+                  </article>
+
+                  <article className={styles.plan}>
                     <div className={styles.planHead}>
-                      <span className={styles.planTitle}>Standard Store</span>
-                      <span className={styles.pricePill}>$3.5k–$7.5k</span>
+                      <h3 className={styles.planTitle}>Standard Store</h3>
                     </div>
-                    <ul className={styles.bullets}>
-                      <li>20–200 products, filters, search</li>
-                      <li>Shipping rules, taxes, emails</li>
-                      <li>Optional customer accounts</li>
-                    </ul>
-                    <div className={styles.actionBar}>
-                      <Link to="/contact" className={`button ${styles.ctaPrimary}`}>Get a quote</Link>
+
+                    <div className={styles.planMain}>
+                      <div className={styles.planKicker}>Includes</div>
+                      <ul className={styles.featureList}>
+                        <li>20–200 products, categories &amp; filters</li>
+                        <li>Search, advanced shipping &amp; taxes</li>
+                        <li>Order emails &amp; notifications</li>
+                        <li>Optional customer accounts</li>
+                        <li>Design & Development</li>
+                        <li>+25/mo hosting</li>
+                        <li>+40/mo unlimted edits</li>
+
+                      </ul>
                     </div>
-                  </div>
+
+                    <div className={styles.pricePill}>$3.5k–$7.5k</div>
+                  </article>
                 </div>
-
-                <div /> {/* empty foot keeps panel layout consistent */}
-              </article>
+              </>
             )}
 
-            {/* Web Apps */}
+            {/* WEB APPS */}
             {active === 'apps' && (
-              <article className={`${styles.card} ${styles.panel}`}>
-                <header className={styles.cardHead}>
-                  <div>
-                    <h3>Web Apps / Software</h3>
-                    <p className={styles.cardSub}>Tailored tools for your workflow</p>
-                  </div>
+              <>
+                <header className={styles.panelHead}>
+                  <h2 className={styles.panelTitle}>Web Apps / Software</h2>
+                  <p className={styles.panelSub}>Tailored tools for your workflow</p>
                 </header>
 
-                <div className={styles.planGrid} role="list">
-                  <div className={styles.plan} role="listitem">
+                <div className={styles.plansRow}>
+                  <article className={styles.plan}>
                     <div className={styles.planHead}>
-                      <span className={styles.planTitle}>Scope-based</span>
-                      <span className={styles.pricePill}>from $5k+</span>
+                      <h3 className={styles.planTitle}>Scope-based</h3>
                     </div>
-                    <ul className={styles.bullets}>
-                      <li>Client portals, bookings, quote calculators</li>
-                      <li>Dashboards, simple CRMs, payments</li>
-                      <li>Integrations: Stripe, QuickBooks, Shopify</li>
-                    </ul>
-                    <div className={styles.actionBar}>
-                      <Link to="/contact" className={`button ${styles.ctaPrimary}`}>Discuss your app</Link>
-                    </div>
-                  </div>
 
-                  {/* Optional second tile balances the grid nicely */}
-                  <div className={styles.plan} role="listitem">
+                    <div className={styles.planMain}>
+                      <div className={styles.planKicker}>Includes</div>
+                      <ul className={styles.featureList}>
+                        <li>Client portals, bookings, quote calculators</li>
+                        <li>Dashboards, simple CRMs, payments</li>
+                        <li>Integrations: Stripe, QuickBooks, Shopify</li>
+                        <li>Clean code, maintainable stack</li>
+                        <li>Security &amp; basic audit logging</li>
+                      </ul>
+                    </div>
+
+                    <div className={styles.pricePill}>from $5k+</div>
+                  </article>
+
+                  <article className={styles.plan}>
                     <div className={styles.planHead}>
-                      <span className={styles.planTitle}>Discovery Sprint</span>
-                      <span className={styles.pricePill}>$750–$1.5k</span>
+                      <h3 className={styles.planTitle}>Discovery Sprint</h3>
                     </div>
-                    <ul className={styles.bullets}>
-                      <li>1–2 weeks to outline scope & wireframes</li>
-                      <li>Clickable prototype + estimate</li>
-                    </ul>
-                    <div className={styles.actionBar}>
-                      <Link to="/contact" className={`button ${styles.ctaPrimary}`}>Start a sprint</Link>
+
+                    <div className={styles.planMain}>
+                      <div className={styles.planKicker}>Includes</div>
+                      <ul className={styles.featureList}>
+                        <li>1–2 weeks to map scope &amp; wireframes</li>
+                        <li>Clickable prototype + estimate</li>
+                        <li>Tech choices &amp; risk notes</li>
+                        <li>Roadmap &amp; next steps</li>
+                        <li>Yours to keep—no lock-in</li>
+                      </ul>
                     </div>
-                  </div>
+
+                    <div className={styles.pricePill}>$750–$1.5k</div>
+                  </article>
                 </div>
-
-                <div />
-              </article>
+              </>
             )}
+          </div>
+
+          {/* Page-level CTA under the lineup */}
+          <div className={styles.ctaRow}>
+            <Link to="/contact" className={`button ${styles.ctaPrimary}`}>Start your Project</Link>
           </div>
         </div>
       </section>
@@ -245,8 +240,8 @@ export default function Services() {
               <p className={styles.cardSub}>Mailchimp/Resend basics — quoted</p>
             </li>
             <li className={styles.card}>
-              <h3>Photos &amp; stock</h3>
-              <p className={styles.cardSub}>Shot list + stock curation — quoted</p>
+              <h3>New Features</h3>
+              <p className={styles.cardSub}><strong>Qutoed on work</strong></p>
             </li>
           </ul>
         </div>
@@ -264,7 +259,7 @@ export default function Services() {
             <article className={styles.card}>
               <h3>Hosting-only</h3>
               <p className={styles.cardSub}>Managed hosting + SSL</p>
-              <ul className={styles.bullets}>
+              <ul className={styles.featureList}>
                 <li>Uptime monitoring</li>
                 <li>Weekly backups &amp; security updates</li>
               </ul>
@@ -274,7 +269,7 @@ export default function Services() {
             <article className={styles.card}>
               <h3>Basic Care</h3>
               <p className={styles.cardSub}>Includes hosting</p>
-              <ul className={styles.bullets}>
+              <ul className={styles.featureList}>
                 <li>Everything in Hosting-only</li>
                 <li><strong>30 min/mo</strong> small edits</li>
                 <li>Business-day response; typical ≤48h</li>
@@ -285,7 +280,7 @@ export default function Services() {
             <article className={styles.card}>
               <h3>Pro Care</h3>
               <p className={styles.cardSub}>Includes hosting</p>
-              <ul className={styles.bullets}>
+              <ul className={styles.featureList}>
                 <li>Everything in Basic</li>
                 <li><strong>2 hrs/mo</strong> improvements</li>
                 <li>Priority queue; next-business-day start</li>
