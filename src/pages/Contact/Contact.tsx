@@ -8,29 +8,16 @@ import { SEO } from '../../components/SEO/SEO'
 import styles from './Contact.module.css'
 
 const PROJECT_TYPES = ['Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const
-const BUDGETS       = ['$2k–$5k', '$5k–$10k', '$10k–$25k', '$25k+'] as const
-const TIMELINES     = ['2–4 weeks', '4–8 weeks', '8–12 weeks', '12+ weeks'] as const
-
 
 const Schema = z.object({
   name: z.string().min(2, 'Please enter your full name'),
   email: z.string().email('Enter a valid email'),
   phone: z.string().optional(),
   company: z.string().optional(),
-projectType: z
-  .string()
-  .min(1, 'Select a project type')
-  .refine(v => (PROJECT_TYPES as readonly string[]).includes(v), { message: 'Select a project type' }),
-
-budget: z
-  .string()
-  .min(1, 'Select a budget')
-  .refine(v => (BUDGETS as readonly string[]).includes(v), { message: 'Select a budget' }),
-
-timeline: z
-  .string()
-  .min(1, 'Select a timeline')
-  .refine(v => (TIMELINES as readonly string[]).includes(v), { message: 'Select a timeline' }),
+  projectType: z
+    .string()
+    .min(1, 'Select a project type')
+    .refine(v => (PROJECT_TYPES as readonly string[]).includes(v), { message: 'Select a project type' }),
   message: z.string().min(20, 'Tell us a bit more so we can help (min 20 chars)').max(1500)
 })
 type Form = z.infer<typeof Schema>
@@ -54,29 +41,30 @@ export default function Contact() {
       <SEO title="Contact" description="Tell us about your project. Free consultation and a fast, detailed proposal." />
 
       {/* HERO */}
-      <section className={styles.hero}>
+      <section className={`${styles.hero} snap anchor`}>
         <div className="container">
-          <div className={styles.badge}>Get In Touch</div>
-          <h1>Let’s Build Something <span className={styles.accent}>Amazing</span> Together</h1>
+          <div className={styles.badgeRow}>
+            <div className={styles.badge}>Veteran Owned and Operated</div>
+            <div className={styles.badge}>Based in USA</div>
+          </div>
+
+          <h1 className={styles.h1}>Let’s Build Something <span className="accent">Great</span></h1>
           <p className={styles.sub}>
-            Ready to start your project? Tell us about your vision and we’ll provide a free consultation
-            and a detailed project proposal.
+            Ready to start your project? Tell us a bit about it and we’ll reply quickly with next steps and a clear estimate.
           </p>
         </div>
       </section>
 
       {/* BODY */}
-      <section className={styles.bodyBand}>
+      <section className={`${styles.bodyBand} vh snap anchor`}>
         <div className="container">
           <div className={styles.grid}>
             {/* FORM CARD */}
             <article className={`card ${styles.formCard}`}>
-              <header>
-                <h2 className={styles.h2}>Project Inquiry Form</h2>
-                <p className={styles.kicker}>Tell us about your project and we’ll provide a free consultation.</p>
-              </header>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate className={styles.form} aria-labelledby="contact-title">
+                <h2 id="contact-title" className={styles.h2}>Project inquiry</h2>
+                <p className={styles.kicker}>Tell us about your project and we’ll reply quickly.</p>
 
-              <form onSubmit={handleSubmit(onSubmit)} noValidate className={styles.form}>
                 <div className={styles.twoCol}>
                   <div>
                     <label htmlFor="name">Full Name *</label>
@@ -101,45 +89,26 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className={styles.twoCol}>
-                  <div>
-                    <label htmlFor="projectType">Project Type *</label>
-                    <select id="projectType" {...register('projectType')} aria-invalid={!!errors.projectType}>
-                      <option value="">Select your project type</option>
-                      {PROJECT_TYPES.map(pt => <option key={pt} value={pt}>{pt}</option>)}
-                    </select>
-                    {errors.projectType && <span role="alert">{errors.projectType.message}</span>}
-                  </div>
-                  <div>
-                    <label htmlFor="budget">Project Budget *</label>
-                    <select id="budget" {...register('budget')} aria-invalid={!!errors.budget}>
-                      <option value="">Select your budget range</option>
-                      {BUDGETS.map(b => <option key={b} value={b}>{b}</option>)}
-                    </select>
-                    {errors.budget && <span role="alert">{errors.budget.message}</span>}
-                  </div>
-                </div>
-
-                <div className={styles.singleCol}>
-                  <div>
-                    <label htmlFor="timeline">Timeline *</label>
-                    <select id="timeline" {...register('timeline')} aria-invalid={!!errors.timeline}>
-                      <option value="">When do you need this?</option>
-                      {TIMELINES.map(t => <option key={t} value={t}>{t}</option>)}
-                    </select>
-                    {errors.timeline && <span role="alert">{errors.timeline.message}</span>}
-                  </div>
+                <div>
+                  <label htmlFor="projectType">Project Type *</label>
+                  <select id="projectType" {...register('projectType')} aria-invalid={!!errors.projectType}>
+                    <option value="">Select a project type</option>
+                    {PROJECT_TYPES.map(pt => <option key={pt} value={pt}>{pt}</option>)}
+                  </select>
+                  {errors.projectType && <span role="alert">{errors.projectType.message}</span>}
                 </div>
 
                 <div>
                   <label htmlFor="message">Project Description *</label>
-                  <textarea id="message" rows={6} {...register('message')} aria-invalid={!!errors.message}
-                    placeholder="Tell us about your goals, requirements, and any specific features you need..." />
+                  <textarea
+                    id="message" rows={6} {...register('message')} aria-invalid={!!errors.message}
+                    placeholder="Goals, requirements, pages/features, examples…"
+                  />
                   {errors.message && <span role="alert">{errors.message.message}</span>}
                 </div>
 
-                <button className={styles.submit} disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending…' : 'Send Inquiry  →'}
+                <button className={`button ${styles.submit}`} disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending…' : 'Send Inquiry →'}
                 </button>
 
                 {sent && <p className={styles.success} aria-live="polite">Thanks! We’ll reply within one business day.</p>}
@@ -149,22 +118,22 @@ export default function Contact() {
             {/* INFO COLUMN */}
             <aside className={styles.infoCol} aria-label="Contact information">
               <div className={`card ${styles.infoCard}`}>
-                <h3>Get In Touch</h3>
+                <h3>Contact</h3>
                 <ul className={styles.contactList}>
                   <li>📧 <a href="mailto:frontline.web.and.software@gmail.com">frontline.web.and.software@gmail.com</a></li>
-                  <li>📞 <a href="tel:+4192616857">(419) 261-6857</a></li>
+                  <li>📞 <a href="tel:+14192616857">(419) 261-6857</a></li>
                   <li>📍 Based in Pocatello, ID</li>
                 </ul>
               </div>
 
               <div className={`card ${styles.noteBlue}`}>
-                <h3>Quick Response</h3>
-                <p>We typically respond within 24 hours and can schedule a consultation call within 48 hours.</p>
+                <h3>Quick response</h3>
+                <p>We typically respond within 24 hours and can schedule a consultation within 48 hours.</p>
               </div>
 
               <div className={`card ${styles.noteGreen}`}>
-                <h3>Free Consultation</h3>
-                <p>Every project starts with a free consultation where we discuss goals and provide honest recommendations.</p>
+                <h3>Free consultation</h3>
+                <p>Every project starts with a free call where we discuss goals and share honest recommendations.</p>
               </div>
             </aside>
           </div>

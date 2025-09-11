@@ -4,6 +4,7 @@ import styles from './Portfolio.module.css'
 
 const categories = ['All', 'Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const
 type Category = typeof categories[number]
+
 type Project = {
   title: string
   category: Exclude<Category, 'All'>
@@ -42,35 +43,34 @@ export default function Portfolio() {
       <SEO title="Projects" description="Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations." />
 
       {/* HERO */}
-      <section className={styles.hero}>
+      <section className={`${styles.hero} snap anchor`}>
         <div className="container">
-          <h1>Projects</h1>
+          <h1 className={`accent`} >Projects</h1>
           <p className={styles.sub}>Real results across four simple categories. Click a filter to explore.</p>
         </div>
       </section>
 
       {/* FILTERS */}
-      <section className={styles.filters}>
-        <div className="container">
-          <ul className={styles.chips} role="tablist" aria-label="Project categories">
+      <section className={`${styles.filters} anchor`}>
+        <div className="container" style={{ display:'flex', justifyContent:'center' }}>
+          <div className={styles.segmented} role="tablist" aria-label="Project categories">
             {categories.map(cat => (
-              <li key={cat}>
-                <button
-                  role="tab"
-                  aria-selected={active === cat}
-                  className={`${styles.chip} ${active === cat ? styles.chipActive : ''}`}
-                  onClick={() => setActive(cat)}
-                >
-                  {cat}
-                </button>
-              </li>
+              <button
+                key={cat}
+                role="tab"
+                aria-selected={active === cat}
+                className={`${styles.segment} ${active === cat ? styles.active : ''}`}
+                onClick={() => setActive(cat)}
+              >
+                {cat}
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
       {/* GRID */}
-      <section className={styles.gridBand}>
+      <section className={`${styles.gridBand} snap anchor`}>
         <div className="container">
           <div className={styles.grid}>
             {filtered.map((p) => (
@@ -102,9 +102,10 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Empty state */}
           {filtered.length === 0 && (
-            <p className={styles.empty}>No projects in this category yet. <a href="/contact">Let’s build one.</a></p>
+            <p className={styles.empty}>
+              No projects in this category yet. <a href="/contact">Let’s build one.</a>
+            </p>
           )}
         </div>
       </section>

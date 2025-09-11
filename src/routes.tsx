@@ -3,6 +3,7 @@ import Home from './pages/Home/Home'
 import About from './pages/About/About'
 import Services from './pages/Services/Services'
 import Portfolio from './pages/Portfolio/Portfolio'
+import FAQ from './pages/FAQ/FAQ'
 import Contact from './pages/Contact/Contact'
 
 
@@ -13,6 +14,7 @@ return (
 <Route path="/about" element={<About />} />
 <Route path="/services" element={<Services />} />
 <Route path="/portfolio" element={<Portfolio />} />
+<Route path="/FAQ" element={<FAQ />} />
 <Route path="/contact" element={<Contact />} />
 </Routes>
 )

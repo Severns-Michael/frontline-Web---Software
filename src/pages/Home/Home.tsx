@@ -138,6 +138,7 @@ export default function Home() {
 </section>
 
 
+
 {/* PRICING PREVIEW */}
 <section id="pricing" className={`${styles.bandSoft} vh snap anchor`} aria-labelledby="pricing-title">
   <div className="container">
@@ -268,32 +269,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-        {/* FAQ */}
-<section id="faq" className={`${styles.bandDark} vh snap anchor`} aria-labelledby="faq-title">
-  <div className="container">
-    <h2 id="faq-title" className={styles.h2}>Questions we get a lot</h2>
-    <div className={styles.faq}>
-      <details>
-        <summary>How long does a websitre take?</summary>
-        <p>Most sites launch in 3–6 weeks depending on pages, features, and how quickly we get content/feedback.</p>
-      </details>
-      <details>
-        <summary>Do you work with templates?</summary>
-        <p>We custom-code for speed and flexibility. If a high-quality base theme saves you money, we’ll suggest it honestly.</p>
-      </details>
-      <details>
-        <summary>Can you help with content and photos?</summary>
-        <p>Yes. We can draft copy, structure pages for SEO, and guide brand photography so your site looks professional.</p>
-      </details>
-      <details>
-        <summary>What happens after launch?</summary>
-        <p>We offer ongoing care: updates, uptime checks, backups, and small improvements so your site keeps performing.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-
         {/* FINAL CTA */}
         <section id="cta" className={`${styles.finalCta}`}>
           <div className="container">

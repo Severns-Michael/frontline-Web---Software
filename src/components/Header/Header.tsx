@@ -54,9 +54,11 @@ export default function Header() {
             aria-label="Primary"
             aria-hidden={open ? false : undefined}
           >
+            <NavLink to="/" end>Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/services">Services</NavLink>
             <NavLink to="/portfolio">Portfolio</NavLink>
+            <NavLink to="/Faq">FAQs</NavLink>
             <NavLink to="/contact" className={styles.cta}>Contact</NavLink>
           </nav>
 
