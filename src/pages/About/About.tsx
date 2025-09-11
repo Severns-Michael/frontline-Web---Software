@@ -28,8 +28,15 @@ export default function About() {
                 </h1>
 
                 <p className={styles.intro}>
-                  I’m <strong>Michael Severns</strong>, founder & lead developer. I create fast, accessible
-                  websites and small web apps with clean, maintainable code—no bloat and no lock-in.
+                    I’m <strong>Michael Severns</strong>, founder & lead developer. I was active duty Marine Corps for 4 years, now im currently in college for computer science. 
+                  I Just moved to Pocaltello Idaho from a small town in Ohio. I am available for 1-2 projects per month to keep quality high. My focus is on small business sites that are
+                   fast, accessible, and easy to update at an affordable price. My goal is to help local businesses get online and grow with a website that works as hard as you do, 
+                    without the bloat and complexity of big agencies. I find more often than not, small businesses are overcharged for websites that are slow and hard to use. 
+                    I want to change that by providing clear, honest service with no upsells or confusing jargon. There are so many great local businesses out there doing awesome things,
+                    but they get overlooked because they don't have a good online presence. I'm here to fix that. Let's work together to create a website that truly represents your business
+                     and helps you reach more customers. 
+
+
                 </p>
 
                 <div className={styles.ctaRow}>
@@ -54,45 +61,63 @@ export default function About() {
           </div>
         </section>
 
-      {/* WHAT I DO (teaser) */}
-      <section className={`${styles.section} ${styles.bandDark} vh snap anchor`}>
-        <div className="container">
-          <h2 className={styles.h2}>What I do</h2>
-          <ul className={styles.gridList} role="list">
-            <li className={styles.card}>
-              <h3>Websites</h3>
-              <p className={styles.sub}>Fast on real phones with clear paths to calls, bookings, or orders.</p>
-            </li>
-            <li className={styles.card}>
-              <h3>Small web apps & Software</h3>
-              <p className={styles.sub}>Dashboards, forms, simple portals—kept lean and maintainable.</p>
-            </li>
-          </ul>
 
-          <div className={styles.linkRow}>
-            <Link to="/services#website-builds">Services</Link>
-            <span aria-hidden>•</span>
-            <Link to="/portfolio">Portfolio</Link>
+        {/* PROCESS */}
+        <section id="process" className={`${styles.section} ${styles.bandSoft} vh snap anchor`}>
+          <div className="container">
+            <h2 className={styles.h2}>Our process</h2>
+
+            <ol className={styles.timeline} role="list">
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>1</div>
+                <div className={styles.stepBody}>
+                  <h3>15-minute intro</h3>
+                  <p className={styles.sub}>
+                    We talk goals, pages, and budget. If it’s a fit, I outline scope and a simple timeline.
+                  </p>
+                </div>
+              </li>
+
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>2</div>
+                <div className={styles.stepBody}>
+                  <h3>Quick questionnaire</h3>
+                  <p className={styles.sub}>
+                    You share brand assets and priorities. I confirm a fixed price and what’s included.
+                  </p>
+                </div>
+              </li>
+
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>3</div>
+                <div className={styles.stepBody}>
+                  <h3>Design preview</h3>
+                  <p className={styles.sub}>
+                    Wireframe → visual pass. One focused revision round so we move fast without rework.
+                  </p>
+                </div>
+              </li>
+
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>4</div>
+                <div className={styles.stepBody}>
+                  <h3>Build &amp; launch</h3>
+                  <p className={styles.sub}>
+                    Staging link + weekly updates. Performance &amp; accessibility checks, analytics, and a clear handoff.
+                  </p>
+                </div>
+              </li>
+            </ol>
+
+            <div className={styles.ctaRow} style={{ marginTop: '.8rem' }}>
+              <Link to="/contact" className={`button ${styles.glowCta}`}>Book a 15-minute intro</Link>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* HOW I WORK (promises) */}
-      <section className={`${styles.section} ${styles.bandSoft} vh snap anchor`}>
-        <div className="container">
-          <h2 className={styles.h2}>How I work</h2>
-          <ul className={styles.checkList} role="list">
-            <li><strong>Clear scope &amp; price</strong> before we start.</li>
-            <li><strong>Weekly updates</strong> and a staging link you can click anytime.</li>
-            <li><strong>Performance &amp; accessibility first</strong> (Core Web Vitals + keyboard/screen-reader checks).</li>
-            <li><strong>You own it</strong>—no lock-in; plain-English handoff.</li>
-          </ul>
-        </div>
-      </section>
+        </section>
 
 
       {/* CTA */}
-      <section className={`${styles.finalCta} anchor`}>
+      <section className={`${styles.finalCta} vh snap anchor`}>
         <div className="container">
           <div className={styles.finalCard}>
             <h2>Want a quick plan for your site?</h2>
@@ -105,5 +130,6 @@ export default function About() {
         </div>
       </section>
     </>
+
   );
 }
