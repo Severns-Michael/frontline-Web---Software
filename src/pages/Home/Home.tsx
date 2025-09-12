@@ -7,9 +7,32 @@ import FeaturedHeroProjects from '../../components/FeaturedHeroProjects/Featured
 export default function Home() {
   return (
     <>
-      <SEO
+      <SEO //use on every page a little differently
         title="Custom Web & Software"
         description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
+        canonical="https://frontline.example/"
+        image="/og.jpg"
+        jsonLd={{
+          "@context":"https://schema.org",
+          "@type":"LocalBusiness",
+          "name":"Frontline Web & Software",
+          "url":"https://frontline.example",
+          "image":"https://frontline.example/og.jpg",
+          "telephone":"+1-208-555-1234",
+          "address":{
+            "@type":"PostalAddress",
+            "streetAddress":"123 Example St",
+            "addressLocality":"Idaho Falls",
+            "addressRegion":"ID",
+            "postalCode":"83401",
+            "addressCountry":"US"
+          },
+          "areaServed":["Idaho Falls","Pocatello","Rexburg"],
+          "sameAs":[
+            "https://www.facebook.com/yourpage",
+            "https://www.linkedin.com/company/yourcompany"
+          ]
+        }}
       />
 
       <main className={'snapContainer'}>
@@ -26,8 +49,8 @@ export default function Home() {
                 <h1>Custom-Coded Websites & Software for </h1>
                 <h1 className={`accent`}> Small Businesses</h1>
                 <p className={styles.sub}>
-                  Transform your business with custom websites and lightweight web apps.
-                  Performance, accessibility, and SEO baked in — no page builders, no bloat.
+                  Transform your business with a custom website and lightweight web app.
+                  Performance, accessibility, and SEO built in — no page builders, no bloat.
                 </p>
                 <div className={styles.ctaRow}>
                   <Link to="/contact" className="button">Start Your Project</Link>
@@ -46,9 +69,9 @@ export default function Home() {
         {/* PROBLEMS WE SOLVE */}
 <section id="problems" className={`${styles.bandSoft} vh snap anchor`} aria-labelledby="problems-title">
   <div className="container">
-    <h1 id="problems-title" className={`${styles.h1}`}>Fix the stuff that hurts<span className={`${styles.h1} accent`}> Revenue</span></h1>
+    <h1 id="problems-title" className={`${styles.h1}`}><span className={`${styles.h1} accent`}> Fix</span> the stuff that hurts<span className={`${styles.h1} accent`}> revenue</span></h1>
   
-    <p className={styles.sub}>Most small businesses lose customers to slow sites, clunky forms, and poor Google visibility. We fix that.</p>
+    <p className={styles.sub}>Most small businesses lose customers to slow sites, clunky forms, and poor Google visibility. We can fix that.</p>
 
     <ul className={styles.miniProof} role="list">
       <li>Slow load times</li>
@@ -64,8 +87,8 @@ export default function Home() {
 <section id="capabilities" className={`${styles.bandDark} vh snap anchor`} aria-labelledby="capabilities-title">
   <div className="container">
     <div className={`${styles.sectionHead} ${styles.alignCenter}`}>
-      <h2 id="capabilities-title" className={styles.h1}>What you get with every <span className={`accent ${styles.h1}`}>Build</span></h2>
-      <p className={styles.sub}>Fast, mobile-ready websites with clean code, built to rank — and support after launch.</p>
+      <h2 id="capabilities-title" className={styles.h1}>What you get with every <span className={`accent ${styles.h1}`}>build:</span></h2>
+      <p className={styles.sub}>Fast, mobile-ready websites or software with clean code, built to last.</p>
     </div>
 
     <ul className={styles.featureList} role="list">
@@ -116,19 +139,19 @@ export default function Home() {
 {/* PROCESS */}
 <section id="process" className={`${styles.bandSoft}  vh snap anchor`} aria-labelledby="process-title">
   <div className="container">
-    <h2 id="process-title" className={styles.h1}>A Simple, <span className={`${styles.h1} accent`}>No-Stess</span> Process</h2>
+    <h2 id="process-title" className={styles.h1}>A Simple, <span className={`${styles.h1} accent`}>No-Stress</span> Process</h2>
     <div className={styles.processGrid}>
       <article className="card">
         <h2 className="accent">Plan</h2>
-        <p className={styles.lead}>Quick call to learn your goals, pages, and must-haves. We share a fixed scope and timeline so there are no surprises.</p>
+        <p className={styles.lead}>Intro call to learn your goals, pages, and must-haves. We ensure a fixed scope and timeline so there are no surprises.</p>
       </article>
       <article className="card">
         <h2 className="accent">Build</h2>
-        <p className={styles.lead}>Design + development in weekly check-ins. You see progress as we go and give feedback early.</p>
+        <p className={styles.lead}>Design & development in weekly check-ins. You"ll see progress as we go and can give feedback early.</p>
       </article>
       <article className="card">
         <h2 className="accent">Launch & grow</h2>
-        <p className={styles.lead}>Performance tuned, SEO-ready, tracked with analytics. We iterate post-launch to keep results climbing.</p>
+        <p className={styles.lead}>Performance tuned, SEO active, and tracked with analytics. We iterate post-launch to keep results climbing.</p>
       </article>
     </div>
     <div className={styles.sectionFoot}>
@@ -143,7 +166,7 @@ export default function Home() {
 <section id="pricing" className={`${styles.bandSoft} vh snap anchor`} aria-labelledby="pricing-title">
   <div className="container">
     <h2 id="pricing-title" className={styles.h1}><span className={`${styles.h3} accent`} >Simple</span> Packages</h2>
-    <p className={styles.lead}>Transparent pricing with options to spread payments. Every build includes mobile-first design, SEO basics, and launch checklist.</p>
+    <p className={styles.lead}>Transparent pricing with multiple options. Every build includes mobile-first design, SEO built in, and a launch checklist.</p>
 
     <div className={styles.priceGrid}>
       {/* Starter */}
@@ -212,7 +235,7 @@ export default function Home() {
 
     {/* Risk reversal + tiny FAQ hook */}
     <div className={styles.pricingFoot}>
-      <p><strong className='accent'>Guarantee:</strong> If you’re not happy with the finished product, you don’t move forward—no hard feelings.</p>
+      <p><strong className='accent'>Satisfaction Guarantee:</strong> If you’re not happy with the finished product, we don't move foward - no hard feelings.</p>
       <p className={styles.muted}>Not sure where you land? <Link to="/services">Compare packages</Link> or <Link to="/contact">ask for a free 15-minute consult</Link>.</p>
     </div>
   </div>
@@ -225,7 +248,7 @@ export default function Home() {
     <div className={styles.focusGrid}>
       <aside className={styles.stickyCol}>
         <h2 id="focus-title" className={styles.h1}>
-          What we actually <span className="accent">move</span>
+          What we <span className="accent">do:</span>
         </h2>
         <p className={styles.sub}>
           Speed. Conversion. Findability. Everything else is tactics.
@@ -260,7 +283,7 @@ export default function Home() {
 
         <li className={`${styles.focusItem} ${styles.pushL}`}>
           <span className={styles.kicker}>Care</span>
-          <h3>Keep it humming</h3>
+          <h3>Keep it running</h3>
           <p className={styles.sub}>
             Updates, uptime checks, backups, and small improvements so performance doesn’t drift.
           </p>

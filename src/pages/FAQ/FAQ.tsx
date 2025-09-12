@@ -112,12 +112,30 @@ const GROUP_ORDER: GroupKey[] = [
   'Care & Hosting',
 ]
 
-export default function FAQ() {
+const faqs = [
+  { q: 'How long does a typical website take?', a: 'Most sites launch in 3–5 weeks depending on scope and content readiness.' },
+  { q: 'Do you offer hosting?', a: 'Yes, we set up modern hosting and connect your domain.' },
+];
+
+export default function Faq() {
   const [active, setActive] = useState<GroupKey>('General')
 
   return (
     <>
-      <SEO title="FAQ" description="Answers about websites, e-commerce, web apps, process, pricing, and care/hosting." />
+     <SEO
+        title="FAQs"
+        description="Common questions about timelines, hosting, editing your site, and more."
+        canonical="https://frontline.example/faq"
+        jsonLd={{
+          "@context":"https://schema.org",
+          "@type":"FAQPage",
+          "mainEntity": faqs.map(({q,a}) => ({
+            "@type":"Question",
+            "name": q,
+            "acceptedAnswer": { "@type":"Answer", "text": a }
+          }))
+        }}
+      />
 
       {/* HERO */}
       <section className={`${styles.hero} vh snap anchor`}>
@@ -186,3 +204,4 @@ export default function FAQ() {
     </>
   )
 }
+

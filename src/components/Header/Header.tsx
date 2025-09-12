@@ -29,6 +29,13 @@ export default function Header() {
   useEffect(() => { document.body.style.overflow = open ? 'hidden' : '' }, [open])
   useEffect(() => { setOpen(false) }, [location.pathname])
 
+  useEffect(() => {
+  const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+  window.addEventListener('keydown', onKey)
+  return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+
   return (
     <header ref={headerRef} className={`${styles.header} ${scrolled ? styles.scrolled : ''}`} role="banner">
       <div className="container">

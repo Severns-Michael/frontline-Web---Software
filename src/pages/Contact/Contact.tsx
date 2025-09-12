@@ -34,7 +34,11 @@ export default function Contact() {
     await leadService.createLead(payload)
     reset()
     setSent(true)
-  }
+    window.gtag?.('event', 'generate_lead', {
+      form: 'contact',
+      project_type: values.projectType || '(not set)'
+      })
+    }
 
   return (
     <>
@@ -120,9 +124,9 @@ export default function Contact() {
               <div className={`card ${styles.infoCard}`}>
                 <h3>Contact</h3>
                 <ul className={styles.contactList}>
-                  <li>📧 <a href="mailto:frontline.web.and.software@gmail.com">frontline.web.and.software@gmail.com</a></li>
-                  <li>📞 <a href="tel:+14192616857">(419) 261-6857</a></li>
-                  <li>📍 Based in Pocatello, ID</li>
+                  <li>📧<a href="mailto:frontline.web.and.software@gmail.com" onClick={() => window.gtag?.('event', 'click_email', { location: 'footer' })}>hello@frontline.exampl </a></li>
+                  <li>📞 <a href="tel:+1419261685" onClick={() => window.gtag?.('event', 'click_call', { location: 'header' })}> (419) 261-6857</a></li>
+                  <li> Based in Pocatello, ID</li>
                 </ul>
               </div>
 

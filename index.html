@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  // Initial config (optional fields can be added later)
+  gtag('config', 'G-XXXXXXXXXX', { send_page_view: false }); // we handle page_view manually for SPA
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Custom websites & software for small businesses." />
@@ -12,6 +20,7 @@
 <title>MS Labs Web Solutions</title>
 </head>
 <body>
+    
 <div id="root"></div>
 <script type="module" src="/src/main.tsx"></script>
 </body>

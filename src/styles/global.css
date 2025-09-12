@@ -106,3 +106,38 @@ a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
 summary:focus { outline: none; }
 summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Neutralize stuck :active on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  a:active,
+  button:active,
+  [role="button"]:active,
+  summary:active {
+    background: inherit !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+}
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  color: #111;
+  padding: .75rem 1rem;
+  border-radius: .5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 3px solid #7aa2ff; /* any accessible color */
+  outline-offset: 2px;
+}
+a, button, input, select, textarea, summary, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
