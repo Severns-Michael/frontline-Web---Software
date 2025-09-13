@@ -4,6 +4,7 @@ import styles from './Portfolio.module.css'
 
 const categories = ['All', 'Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const
 type Category = typeof categories[number]
+
 type Project = {
   title: string
   category: Exclude<Category, 'All'>
@@ -15,6 +16,25 @@ type Project = {
   link?: string
 }
 
+// --- NEW: Launch offer config & optional "promo-only" flag ---
+const launchOffer = {
+  headline: "Founder's Launch Offer",
+  sub: "New company, big results—intro pricing for first 5 clients.",
+  bullets: [
+    "Priority kickoff in 3 days",
+    "up to 5 pages",
+    "SEO + analytics",
+    "lump sum website 30% off first 3 clients or",
+    "Subscription based website option will be discounted 30% the first 12 month contract",
+  ],
+  badge: "Limited seats",
+  code: "LAUNCH25",
+  footnote: "Available through Nov 30, 2025 or until seats fill, type code in the contact form.",
+  ctaHref: "/contact?offer=LAUNCH25",
+  ctaText: "Claim the Offer",
+}
+// Set this true if you want to HIDE portfolio cards (data stays intact)
+const PROMO_ONLY_MODE = true
 const projects: Project[] = [
   // Websites
   { title: 'RiverStone Construction', category: 'Websites', result: '+120% leads in 60 days', features: ['SEO pages', 'Quote form', 'Reviews'], tech: ['React', 'Vite', 'Postgres'], timeline: '3 weeks', year: 2025 },
@@ -36,44 +56,62 @@ const projects: Project[] = [
 export default function Portfolio() {
   const [active, setActive] = useState<Category>('All')
   const filtered = projects.filter(p => active === 'All' ? true : p.category === active)
+  const shouldShowGrid = !PROMO_ONLY_MODE
 
   return (
     <>
       <SEO title="Projects" description="Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations." />
 
       {/* HERO */}
-      <section className={styles.hero}>
+      <section className={`${styles.hero} snap anchor`}>
         <div className="container">
-          <h1>Projects</h1>
+          <h1 className={`accent`}>Projects</h1>
           <p className={styles.sub}>Real results across four simple categories. Click a filter to explore.</p>
         </div>
       </section>
 
       {/* FILTERS */}
-      <section className={styles.filters}>
-        <div className="container">
-          <ul className={styles.chips} role="tablist" aria-label="Project categories">
+      <section className={`${styles.filters} anchor`}>
+        <div className="container" style={{ display:'flex', justifyContent:'center' }}>
+          <div className={styles.segmented} role="tablist" aria-label="Project categories">
             {categories.map(cat => (
-              <li key={cat}>
-                <button
-                  role="tab"
-                  aria-selected={active === cat}
-                  className={`${styles.chip} ${active === cat ? styles.chipActive : ''}`}
-                  onClick={() => setActive(cat)}
-                >
-                  {cat}
-                </button>
-              </li>
+              <button
+                key={cat}
+                role="tab"
+                aria-selected={active === cat}
+                className={`${styles.segment} ${active === cat ? styles.active : ''}`}
+                onClick={() => setActive(cat)}
+              >
+                {cat}
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
       {/* GRID */}
-      <section className={styles.gridBand}>
+      <section className={`${styles.gridBand} snap anchor`}>
         <div className="container">
           <div className={styles.grid}>
-            {filtered.map((p) => (
+            {/* --- NEW: Promo card pinned first --- */}
+            <aside className={`${styles.promo} card`} aria-labelledby="launch-offer-title">
+              <div className={styles.promoTop}>
+                <span className={styles.promoBadge}>{launchOffer.badge}</span>
+                <span className={styles.promoCode}>Use code <strong>{launchOffer.code}</strong></span>
+              </div>
+              <h3 id="launch-offer-title" className={styles.promoTitle}>{launchOffer.headline}</h3>
+              <p className={styles.promoSub}>{launchOffer.sub}</p>
+              <ul className={styles.promoBullets}>
+                {launchOffer.bullets.map(b => <li key={b}>{b}</li>)}
+              </ul>
+              <div className={styles.promoActions}>
+                <a href={launchOffer.ctaHref} className="button">{launchOffer.ctaText}</a>
+                <span className={styles.promoFootnote}>{launchOffer.footnote}</span>
+              </div>
+            </aside>
+
+            {/* Existing cards (kept intact) */}
+            {shouldShowGrid && filtered.map((p) => (
               <article key={p.title} className={`card ${styles.card}`}>
                 <div className={styles.cardTop}>
                   <span className={styles.badge}>{p.category}</span>
@@ -95,16 +133,19 @@ export default function Portfolio() {
                   {p.link ? (
                     <a href={p.link} target="_blank" rel="noreferrer" className={styles.cta}>View case study →</a>
                   ) : (
-                    <a href="/contact" className={styles.cta}>Get a similar build →</a>
+                    <a href={`/contact?project=${encodeURIComponent(p.title)}&offer=${launchOffer.code}`} className={styles.cta}>Get a similar build →</a>
                   )}
                 </div>
               </article>
             ))}
           </div>
 
-          {/* Empty state */}
-          {filtered.length === 0 && (
-            <p className={styles.empty}>No projects in this category yet. <a href="/contact">Let’s build one.</a></p>
+          {/* Empty/promo-only state copy */}
+          {!shouldShowGrid && (
+            <p className={styles.empty}>
+              Case studies are being prepared. Be one of the first and get the {launchOffer.headline.toLowerCase()} —
+              <a href={launchOffer.ctaHref}> claim code {launchOffer.code}</a>.
+            </p>
           )}
         </div>
       </section>

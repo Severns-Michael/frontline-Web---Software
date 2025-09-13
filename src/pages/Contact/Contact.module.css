@@ -1,61 +1,62 @@
-/* Hero */
-.hero {
-  padding: 5rem 0 3rem; text-align: center;
+/* === Hero (match Home/Services) === */
+.hero{
+  padding: 6rem 0 3rem; text-align:center;
   background:
     radial-gradient(800px 400px at 70% -10%, rgba(255,255,255,.06), transparent),
     linear-gradient(180deg, #0b0d12, #121621);
 }
-.badge {
-  display: inline-block; font-size: .85rem; padding: .3rem .6rem; border-radius: 999px;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); margin-bottom: 1rem;
+.h1{ font-size:clamp(2.25rem,1.6rem + 1.8vw,3.25rem); line-height:1.05; text-wrap:balance; letter-spacing:-0.01em; margin:0; }
+.sub{
+  color: var(--muted); max-width: 720px; margin: 1rem auto 0;
+  font-size: clamp(1.05rem, .95rem + .15vw, 1.15rem); line-height:1.45;
 }
-.accent { color: var(--brand); }
-.sub { color: var(--muted); max-width: 900px; margin: .25rem auto 0; }
+.badgeRow{ display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:.75rem; }
+.badge{
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-size:.85rem; padding:.35rem .6rem; border-radius:999px;
+  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+}
 
-/* Body band */
-.bodyBand { background: #0e1320; padding: 2rem 0; }
-.grid {
-  display: grid; grid-template-columns: 1.4fr .8fr; gap: 1rem; align-items: start;
+/* === Body band / grid === */
+.bodyBand{ background:#0e1320; padding: 2rem 0; }
+.grid{
+  display:grid; grid-template-columns: 1.4fr .8fr; gap: 1rem; align-items:start;
 }
-@media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 960px){ .grid{ grid-template-columns: 1fr; } }
 
 /* Cards */
-.formCard { padding: 1.25rem; }
-.infoCol { display: grid; gap: 1rem; }
-.infoCard { padding: 1.25rem; }
+.formCard{ padding: 1.25rem; }
+.infoCol{ display:grid; gap:1rem; }
+.infoCard{ padding: 1.25rem; }
 
-/* Headings */
-.h2 { margin: 0 0 .25rem; font-size: clamp(1.2rem, 1rem + .8vw, 1.6rem); }
-.kicker { color: var(--muted); margin: 0 0 1rem; }
+/* Form header copy */
+.h2{ margin:0 0 .25rem; font-size: clamp(1.2rem, 1rem + .8vw, 1.6rem); }
+.kicker{ color: var(--muted); margin: 0 0 1rem; }
 
-/* Form controls */
-.form { display: grid; gap: 1rem; }
-.twoCol { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.singleCol { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-@media (max-width: 640px) { .twoCol { grid-template-columns: 1fr; } }
+/* Form layout + controls */
+.form{ display:grid; gap:1rem; }
+.twoCol{ display:grid; grid-template-columns: 1fr 1fr; gap:1rem; }
+@media (max-width: 640px){ .twoCol{ grid-template-columns: 1fr; } }
 
-label { display: block; margin-bottom: .3rem; font-weight: 600; }
-input, textarea, select {
-  width: 100%; padding: .85rem 1rem; border-radius: .75rem;
-  border: 1px solid rgba(255,255,255,.12); background: #0e1220; color: var(--text);
+label{ display:block; margin-bottom:.35rem; font-weight:700; }
+input, textarea, select{
+  width:100%; padding:.9rem 1rem; border-radius:.75rem;
+  border:1px solid rgba(255,255,255,.12); background:#0e1220; color:inherit;
 }
-input:focus, textarea:focus, select:focus { outline: 3px solid var(--brand); outline-offset: 2px; }
-span[role="alert"] { color: #ffb4b4; font-size: .9rem; }
+input:focus, textarea:focus, select:focus{ outline:3px solid var(--brand); outline-offset:2px; }
+span[role="alert"]{ color:#ffb4b4; font-size:.9rem; }
 
-/* Submit */
-.submit {
-  display: inline-block; padding: .9rem 1.1rem; border-radius: 999px;
-  background: var(--brand); color: #0b0d12; font-weight: 800; border: none; cursor: pointer;
-}
-.success { color: var(--accent); font-weight: 700; }
+/* Submit / success */
+.submit{ margin-top:.25rem; }
+.success{ color: var(--accent); font-weight:700; margin:.35rem 0 0; }
 
-/* Info cards (right column) */
-.contactList { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .4rem; }
-.noteBlue {
-  border: 1px solid rgba(106,166,255,.35);
+/* Right column cards */
+.contactList{ list-style:none; margin:.5rem 0 0; padding:0; display:grid; gap:.4rem; }
+.noteBlue{
+  border:1px solid rgba(106,166,255,.35);
   background: linear-gradient(180deg, rgba(106,166,255,.15), rgba(255,255,255,.02));
 }
-.noteGreen {
-  border: 1px solid rgba(0,209,178,.35);
+.noteGreen{
+  border:1px solid rgba(0,209,178,.35);
   background: linear-gradient(180deg, rgba(0,209,178,.15), rgba(255,255,255,.02));
 }

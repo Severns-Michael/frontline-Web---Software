@@ -1,124 +1,135 @@
-import { SEO } from '../../components/SEO/SEO'
-import styles from './About.module.css'
+import { Link } from "react-router-dom";
+import { SEO } from "../../components/SEO/SEO";
+import styles from "./About.module.css";
 
 export default function About() {
   return (
     <>
       <SEO
         title="About"
-        description="We build amazing software for small businesses—fast, accessible, and SEO-ready."
+        description="Veteran-owned, USA-based. Michael Severns builds fast, accessible websites and small web apps—clean code, no bloat."
       />
 
-      {/* HERO */}
-      <section className={styles.hero}>
-        <div className="container">
-          <div className={styles.badge}>About Frontline Web & Software</div>
-          <h1>
-            We’re Passionate About Building <span className={styles.accent}>Amazing Software</span>
-          </h1>
-          <p className={styles.sub}>
-            Since 2019, we’ve helped small businesses leverage technology to grow faster, serve
-            customers better, and compete with larger companies.// new missong statement
-          </p>
-        </div>
-      </section>
+      {/* HERO (personal intro + photo) */}
+        <section id="about-hero" className={`${styles.bioHero} vh snap anchor`}>
+          <div className="container">
+            <div className={styles.bioGrid}>
+              {/* Left: copy */}
+              <div className={styles.bioCopy}>
+                <div className={styles.badgeRow}>
+                  <span className={styles.badge}>Veteran-owned</span>
+                  <span className={styles.badge}>USA-based</span>
+                  <span className={styles.badge}>No page builders</span>
+                </div>
 
-      {/* STORY + STATS */}
-      <section className={styles.story}>
-        <div className="container">
-          <div className={styles.storyGrid}>
-            <div>
-              <h2 className={styles.h2}>Our Story</h2>
-              <p>
-                Frontline Web & Software was founded with a simple mission: make enterprise-level technology
-                accessible to small businesses. Too many great teams were stuck with outdated
-                websites and manual workflows that slowed them down.
-              </p>
-              <p>
-                What started as a small dev shop has grown into a full-service web development
-                partner. We’ve helped restaurants streamline orders, contractors capture more
-                leads, and local brands scale online with lightweight, maintainable software. // need reworked
-              </p>
-              <p>
-                Today, we’re proud to have completed 50+ projects and helped clients generate real// needs reworked
-                results through better technology and clean code.
-              </p>
+                <p className={styles.kicker}>Frontline Web & Software</p>
+                <h1 className={styles.h1}>
+                  <span className={'accent'}>Veteran</span>-built websites for <span className={'accent'}>Local Business</span>
+                </h1>
+
+                <p className={styles.intro}>
+                    I’m <strong>Michael Severns</strong>, founder & lead developer. I was active duty Marine Corps for 4 years, now im currently in college for computer science. 
+                  I Just moved to Pocaltello Idaho from a small town in Ohio. I am available for 1-2 projects per month to keep quality high. My focus is on small business sites that are
+                   fast, accessible, and easy to update at an affordable price. My goal is to help local businesses get online and grow with a website that works as hard as you do, 
+                    without the bloat and complexity of big agencies. I find more often than not, small businesses are overcharged for websites that are slow and hard to use. 
+                    I want to change that by providing clear, honest service with no upsells or confusing jargon. There are so many great local businesses out there doing awesome things,
+                    but they get overlooked because they don't have a good online presence. I'm here to fix that. Let's work together to create a website that truly represents your business
+                     and helps you reach more customers. 
+
+
+                </p>
+
+                <div className={styles.ctaRow}>
+                  <Link to="/contact" className={`button ${styles.glowCta}`}>Book a 15-minute intro</Link>
+                  <Link to="/services#pricing" className={styles.secondaryCta}>See packages & pricing</Link>
+                </div>
+              </div>
+
+              {/* Right: portrait */}
+              <figure className={styles.portraitWrap}>
+                <img
+                  src="public\aboutPicture.jpg"
+                  alt="Michael Severns, founder of Frontline Web & Software"
+                  className={styles.portrait}
+                  width={560}
+                  height={680}
+                  loading="eager"
+                />
+                <figcaption className={styles.caption}>Michael Severns — Founder & Developer</figcaption>
+              </figure>
             </div>
-
-            <ul className={styles.statCards}>
-              <li className={styles.card}>
-                <span className={styles.statNum}>0 </span>
-                <span className={styles.statLabel}>Projects Delivered</span>
-              </li>
-              <li className={styles.card}>
-                <span className={styles.statNum}>0%</span>
-                <span className={styles.statLabel}>Client Satisfaction</span>
-              </li>
-              <li className={styles.card}>
-                <span className={styles.statNum}>2+</span>
-                <span className={styles.statLabel}>Years Experience</span>
-              </li>
-              <li className={styles.card}>
-                <span className={styles.statNum}>0</span>
-                <span className={styles.statLabel}>Happy Clients</span>
-              </li>
-            </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* VALUES */}
-      <section className={styles.values}>
-        <div className="container">
-          <h2 className={styles.h2}>Our Values</h2>
-          <p className={styles.kicker}>The principles that guide everything we do</p>
 
-          <div className={styles.valueGrid}>
-            <article className={styles.valueCard}>
-              <h3>Quality First</h3>
-              <p>We never compromise on code quality, testing, or user experience.</p>
-            </article>
-            <article className={styles.valueCard}>
-              <h3>Client Success</h3>
-              <p>Your success is our success. We’re invested in your long-term growth.</p>
-            </article>
-            <article className={styles.valueCard}>
-              <h3>Innovation</h3>
-              <p>We stay ahead of trends to give you a competitive advantage.</p>
-            </article>
-            <article className={styles.valueCard}>
-              <h3>Reliability</h3>
-              <p>Clear communication, dependable delivery, and ongoing support.</p>
-            </article>
+        {/* PROCESS */}
+        <section id="process" className={`${styles.section} ${styles.bandSoft} vh snap anchor`}>
+          <div className="container">
+            <h2 className={styles.h2}>Our process</h2>
+
+            <ol className={styles.timeline} role="list">
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>1</div>
+                <div className={styles.stepBody}>
+                  <h3>15-minute intro</h3>
+                  <p className={styles.sub}>
+                    We talk goals, pages, and budget. If it’s a fit, I outline scope and a simple timeline.
+                  </p>
+                </div>
+              </li>
+
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>2</div>
+                <div className={styles.stepBody}>
+                  <h3>Quick questionnaire</h3>
+                  <p className={styles.sub}>
+                    You share brand assets and priorities. I confirm a fixed price and what’s included.
+                  </p>
+                </div>
+              </li>
+
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>3</div>
+                <div className={styles.stepBody}>
+                  <h3>Design preview</h3>
+                  <p className={styles.sub}>
+                    Wireframe → visual pass. One focused revision round so we move fast without rework.
+                  </p>
+                </div>
+              </li>
+
+              <li className={styles.stepItem}>
+                <div className={styles.stepNum}>4</div>
+                <div className={styles.stepBody}>
+                  <h3>Build &amp; launch</h3>
+                  <p className={styles.sub}>
+                    Staging link + weekly updates. Performance &amp; accessibility checks, analytics, and a clear handoff.
+                  </p>
+                </div>
+              </li>
+            </ol>
+
+            <div className={styles.ctaRow} style={{ marginTop: '.8rem' }}>
+              <Link to="/contact" className={`button ${styles.glowCta}`}>Book a 15-minute intro</Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* TEAM */}
-      <section className={styles.team}>
+
+      {/* CTA */}
+      <section className={`${styles.finalCta} vh snap anchor`}>
         <div className="container">
-          <h2 className={styles.h2}>Meet Our Team</h2>
-          <p className={styles.kicker}>
-            Experienced developers and designers passionate about your success
-          </p>
-
-          <div className={styles.teamGrid}>
-            <article className={styles.teamCard}>
-              <div className={styles.avatar}>MS</div>
-              <h3>Michael Severns</h3>
-              <p className={styles.role}>Founder & Lead Developer</p>
-              <p className={styles.bio}>
-                2+ years building scalable web apps for startups and small businesses.
-              </p>
-              <ul className={styles.chips}>
-                <li>React</li> <li>Vue</li>
-                <li>TypeScript</li> <li> javaScript</li> <li>java</li> <li>Node.js</li> <li>Html</li> <li>Css</li>
-                <li>Postgres</li><li>Suprabase</li> <li>Prisma</li>
-              </ul>
-            </article>
+          <div className={styles.finalCard}>
+            <h2>Want a quick plan for your site?</h2>
+            <p>I’ll look at what you have and outline the three fastest wins.</p>
+            <div className={styles.ctaRow}>
+              <Link to="/contact" className="button">Book a 15-minute intro</Link>
+              <Link to="/services" className={styles.secondaryCta}>See Services &amp; Pricing</Link>
+            </div>
           </div>
         </div>
       </section>
     </>
-  )
+
+  );
 }

@@ -1,23 +1,81 @@
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink, Link, useLocation } from 'react-router-dom'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './Header.module.css'
 
+export default function Header() {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
+  const headerRef = useRef<HTMLElement>(null)
 
-export function Header() {
-return (
-<header className={styles.header}>
-<div className="container">
-<div className={styles.row}>
-<Link to="/" className={styles.logo} aria-label="Frontline Web & Software home">Frontline Web & Software</Link>
-<nav aria-label="Primary">
-<ul className={styles.nav}>
-<li><NavLink to="/about">About</NavLink></li>
-<li><NavLink to="/services">Services</NavLink></li>
-<li><NavLink to="/portfolio">Portfolio</NavLink></li>
-<li><NavLink to="/contact">Contact</NavLink></li>
-</ul>
-</nav>
-</div>
-</div>
-</header>
-)
+  // Keep --header-h accurate
+  useLayoutEffect(() => {
+    const setVar = () => {
+      const h = headerRef.current?.offsetHeight ?? 64
+      document.documentElement.style.setProperty('--header-h', `${h}px`)
+    }
+    setVar()
+    window.addEventListener('resize', setVar)
+    return () => window.removeEventListener('resize', setVar)
+  }, [])
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => { document.body.style.overflow = open ? 'hidden' : '' }, [open])
+  useEffect(() => { setOpen(false) }, [location.pathname])
+
+  useEffect(() => {
+  const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+  window.addEventListener('keydown', onKey)
+  return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+
+  return (
+    <header ref={headerRef} className={`${styles.header} ${scrolled ? styles.scrolled : ''}`} role="banner">
+      <div className="container">
+        <div className={styles.row}>
+          <Link to="/" className={styles.logo } onClick={() => setOpen(false)}>
+            Frontline Web &amp; Software
+          </Link>
+
+          <button
+            type="button"
+            className={styles.menuBtn}
+            aria-expanded={open}
+            aria-controls="primary-nav"
+            onClick={() => setOpen(v => !v)}
+          >
+            <span className={styles.menuIcon} />
+            <span className={styles.srOnly}>Menu</span>
+          </button>
+
+          <nav
+            id="primary-nav"
+            className={`${styles.nav} ${open ? styles.open : ''}`}
+            aria-label="Primary"
+            aria-hidden={open ? false : undefined}
+          >
+            <NavLink to="/" end>Home</NavLink>
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="/services">Services</NavLink>
+            <NavLink to="/portfolio">Portfolio</NavLink>
+            <NavLink to="/Faq">FAQs</NavLink>
+            <NavLink to="/contact" className={styles.cta}>Contact</NavLink>
+          </nav>
+
+          <div
+            className={`${styles.scrim} ${open ? styles.scrimShow : ''}`}
+            onClick={() => setOpen(false)}
+            aria-hidden
+          />
+        </div>
+      </div>
+    </header>
+  )
 }
