@@ -45,7 +45,7 @@ export function Footer() {
         <div className={styles.hr} />
 
         <div className={styles.bottom}>
-          <p>© {year} DevStudio. All rights reserved.</p>
+          <p>© {year} Frontline Web & Software 2025. All rights reserved.</p>
           <p className={styles.linksRow}>
             <Link to="/privacy">Privacy</Link><span>·</span><Link to="/terms">Terms</Link>
           </p>
