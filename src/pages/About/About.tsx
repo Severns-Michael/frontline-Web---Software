@@ -48,7 +48,7 @@ export default function About() {
               {/* Right: portrait */}
               <figure className={styles.portraitWrap}>
                 <img
-                  src="/assets/team/michael-severns.webp"
+                  src="public\aboutPicture.jpg"
                   alt="Michael Severns, founder of Frontline Web & Software"
                   className={styles.portrait}
                   width={560}

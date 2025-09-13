@@ -170,3 +170,54 @@
   .chipActive:hover,
   .chip[aria-selected="true"]:hover { background-color: var(--brand); }
 }
+
+.promo {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: .75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.promoTop {
+  display: flex; justify-content: space-between; align-items: center; gap: .75rem;
+  color: var(--muted);
+}
+
+.promoBadge {
+  font-size: .75rem; padding: .2rem .6rem; border-radius: 999px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+}
+
+.promoCode { font-size: .9rem; opacity: .9; }
+.promoTitle { margin: 0; }
+.promoSub { margin: 0; color: var(--muted); }
+
+.promoBullets {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: .4rem;
+}
+.promoBullets li {
+  display: inline-flex; align-items: center; gap: .5rem;
+}
+.promoBullets li::before {
+  content: "•"; opacity: .6;
+}
+
+.promoActions {
+  display: flex; gap: .75rem; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;
+}
+.promoFootnote { color: var(--muted); font-size: .9rem; }
+
+/* Touch: kill sticky dark press on segmented buttons (your filter control uses .segment) */
+.segment {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+@media (hover: none) and (pointer: coarse) {
+  .segment:active { background: inherit !important; filter: none !important; opacity: 1 !important; }
+}
