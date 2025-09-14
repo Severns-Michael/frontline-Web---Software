@@ -1,18 +1,22 @@
+/* Bigger hero visual with nice shadow */
 .deviceCarousel{
-  position:relative;
-  width: clamp(280px, 60vw, 580px);
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+  width: clamp(320px, 64vw, 720px); /* bigger cap */
   aspect-ratio: 16/10;
-  isolation:isolate;
   filter: drop-shadow(0 24px 48px rgba(0,0,0,.35));
+  margin-bottom: 18px; /* room for meta below */
 }
 
-/* optional generated frames (remove if you switch to PNG frame images) */
+/* Optional generated frames (replace with PNG frames later if preferred) */
 .deviceCarousel::before{
   content:"";
   position:absolute; inset:0;
   border-radius:16px;
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   border:1px solid rgba(255,255,255,.12);
+  z-index: 0;
 }
 .deviceCarousel::after{
   content:"";
@@ -23,53 +27,78 @@
   border:1px solid rgba(255,255,255,.12);
   transform: rotate(-6deg);
   box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  z-index: 0; /* behind slides */
 }
 
-/* slides */
-.slides{ position:absolute; inset:0; }
+/* Slides */
+.slides{ position:absolute; inset:0; z-index: 1; }
 .slide{
   position:absolute; inset:0; opacity:0; pointer-events:none;
   transition: opacity .45s ease;
 }
 .active{ opacity:1; pointer-events:auto; }
 
-/* screen windows (match your old insets) */
+/* Screen windows */
 .screenLaptop{
   position:absolute; inset:6% 6% 18% 6%;
   width:auto; height:auto; max-width:100%; max-height:100%;
   object-fit:cover; border-radius:12px;
 }
 .screenPhone{
-  position:absolute; width:32%; height:58%;
-  right:-2.5%; bottom:-3%;
+  position:absolute; width:36%; height:60%;
+  right:-3.5%; bottom:-5%;
   object-fit:cover; border-radius:18px; transform: rotate(-6deg);
   box-shadow: 0 10px 24px rgba(0,0,0,.35);
 }
 
-/* dots + caption */
-.carouselMeta{
-  position:absolute; left:0; right:0; bottom:-42px;
-  display:grid; gap:6px; justify-items:center;
+/* Meta BELOW (no absolute positioning = no overlap surprises) */
+.carouselMetaBelow{
+  display:grid; gap:6px; justify-items:center; width: min(100%, 720px);
 }
-.dots{ display:flex; gap:8px; }
+
+/* Dots with 44px hit target */
+.dots{ display:flex; gap:14px; }
 .dot{
-  width:8px; height:8px; border-radius:999px;
+  position: relative;
+  width: 14px; height: 14px; border-radius: 999px;
   background: rgba(255,255,255,.3);
-  border:1px solid rgba(255,255,255,.4);
-  cursor:pointer;
+  border: 2px solid rgba(255,255,255,.4);
+  cursor: pointer;
+}
+.dot::after{
+  content:"";
+  position:absolute; inset:-15px; /* ~44px target */
+  border-radius:999px;
 }
 .dotActive{ background: var(--brand); border-color: var(--brand); }
 
-.caption{ display:flex; gap:10px; align-items:baseline; font-size:.95rem; }
+/* Caption (clickable) */
+.caption{
+  display:flex; gap:10px; align-items:baseline;
+  font-size:.95rem; text-decoration:none;
+}
+.caption:hover{ text-decoration: underline; }
 .captionTitle{ font-weight:700; }
 .captionKpi{ color: var(--brand); font-weight:800; }
 
-/* gentle float */
+/* Motion flourish (optional) */
 @media (prefers-reduced-motion: no-preference){
   .deviceCarousel{ animation: float 6s ease-in-out infinite; }
   @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
 }
-@media (max-width: 520px){
-  .carouselMeta{ bottom:-36px; }
+
+/* Mobile tweaks */
+@media (max-width: 600px){
+  .deviceCarousel{
+    width: min(94vw, 640px);
+    aspect-ratio: 16/11; /* taller frame so laptop area is bigger */
+  }
+  .screenLaptop{ inset: 5% 5% 16% 5%; }
+  .screenPhone{
+    width: 42%;
+    height: 64%;
+    right: -5%;
+    bottom: -7%;
+  }
   .caption{ font-size:.9rem; }
 }

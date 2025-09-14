@@ -69,51 +69,38 @@ function useAutoAdvance(length: number, delayMs = 4500) {
   };
 }
 
-export default function FeaturedHeroProjects({
-  slides = DEFAULT_SLIDES,
-}: {
-  slides?: Slide[];
-}) {
+export default function FeaturedHeroProjects({ slides = DEFAULT_SLIDES }: { slides?: Slide[] }) {
   const { index, setIndex, pause, resume } = useAutoAdvance(slides.length, 4500);
 
   return (
-    <div
-      className={styles.deviceCarousel}
-      onMouseEnter={pause}
-      onMouseLeave={resume}
-      aria-roledescription="carousel"
-      aria-label="Featured projects"
-    >
-      {/* Generated device frames (swap to PNG frames later if you have them) */}
-      <div className={styles.slides}>
-        {slides.map((s, n) => (
-          <Link
-            id={`slide-${n}`}
-            key={s.title}
-            to={s.link}
-            className={`${styles.slide} ${n === index ? styles.active : ""}`}
-            aria-roledescription="slide"
-            aria-label={`${s.title}${s.kpi ? `, ${s.kpi}` : ""}`}
-          >
-            <img
-              className={styles.screenLaptop}
-              src={s.laptopSrc}
-              alt={s.laptopAlt}
-              loading={n === 0 ? "eager" : "lazy"}
-              decoding={n === 0 ? "sync" : "async"}
-            />
-            <img
-              className={styles.screenPhone}
-              src={s.phoneSrc}
-              alt={s.phoneAlt}
-              loading="lazy"
-              decoding="async"
-            />
-          </Link>
-        ))}
+    <div className={styles.widget}>
+      <div
+        className={styles.deviceCarousel}
+        onMouseEnter={pause}
+        onMouseLeave={resume}
+        aria-roledescription="carousel"
+        aria-label="Featured projects"
+      >
+        <div className={styles.slides}>
+          {slides.map((s, n) => (
+            <Link
+              id={`slide-${n}`}
+              key={s.title}
+              to={s.link}
+              className={`${styles.slide} ${n === index ? styles.active : ""}`}
+              aria-roledescription="slide"
+              aria-label={`${s.title}${s.kpi ? `, ${s.kpi}` : ""}`}
+            >
+              <img className={styles.screenLaptop} src={s.laptopSrc} alt={s.laptopAlt}
+                   loading={n === 0 ? "eager" : "lazy"} decoding={n === 0 ? "sync" : "async"} />
+              <img className={styles.screenPhone} src={s.phoneSrc} alt={s.phoneAlt}
+                   loading="lazy" decoding="async" />
+            </Link>
+          ))}
+        </div>
       </div>
 
-      <div className={styles.carouselMeta}>
+      <div className={styles.carouselMetaBelow}>
         <div className={styles.dots} role="tablist" aria-label="Featured project selector">
           {slides.map((_, n) => (
             <button
@@ -128,12 +115,10 @@ export default function FeaturedHeroProjects({
           ))}
         </div>
 
-        <div className={styles.caption}>
+        <Link to={slides[index].link} className={styles.caption} aria-label={`Open ${slides[index].title}`}>
           <span className={styles.captionTitle}>{slides[index].title}</span>
-          {slides[index].kpi && (
-            <span className={styles.captionKpi}>{slides[index].kpi}</span>
-          )}
-        </div>
+          {slides[index].kpi && <span className={styles.captionKpi}>{slides[index].kpi}</span>}
+        </Link>
       </div>
     </div>
   );
