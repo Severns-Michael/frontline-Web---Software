@@ -12,6 +12,7 @@ export default function Home() {
         description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
         canonical="https://frontline.example/"
         image="/og.jpg"
+        
         jsonLd={{
           "@context":"https://schema.org",
           "@type":"LocalBusiness",

@@ -91,8 +91,14 @@ export default function FeaturedHeroProjects({ slides = DEFAULT_SLIDES }: { slid
               aria-roledescription="slide"
               aria-label={`${s.title}${s.kpi ? `, ${s.kpi}` : ""}`}
             >
-              <img className={styles.screenLaptop} src={s.laptopSrc} alt={s.laptopAlt}
-                   loading={n === 0 ? "eager" : "lazy"} decoding={n === 0 ? "sync" : "async"} />
+              <img className={styles.screenLaptop} 
+              src={s.laptopSrc} 
+              alt={s.laptopAlt}
+                   loading={n === 0 ? "eager" : "lazy"} 
+                   decoding={n === 0 ? "sync" : "async"}
+                   fetchPriority={n === 0 ? "high" : "low"}
+                    width={1200} height={750}   
+                   />
               <img className={styles.screenPhone} src={s.phoneSrc} alt={s.phoneAlt}
                    loading="lazy" decoding="async" />
             </Link>
