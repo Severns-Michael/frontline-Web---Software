@@ -18,7 +18,7 @@ export default function Home() {
           "@type":"LocalBusiness",
           "name":"Frontline Web & Software",
           "url":"https://frontline.example",
-          "image":"https://frontline.example/og.jpg",
+          "image":"src/assets/aboutPicture.webp",
           "telephone":"+1-208-555-1234",
           "address":{
             "@type":"PostalAddress",
