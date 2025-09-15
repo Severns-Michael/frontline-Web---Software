@@ -10,6 +10,7 @@ type Props = {
   canonical?: string;
   image?: string;      // absolute URL or /public path
   jsonLd?: JsonLd;     // object or array of objects
+  extraHead?: React.ReactNode; // any extra tags to add to the head
 };
 
 function toAbsoluteUrl(pathOrUrl: string): string {
@@ -18,7 +19,7 @@ function toAbsoluteUrl(pathOrUrl: string): string {
   return new URL(pathOrUrl, window.location.origin).toString();
 }
 
-export function SEO({ title, description, canonical, image = '/og.jpg', jsonLd }: Props) {
+export function SEO({ title, description, canonical, image = '/og.jpg', jsonLd, extraHead }: Props) {
   const site = 'Frontline Web & Software';
   const pageTitle = title ? `${title} • ${site}` : site;
 
@@ -51,6 +52,9 @@ export function SEO({ title, description, canonical, image = '/og.jpg', jsonLd }
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
+            {/* 🔽 anything the page wants to inject (preload, preconnect, inline critical css…) */}
+      {extraHead}
+
     </>
   );
 }

@@ -3,38 +3,81 @@ import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Home.module.css'
 import FeaturedHeroProjects from '../../components/FeaturedHeroProjects/FeaturedHeroProjects'
+import firstLaptop400 from '@/assets/aboutPicture-400.webp';
+import firstLaptop200 from '@/assets/aboutPicture-200.webp';
+
 
 export default function Home() {
+   const origin =
+    typeof window !== 'undefined'
+      ? window.location.origin
+      : 'https://frontline-web-software.netlify.app';
+
   return (
     <>
-      <SEO //use on every page a little differently
+    <SEO
         title="Custom Web & Software"
         description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
-        canonical="https://frontline.example/"
-        image="/og.jpg"
-        
+        canonical={`${origin}/`}              // canonical absolute
+        image={`${origin}/og.jpg`}           // og:image absolute
         jsonLd={{
-          "@context":"https://schema.org",
-          "@type":"LocalBusiness",
-          "name":"Frontline Web & Software",
-          "url":"https://frontline.example",
-          "image":"src/assets/aboutPicture.webp",
-          "telephone":"+1-208-555-1234",
-          "address":{
-            "@type":"PostalAddress",
-            "streetAddress":"123 Example St",
-            "addressLocality":"Idaho Falls",
-            "addressRegion":"ID",
-            "postalCode":"83401",
-            "addressCountry":"US"
+          '@context': 'https://schema.org',
+          '@type': 'LocalBusiness',
+          name: 'Frontline Web & Software',
+          url: origin,                       // absolute
+          image: `${origin}/og.jpg`,         // absolute ✅
+          telephone: '+1-208-555-1234',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: '123 Example St',
+            addressLocality: 'Idaho Falls',
+            addressRegion: 'ID',
+            postalCode: '83401',
+            addressCountry: 'US',
           },
-          "areaServed":["Idaho Falls","Pocatello","Rexburg"],
-          "sameAs":[
-            "https://www.facebook.com/yourpage",
-            "https://www.linkedin.com/company/yourcompany"
-          ]
+          areaServed: ['Idaho Falls', 'Pocatello', 'Rexburg'],
+          sameAs: [
+            'https://www.facebook.com/yourpage',
+            'https://www.linkedin.com/company/yourcompany',
+          ],
         }}
+        extraHead={
+          <>
+            {/* Preload the LCP image for the first slide */}
+          <link
+            rel="preload"
+            as="image"
+            href={firstLaptop400}
+            imageSrcSet={`${firstLaptop200} 200w, ${firstLaptop400} 400w`}
+            imageSizes="(max-width: 600px) 90vw, 720px"
+          />
+
+            {/* Small critical CSS (optional, helps first paint before main CSS arrives) */}
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
+                  .${styles.hero}{padding:6rem 0 3rem;background:linear-gradient(180deg,#0b0d12,#121621)}
+                  .${styles.heroGrid}{display:grid;grid-template-columns:1.1fr 1.2fr;gap:2rem;align-items:center}
+                  .${styles.heroCopy} h1{margin:0 0 .5rem}
+                  .${styles.heroVisual}{display:flex;justify-content:center}
+                  .deviceCarousel{position:relative;aspect-ratio:16/10;filter:drop-shadow(0 24px 48px rgba(0,0,0,.35))}
+                  .slides{position:absolute;inset:0}
+                  .slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
+                  .active{opacity:1}
+                  .screenLaptop{position:absolute;inset:6% 6% 18% 6%;border-radius:12px;object-fit:cover}
+                  .screenPhone{position:absolute;right:-3.5%;bottom:-5%;width:36%;height:60%;border-radius:18px;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+                `,
+              }}
+            />
+
+            {/* Preconnect for GA/GTM (minor but free) */}
+            <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+
+          </>
+        }
       />
+
 
       <main className={'snapContainer'}>
         {/* HERO */}
