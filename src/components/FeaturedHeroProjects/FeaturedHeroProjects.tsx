@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./FeaturedHeroProjects.module.css";
-import aboutPic from '../assets/aboutPicture.webp'; 
+import aboutPic from '../../assets/aboutPicture.webp';
 
 export type Slide = {
   title: string;
