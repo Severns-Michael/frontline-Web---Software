@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../../components/SEO/SEO";
 import styles from "./About.module.css";
-import aboutPic from '../assets/aboutPicture.webp'; 
+import aboutPic from '../../assets/aboutPicture.webp';
 
 export default function About() {
   return (
