@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../../components/SEO/SEO";
 import styles from "./About.module.css";
+import aboutPic from '../assets/aboutPicture.webp'; 
 
 export default function About() {
   return (
@@ -48,7 +49,7 @@ export default function About() {
               {/* Right: portrait */}
               <figure className={styles.portraitWrap}>
                 <img
-                  src="src/assets/aboutPicture.webp"
+                  src={aboutPic}
                   alt="Michael Severns, founder of Frontline Web & Software"
                   className={styles.portrait}
                   width={560}
