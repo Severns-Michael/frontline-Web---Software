@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Home.module.css'
 import FeaturedHeroProjects from '../../components/FeaturedHeroProjects/FeaturedHeroProjects'
-import firstLaptop400 from '@/assets/aboutPicture-400.webp';
-import firstLaptop200 from '@/assets/aboutPicture-200.webp';
+import firstLaptop400 from '../../assets/aboutPicture-400.webp';
+import firstLaptop200 from '../../assets/aboutPicture-200.webp';
 
 
 export default function Home() {
