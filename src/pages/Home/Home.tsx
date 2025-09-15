@@ -5,6 +5,8 @@ import styles from './Home.module.css';
 import FeaturedHeroProjects from '../../components/FeaturedHeroProjects/FeaturedHeroProjects';
 import firstLaptop400 from '../../assets/aboutPicture-400.webp';
 import firstLaptop200 from '../../assets/aboutPicture-200.webp';
+import React from 'react';
+import { useRef } from 'react';
 
 // Lazy imports for below-the-fold sections
 const Problems = lazy(() => import('./sections/Problems'));
@@ -20,10 +22,34 @@ export default function Home() {
       : 'https://frontline-web-software.netlify.app';
 
   // Mount sections after first paint to improve LCP
-  const [afterPaint, setAfterPaint] = useState(false);
+
+  function Defer({
+  children,
+  rootMargin = "600px",
+}: {
+  children: React.ReactNode;
+  rootMargin?: string;
+}) {
+  const [show, setShow] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    requestAnimationFrame(() => setAfterPaint(true));
-  }, []);
+    if (!ref.current) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setShow(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [rootMargin]);
+
+  return <div ref={ref}>{show ? children : null}</div>;
+}
 
   return (
     <>
@@ -123,15 +149,14 @@ export default function Home() {
         </section>
 
         {/* Below-the-fold (lazy) */}
-        {afterPaint && (
           <Suspense fallback={null}>
-            <Problems styles={styles} />
-            <Focus styles={styles} />
-            <Process styles={styles} Link={Link} />
-            <Pricing styles={styles} Link={Link} />
-            <FinalCta styles={styles} Link={Link} />
-          </Suspense>
-        )}
+          <Defer><Problems styles={styles} /></Defer>
+          <Defer><Focus styles={styles} /></Defer>
+          <Defer><Process styles={styles} /></Defer>
+          <Defer><Pricing styles={styles} /></Defer>
+          <Defer><FinalCta styles={styles} /></Defer>
+        </Suspense>
+    
       </main>
     </>
   );

@@ -1,6 +1,7 @@
 type CSSModule = Record<string, string>;
-type LinkComponent = React.ComponentType<{ to: string; className?: string; children: React.ReactNode }>;
-export default function Process({ styles, Link }: { styles: CSSModule; Link: LinkComponent }) {
+import { Link } from 'react-router-dom';
+
+export default function Process({ styles,  }: { styles: CSSModule; }) {
   return (
     <section id="process" className={`${styles.bandSoft} vh snap anchor`} aria-labelledby="process-title">
       <div className="container">

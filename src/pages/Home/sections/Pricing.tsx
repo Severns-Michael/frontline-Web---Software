@@ -1,6 +1,7 @@
 type CSSModule = Record<string, string>;
-type LinkComponent = React.ComponentType<{ to: string; className?: string; children: React.ReactNode }>;
-export default function Pricing({ styles, Link }: { styles: CSSModule; Link: LinkComponent }) {
+import { Link } from 'react-router-dom';
+
+export default function Pricing({ styles, }: { styles: CSSModule;  }) {
   return (
     <section id="pricing" className={`${styles.bandSoft} vh snap anchor`} aria-labelledby="pricing-title">
       <div className="container">

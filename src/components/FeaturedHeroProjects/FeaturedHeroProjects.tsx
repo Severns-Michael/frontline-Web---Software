@@ -85,9 +85,10 @@ export type Slide = {
     phoneHeight: 300
   }
 ]; 
+
 function useAutoAdvance(length: number, delayMs = 4500) {
   const [index, setIndex] = useState(0);
-  const pausedRef = useRef(false);
+  const pausedRef = useRef(true); // start paused so LCP can settle
   const mq = useMemo(
     () =>
       typeof window !== "undefined"
@@ -95,6 +96,17 @@ function useAutoAdvance(length: number, delayMs = 4500) {
         : null,
     []
   );
+
+  // Resume after idle or ~4s
+  useEffect(() => {
+    const resume = () => (pausedRef.current = false);
+    const t = window.setTimeout(resume, 4000);
+    if (typeof window.requestIdleCallback === "function") {
+      
+      window.requestIdleCallback(resume, { timeout: 3000 });
+    }
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (mq?.matches) return; // honor reduced motion

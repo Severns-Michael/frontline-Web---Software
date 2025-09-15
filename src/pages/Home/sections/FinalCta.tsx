@@ -1,9 +1,10 @@
-type CSSModule = Record<string, string>;
-type LinkComponent = React.ComponentType<{ to: string; className?: string; children: React.ReactNode }>;
+import { Link } from 'react-router-dom';
 
-export default function FinalCta({ styles, Link }: { styles: CSSModule; Link: LinkComponent }) {
+type CSSModule = Record<string, string>;
+
+export default function FinalCta({ styles }: { styles: CSSModule }) {
   return (
-    <section id="cta" className={`${styles.finalCta}`}>
+    <section id="cta" className={styles.finalCta}>
       <div className="container">
         <div className={styles.finalCard}>
           <h2>Ready to Transform Your Business?</h2>
