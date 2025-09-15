@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./FeaturedHeroProjects.module.css";
-import aboutPic from '../../assets/aboutPicture.webp';
+import aboutPicture200w from '../../assets/aboutPicture-200w.webp';
+import aboutPicture400w from '../../assets/aboutPicture-400w.webp';
 
 export type Slide = {
   title: string;
@@ -18,8 +19,8 @@ const DEFAULT_SLIDES: Slide[] = [
     title: "Local Barber — bookings that convert",
     kpi: "+40% appointments",
     link: "/portfolio/barber",
-    laptopSrc: aboutPic,
-    phoneSrc: aboutPic,
+    laptopSrc: aboutPicture200w,
+    phoneSrc: aboutPicture400w,
     laptopAlt: "Barber site homepage on a laptop",
     phoneAlt: "Barber booking flow on a phone",
   },
@@ -27,8 +28,8 @@ const DEFAULT_SLIDES: Slide[] = [
     title: "Café — online menu & orders",
     kpi: "+22% orders",
     link: "/portfolio/cafe",
-    laptopSrc: aboutPic,
-    phoneSrc: aboutPic,
+    laptopSrc: aboutPicture200w,
+    phoneSrc: aboutPicture400w,
     laptopAlt: "Cafe menu and ordering on a laptop",
     phoneAlt: "Cafe checkout UI on a phone",
   },
@@ -36,8 +37,8 @@ const DEFAULT_SLIDES: Slide[] = [
     title: "Contractor — lead generation",
     kpi: "3× local leads",
     link: "/portfolio/contractor",
-    laptopSrc: aboutPic,
-    phoneSrc: aboutPic,
+    laptopSrc: aboutPicture200w,
+    phoneSrc: aboutPicture400w,
     laptopAlt: "Contractor services page on a laptop",
     phoneAlt: "Contractor contact form on a phone",
   },
