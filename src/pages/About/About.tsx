@@ -17,28 +17,39 @@ export default function About() {
             <div className={styles.bioGrid}>
               {/* Left: copy */}
               <div className={styles.bioCopy}>
-                <div className={styles.badgeRow}>
-                  <span className={styles.badge}>Veteran-owned</span>
-                  <span className={styles.badge}>USA-based</span>
-                  <span className={styles.badge}>No page builders</span>
-                </div>
+                <div className="badgeRow">
+                
+              </div>
 
                 <p className={styles.kicker}>Frontline Web & Software</p>
                 <h1 className={styles.h1}>
                   <span className={'accent'}>Veteran</span>-built websites for <span className={'accent'}>Local Business</span>
                 </h1>
 
-                <p className={styles.intro}>
-                    I’m <strong>Michael Severns</strong>, founder & lead developer. I was active duty Marine Corps for 4 years, now im currently in college for computer science. 
-                  I Just moved to Pocaltello Idaho from a small town in Ohio. I am available for 1-2 projects per month to keep quality high. My focus is on small business sites that are
-                   fast, accessible, and easy to update at an affordable price. My goal is to help local businesses get online and grow with a website that works as hard as you do, 
-                    without the bloat and complexity of big agencies. I find more often than not, small businesses are overcharged for websites that are slow and hard to use. 
-                    I want to change that by providing clear, honest service with no upsells or confusing jargon. There are so many great local businesses out there doing awesome things,
-                    but they get overlooked because they don't have a good online presence. I'm here to fix that. Let's work together to create a website that truly represents your business
-                     and helps you reach more customers. 
+                          <p>
+                          I’m <strong>Michael Severns</strong>, founder & lead developer of Frontline Web & Software. 
+                          I served in the Marine Corps, and today I bring that same discipline 
+                          and commitment to every project I take on.
+                        </p>
 
+                        <p>
+                          I recently moved to Pocatello, Idaho from a small town in Ohio, and I’m focused on building 
+                          high-quality websites for local small businesses. To keep quality high, I only take on 
+                          1–2 projects per month.
+                        </p>
 
-                </p>
+                        <p>
+                          My goal is simple: help small businesses get online with websites that are fast, accessible, 
+                          and easy to update—without the bloat and complexity of big agencies. Too often, I see business 
+                          owners overcharged for sites that are slow and frustrating to use. I want to change that by 
+                          providing clear, honest service with no upsells or confusing jargon.
+                        </p>
+
+                        <p>
+                          There are so many great local businesses out there doing amazing work but getting overlooked 
+                          because they don’t have a strong online presence. I’m here to fix that. Let’s work together 
+                          to create a website that truly represents your business and helps you reach more customers.
+                        </p>
 
                 <div className={styles.ctaRow}>
                   <Link to="/contact" className={`button ${styles.glowCta}`}>Book a 15-minute intro</Link>
@@ -64,7 +75,7 @@ export default function About() {
 
 
         {/* PROCESS */}
-        <section id="process" className={`${styles.section} ${styles.bandSoft} vh snap anchor`}>
+        <section id="process" className={`${styles.section} ${styles.bandSoft}`} aria-labelledby="process-title">
           <div className="container">
             <h2 className={styles.h2}>Our process</h2>
 
@@ -110,26 +121,17 @@ export default function About() {
               </li>
             </ol>
 
-            <div className={styles.ctaRow} style={{ marginTop: '.8rem' }}>
-              <Link to="/contact" className={`button ${styles.glowCta}`}>Book a 15-minute intro</Link>
+           {/* CTA */}
+            <div className={styles.finalCard} style={{ marginTop: '5.5rem' }}>
+              <h2>Want a quick plan for your site?</h2>
+              <p>I’ll look at what you have and outline the three fastest wins.</p>
+              <div className={styles.ctaRow}>
+                <Link to="/contact" className="button">Book a 15-minute intro</Link>
+                <Link to="/services" className={styles.secondaryCta}>See Services &amp; Pricing</Link>
+              </div>
             </div>
           </div>
         </section>
-
-
-      {/* CTA */}
-      <section className={`${styles.finalCta} vh snap anchor`}>
-        <div className="container">
-          <div className={styles.finalCard}>
-            <h2>Want a quick plan for your site?</h2>
-            <p>I’ll look at what you have and outline the three fastest wins.</p>
-            <div className={styles.ctaRow}>
-              <Link to="/contact" className="button">Book a 15-minute intro</Link>
-              <Link to="/services" className={styles.secondaryCta}>See Services &amp; Pricing</Link>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
 
   );

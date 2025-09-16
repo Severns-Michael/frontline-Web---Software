@@ -17,7 +17,7 @@
 .sub{ color: var(--muted); max-width: 820px; margin: .25rem auto 0; }
 
 /* Sections */
-.section{ padding: 2.5rem 0; }
+.section{ padding: 2.5rem 0;padding: clamp(40px, 5vw, 72px) 0; }
 .bandSoft{ background:#0e1320; }
 .bandDark{ background:#0c111d; }
 .h2{ font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); margin: 0 0 1rem; }
@@ -54,12 +54,14 @@
 
 
 /* Final CTA */
-.finalCta{ padding: 3rem 0; background:#0b0f1a; }
+.finalCta{ padding: 3rem 0; padding: clamp(40px, 5vw, 72px) 0; }
 .finalCard{
   text-align:center; padding:2rem; border-radius: var(--radius);
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
   border: 1px solid rgba(255,255,255,.08);
   display:grid; gap:.75rem;
+  max-width: 800px;
+  margin-inline: auto;
 }
 .ctaRow{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
 .secondaryCta{
@@ -204,4 +206,13 @@
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.10);
   font-size:.85rem;
+}
+
+.sectionGap {
+  margin-top: clamp(24px, 4vw, 64px);
+}
+
+/* if you want a little extra on small screens */
+@media (max-width: 700px){
+  .sectionGap { margin-top: clamp(20px, 6vw, 56px); }
 }

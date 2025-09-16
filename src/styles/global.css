@@ -146,3 +146,19 @@ a, button, summary, [role="button"] { -webkit-tap-highlight-color: transparent; 
 @media (hover: none) and (pointer: coarse) {
   button:active { background: inherit !important; filter: none !important; opacity: 1 !important; }
 }
+
+.badgeRow{
+  display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:.75rem;
+}
+.miniProof{
+  list-style:none; padding:0; margin:0;
+  display:flex; gap:.5rem; flex-wrap:wrap;
+  color:var(--brand);
+}
+.miniProof li{
+  padding:.25rem .55rem; border-radius:999px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.10);
+  font-size:1rem;
+  font-weight:600;
+}
