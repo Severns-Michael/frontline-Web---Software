@@ -1,39 +1,65 @@
-/* === Hero (match Home/Services) === */
+/* === Hero (background + copy) === */
 .hero{
-  padding: 6rem 0 3rem; text-align:center;
+  padding: 6rem 0 3rem;
   background:
     radial-gradient(800px 400px at 70% -10%, rgba(255,255,255,.06), transparent),
     linear-gradient(180deg, #0b0d12, #121621);
 }
-.h1{ font-size:clamp(2.25rem,1.6rem + 1.8vw,3.25rem); line-height:1.05; text-wrap:balance; letter-spacing:-0.01em; margin:0; }
+.h1{ font-size:clamp(2.25rem,1.6rem + 1.8vw,3.25rem); line-height:1.05; letter-spacing:-0.01em; margin:0; }
 .sub{
-  color: var(--muted); max-width: 720px; margin: 1rem auto 0;
+  color: var(--muted); margin: 1rem 0 0; 
+  margin-bottom: 1rem;
   font-size: clamp(1.05rem, .95rem + .15vw, 1.15rem); line-height:1.45;
-}
-.badgeRow{ display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:.75rem; }
-.badge{
-  display:inline-flex; align-items:center; gap:.4rem;
-  font-size:.85rem; padding:.35rem .6rem; border-radius:999px;
-  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+  display: flex;
+  justify-content: center;
 }
 
-/* === Body band / grid === */
-.bodyBand{ background:#0e1320; padding: 2rem 0; }
-.grid{
-  display:grid; grid-template-columns: 1.4fr .8fr; gap: 1rem; align-items:start;
+/* === Grid inside hero: copy full width, then form left + info right === */
+.heroGrid{
+  display:grid;
+  /* give the form ~65–70% of the width, info ~30–35% */
+  grid-template-columns: minmax(640px, 1.35fr) minmax(300px, .65fr);
+  grid-template-areas:
+    "copy copy"
+    "form info";
+  gap: 1rem;
+  align-items:start;
 }
-@media (max-width: 960px){ .grid{ grid-template-columns: 1fr; } }
+.areaCopy { grid-area: copy; }
+.areaForm { grid-area: form; }
+.areaInfo { grid-area: info; }
 
-/* Cards */
-.formCard{ padding: 1.25rem; }
-.infoCol{ display:grid; gap:1rem; }
-.infoCard{ padding: 1.25rem; }
+.heroCopy{ text-align:center; }
 
-/* Form header copy */
+/* === Form card (narrower) === */
+.formCardHero{
+  padding: 1.25rem;
+  max-width: 920px;   /* was 780px */
+  width: 100%;
+  justify-self: center;
+  backdrop-filter: blur(4px);
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.35),
+    0 0 0 8px color-mix(in oklab, var(--brand), transparent 86%);
+}
+
+/* === Info column (stack of 3) === */
+.infoColHero{
+  display:grid; gap:1rem; align-content:start;
+  max-width: 420px;      /* was 520px */
+  justify-self: center;
+}
+@media (min-width: 1280px){
+  .heroGrid{
+    grid-template-columns: minmax(720px, 1.5fr) minmax(300px, .6fr);
+  }
+}
+
+/* Cards + form controls */
 .h2{ margin:0 0 .25rem; font-size: clamp(1.2rem, 1rem + .8vw, 1.6rem); }
 .kicker{ color: var(--muted); margin: 0 0 1rem; }
-
-/* Form layout + controls */
 .form{ display:grid; gap:1rem; }
 .twoCol{ display:grid; grid-template-columns: 1fr 1fr; gap:1rem; }
 @media (max-width: 640px){ .twoCol{ grid-template-columns: 1fr; } }
@@ -46,11 +72,9 @@ input, textarea, select{
 input:focus, textarea:focus, select:focus{ outline:3px solid var(--brand); outline-offset:2px; }
 span[role="alert"]{ color:#ffb4b4; font-size:.9rem; }
 
-/* Submit / success */
 .submit{ margin-top:.25rem; }
 .success{ color: var(--accent); font-weight:700; margin:.35rem 0 0; }
 
-/* Right column cards */
 .contactList{ list-style:none; margin:.5rem 0 0; padding:0; display:grid; gap:.4rem; }
 .noteBlue{
   border:1px solid rgba(106,166,255,.35);
@@ -59,4 +83,21 @@ span[role="alert"]{ color:#ffb4b4; font-size:.9rem; }
 .noteGreen{
   border:1px solid rgba(0,209,178,.35);
   background: linear-gradient(180deg, rgba(0,209,178,.15), rgba(255,255,255,.02));
+}
+
+/* Center badges row used in hero copy (your global classes already exist) */
+.center-row{ justify-content:center; }
+
+/* Responsive collapse: stack form then info under copy */
+@media (max-width: 900px){
+  .heroGrid{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "form"
+      "info";
+  }
+  .formCardHero,
+  .infoColHero{ max-width: 720px; }
+  .heroCopy{ text-align:center; }
 }

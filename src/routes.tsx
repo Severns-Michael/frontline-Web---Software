@@ -5,6 +5,7 @@ import Services from './pages/Services/Services'
 import Portfolio from './pages/Portfolio/Portfolio'
 import Faq from './pages/FAQ/FAQ'
 import Contact from './pages/Contact/Contact'
+import ThankYou from './pages/ThankYou/ThankYou'
 import NotFound from './pages/NotFound/NotFound'
 
 
@@ -17,6 +18,7 @@ return (
 <Route path="/portfolio" element={<Portfolio />} />
 <Route path="/FAQ" element={<Faq />} />
 <Route path="/contact" element={<Contact />} />
+<Route path='/ThankYou' element={<ThankYou/>} />
 <Route path="*" element={<NotFound />} />
 </Routes>
 )

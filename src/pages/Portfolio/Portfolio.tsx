@@ -62,93 +62,70 @@ export default function Portfolio() {
     <>
       <SEO title="Projects" description="Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations." />
 
-      {/* HERO */}
-      <section className={`${styles.hero} snap anchor`}>
-        <div className="container">
-          <h1 className={`accent`}>Projects</h1>
-          <p className={styles.sub}>Real results across four simple categories. Click a filter to explore.</p>
-        </div>
-      </section>
+<section className={`${styles.hero} snap anchor`}>
+  <div className="container">
+    <h1 className={`accent`}>Projects</h1>
+    <p className={styles.sub}>Real results across four simple categories. Click a filter to explore.</p>
+    {/* FILTERS stay directly below hero */}
+<section className={`${styles.filters} anchor`}>
+  <div className="container" style={{ display:'flex', justifyContent:'center' }}>
+    <div className={styles.segmented} role="tablist" aria-label="Project categories">
+      {categories.map(cat => (
+        <button
+          key={cat}
+          role="tab"
+          aria-selected={active === cat}
+          className={`${styles.segment} ${active === cat ? styles.active : ''}`}
+          onClick={() => setActive(cat)}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* FILTERS */}
-      <section className={`${styles.filters} anchor`}>
-        <div className="container" style={{ display:'flex', justifyContent:'center' }}>
-          <div className={styles.segmented} role="tablist" aria-label="Project categories">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                role="tab"
-                aria-selected={active === cat}
-                className={`${styles.segment} ${active === cat ? styles.active : ''}`}
-                onClick={() => setActive(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+    
 
-      {/* GRID */}
-      <section className={`${styles.gridBand} snap anchor`}>
-        <div className="container">
-          <div className={styles.grid}>
-            {/* --- NEW: Promo card pinned first --- */}
-            <aside className={`${styles.promo} card`} aria-labelledby="launch-offer-title">
-              <div className={styles.promoTop}>
-                <span className={styles.promoBadge}>{launchOffer.badge}</span>
-                <span className={styles.promoCode}>Use code <strong>{launchOffer.code}</strong></span>
-              </div>
-              <h3 id="launch-offer-title" className={styles.promoTitle}>{launchOffer.headline}</h3>
-              <p className={styles.promoSub}>{launchOffer.sub}</p>
-              <ul className={styles.promoBullets}>
-                {launchOffer.bullets.map(b => <li key={b}>{b}</li>)}
-              </ul>
-              <div className={styles.promoActions}>
-                <a href={launchOffer.ctaHref} className="button">{launchOffer.ctaText}</a>
-                <span className={styles.promoFootnote}>{launchOffer.footnote}</span>
-              </div>
-            </aside>
+    {/* Promo box now inside hero */}
+    <aside className={`${styles.promo} ${styles.promoGlow} card`} aria-labelledby="launch-offer-title">
+      <div className={styles.promoTop}>
+        <span className={styles.promoBadge}>{launchOffer.badge}</span>
+        <span className={styles.promoCode}>Use code <strong>{launchOffer.code}</strong></span>
+      </div>
+      <h3 id="launch-offer-title" className={styles.promoTitle}>{launchOffer.headline}</h3>
+      <p className={styles.promoSub}>{launchOffer.sub}</p>
+      <ul className={styles.promoBullets}>
+        {launchOffer.bullets.map(b => <li key={b}>{b}</li>)}
+      </ul>
+      <div className={styles.promoActions}>
+        <a href={launchOffer.ctaHref} className="button">{launchOffer.ctaText}</a>
+        <span className={styles.promoFootnote}>{launchOffer.footnote}</span>
+      </div>
+    </aside>
+  </div>
+</section>
 
-            {/* Existing cards (kept intact) */}
-            {shouldShowGrid && filtered.map((p) => (
-              <article key={p.title} className={`card ${styles.card}`}>
-                <div className={styles.cardTop}>
-                  <span className={styles.badge}>{p.category}</span>
-                  {p.year && <span className={styles.meta}>{p.year}{p.timeline ? ` · ${p.timeline}` : ''}</span>}
-                </div>
+{/* GRID band (unchanged), but REMOVE the promo there since it's now in hero */}
+<section className={`${styles.gridBand}`}>
+  <div className="container">
+    <div className={styles.grid}>
+      {shouldShowGrid && filtered.map((p) => (
+        <article key={p.title} className={`card ${styles.card}`}>
+          {/* ...existing card content... */}
+        </article>
+      ))}
+    </div>
 
-                <h3 className={styles.title}>{p.title}</h3>
-                {p.result && <p className={styles.result}>{p.result}</p>}
+    {!shouldShowGrid && (
+      <p className={styles.empty}>
+        Case studies are being prepared. Be one of the first and get the {launchOffer.headline.toLowerCase()} —
+        <a href={launchOffer.ctaHref}> claim code {launchOffer.code}</a>.
+      </p>
+    )}
+  </div>
+</section>
 
-                <ul className={styles.featureChips}>
-                  {p.features.map(f => <li key={f}>{f}</li>)}
-                </ul>
-
-                <div className={styles.stackRow}>
-                  {p.tech.map(t => <span key={t} className={styles.stack}>{t}</span>)}
-                </div>
-
-                <div className={styles.cardActions}>
-                  {p.link ? (
-                    <a href={p.link} target="_blank" rel="noreferrer" className={styles.cta}>View case study →</a>
-                  ) : (
-                    <a href={`/contact?project=${encodeURIComponent(p.title)}&offer=${launchOffer.code}`} className={styles.cta}>Get a similar build →</a>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Empty/promo-only state copy */}
-          {!shouldShowGrid && (
-            <p className={styles.empty}>
-              Case studies are being prepared. Be one of the first and get the {launchOffer.headline.toLowerCase()} —
-              <a href={launchOffer.ctaHref}> claim code {launchOffer.code}</a>.
-            </p>
-          )}
-        </div>
-      </section>
 
       {/* FINAL CTA */}
       <section className={styles.finalCta}>

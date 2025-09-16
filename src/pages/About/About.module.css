@@ -216,3 +216,12 @@
 @media (max-width: 700px){
   .sectionGap { margin-top: clamp(20px, 6vw, 56px); }
 }
+
+p{
+  font-size:larger;
+  color: var(--muted);
+
+}
+strong{ color: var(--brand);
+
+}

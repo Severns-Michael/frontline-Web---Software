@@ -1,132 +1,131 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { leadService } from '../../lib/leads.service'
-import type { Lead } from '../../types/lead'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Contact.module.css'
 
 const PROJECT_TYPES = ['Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const
 
-const Schema = z.object({
-  name: z.string().min(2, 'Please enter your full name'),
-  email: z.string().email('Enter a valid email'),
-  phone: z.string().optional(),
-  company: z.string().optional(),
-  projectType: z
-    .string()
-    .min(1, 'Select a project type')
-    .refine(v => (PROJECT_TYPES as readonly string[]).includes(v), { message: 'Select a project type' }),
-  message: z.string().min(20, 'Tell us a bit more so we can help (min 20 chars)').max(1500)
-})
-type Form = z.infer<typeof Schema>
-
 export default function Contact() {
-  const [sent, setSent] = useState(false)
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<Form>({
-    resolver: zodResolver(Schema), mode: 'onBlur'
-  })
-
-  async function onSubmit(values: Form) {
-    setSent(false)
-    const payload: Lead = { ...values, source: 'website' }
-    await leadService.createLead(payload)
-    reset()
-    setSent(true)
-    window.gtag?.('event', 'generate_lead', {
-      form: 'contact',
-      project_type: values.projectType || '(not set)'
-      })
-    }
-
   return (
     <>
       <SEO title="Contact" description="Tell us about your project. Free consultation and a fast, detailed proposal." />
 
-      {/* HERO */}
+      {/* HERO (copy + left form + right info cards) */}
       <section className={`${styles.hero} snap anchor`}>
         <div className="container">
-          <div className={styles.badgeRow}>
-            <div className={styles.badge}>Veteran Owned and Operated</div>
-            <div className={styles.badge}>Based in USA</div>
-          </div>
+          <div className={styles.heroGrid}>
+            {/* Copy */}
+            <div className={`${styles.heroCopy} ${styles.areaCopy}`}>
+              <div className="badgeRow center-row">
+                <ul className="miniProof center-row" role="list">
+                  <li>Veteran owned &amp; operated</li>
+                  <li>Based in USA</li>
+                  <li>No Page builders or templates</li>
+                </ul>
+              </div>
 
-          <h1 className={styles.h1}>Let’s Build Something <span className="accent">Great</span></h1>
-          <p className={styles.sub}>
-            Ready to start your project? Tell us a bit about it and we’ll reply quickly with next steps and a clear estimate.
-          </p>
-        </div>
-      </section>
+              <h1 className={styles.h1}>
+                Let’s Build Something <span className="accent">Great</span>
+              </h1>
+              <p className={styles.sub}>
+                Ready to start your project? Tell us a bit about it and we’ll reply quickly with next steps and a clear estimate.
+              </p>
+            </div>
 
-      {/* BODY */}
-      <section className={`${styles.bodyBand} vh snap anchor`}>
-        <div className="container">
-          <div className={styles.grid}>
-            {/* FORM CARD */}
-            <article className={`card ${styles.formCard}`}>
-              <form onSubmit={handleSubmit(onSubmit)} noValidate className={styles.form} aria-labelledby="contact-title">
+            {/* FORM — Netlify Forms */}
+            <article className={`card ${styles.formCardHero} ${styles.areaForm}`}>
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                action="/thank-you"
+                className={styles.form}
+                aria-labelledby="contact-title"
+                onSubmitCapture={() => {
+                  // fire GA without blocking submit
+                  window.gtag?.('event', 'generate_lead', { form: 'contact' })
+                }}
+              >
+                {/* Required hidden input (Netlify form name) */}
+                <input type="hidden" name="form-name" value="contact" />
+                {/* Redirect (optional; action also works) */}
+                {/* <input type="hidden" name="redirect" value="/thank-you" /> */}
+
+                {/* Honeypot (hidden) */}
+                <p hidden>
+                  <label>
+                    Don’t fill this out: <input name="bot-field" />
+                  </label>
+                </p>
+
                 <h2 id="contact-title" className={styles.h2}>Project inquiry</h2>
                 <p className={styles.kicker}>Tell us about your project and we’ll reply quickly.</p>
 
                 <div className={styles.twoCol}>
                   <div>
                     <label htmlFor="name">Full Name *</label>
-                    <input id="name" type="text" autoComplete="name" {...register('name')} aria-invalid={!!errors.name} />
-                    {errors.name && <span role="alert">{errors.name.message}</span>}
+                    <input id="name" name="name" type="text" autoComplete="name" required />
                   </div>
                   <div>
                     <label htmlFor="email">Email Address *</label>
-                    <input id="email" type="email" autoComplete="email" {...register('email')} aria-invalid={!!errors.email} />
-                    {errors.email && <span role="alert">{errors.email.message}</span>}
+                    <input id="email" name="email" type="email" autoComplete="email" required />
                   </div>
                 </div>
 
                 <div className={styles.twoCol}>
                   <div>
                     <label htmlFor="phone">Phone Number</label>
-                    <input id="phone" type="tel" autoComplete="tel" {...register('phone')} />
+                    <input id="phone" name="phone" type="tel" autoComplete="tel" />
                   </div>
                   <div>
                     <label htmlFor="company">Company Name</label>
-                    <input id="company" type="text" autoComplete="organization" {...register('company')} />
+                    <input id="company" name="company" type="text" autoComplete="organization" />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="projectType">Project Type *</label>
-                  <select id="projectType" {...register('projectType')} aria-invalid={!!errors.projectType}>
-                    <option value="">Select a project type</option>
-                    {PROJECT_TYPES.map(pt => <option key={pt} value={pt}>{pt}</option>)}
+                  <select id="projectType" name="projectType" required defaultValue="">
+                    <option value="" disabled>Select a project type</option>
+                    {PROJECT_TYPES.map(pt => (
+                      <option key={pt} value={pt}>{pt}</option>
+                    ))}
                   </select>
-                  {errors.projectType && <span role="alert">{errors.projectType.message}</span>}
                 </div>
 
                 <div>
                   <label htmlFor="message">Project Description *</label>
                   <textarea
-                    id="message" rows={6} {...register('message')} aria-invalid={!!errors.message}
+                    id="message"
+                    name="message"
+                    rows={6}
+                    required
+                    minLength={20}
+                    maxLength={1500}
                     placeholder="Goals, requirements, pages/features, examples…"
                   />
-                  {errors.message && <span role="alert">{errors.message.message}</span>}
                 </div>
 
-                <button className={`button ${styles.submit}`} disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending…' : 'Send Inquiry →'}
-                </button>
+                {/* If you enable reCAPTCHA in Netlify, uncomment: */}
+                {/* <div data-netlify-recaptcha="true"></div> */}
 
-                {sent && <p className={styles.success} aria-live="polite">Thanks! We’ll reply within one business day.</p>}
+                <button className={`button ${styles.submit}`} type="submit">Send Inquiry →</button>
               </form>
             </article>
 
-            {/* INFO COLUMN */}
-            <aside className={styles.infoCol} aria-label="Contact information">
+            {/* Info cards (right) */}
+            <aside className={`${styles.infoColHero} ${styles.areaInfo}`} aria-label="Contact information">
               <div className={`card ${styles.infoCard}`}>
                 <h3>Contact</h3>
                 <ul className={styles.contactList}>
-                  <li>📧<a href="mailto:frontline.web.and.software@gmail.com" onClick={() => window.gtag?.('event', 'click_email', { location: 'footer' })}>hello@frontline.exampl </a></li>
-                  <li>📞 <a href="tel:+1419261685" onClick={() => window.gtag?.('event', 'click_call', { location: 'header' })}> (419) 261-6857</a></li>
-                  <li> Based in Pocatello, ID</li>
+                  <li>📧 <a href="mailto:frontline.web.and.software@gmail.com"
+                         onClick={() => window.gtag?.('event', 'click_email', { location: 'contact_hero' })}>
+                         frontline.web.and.software@gmail.com
+                      </a></li>
+                  <li>📞 <a href="tel:+1419261685"
+                         onClick={() => window.gtag?.('event', 'click_call', { location: 'contact_hero' })}>
+                         (419) 261-6857
+                      </a></li>
+                  <li>📍 Based in Pocatello, ID</li>
                 </ul>
               </div>
 

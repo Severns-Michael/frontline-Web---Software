@@ -14,13 +14,16 @@ export default function Services() {
       />
 
       {/* HERO + LINEUP (tabs) */}
-      <section id="services-hero" className={`${styles.hero} vh snap anchor`}>
+      <section id="services-hero" className={`${styles.hero}`}>
         <div className="container">
-          <div className={styles.badgeRow}>
-            <div className={styles.badge}>Veteran Owned and Operated</div>
-            <div className={styles.badge}>Based in USA</div>
-            <div className={styles.badge}>No Page Builders</div>
-          </div>
+            <div className={'badgeRow center-row'}>
+                  <ul className={'miniProof center-row'} role="list">
+                    <li>Veteran owned & operated</li>
+                    <li>Based in USA</li>
+                    <li>No Page builders or templates</li>
+                  </ul>
+                </div>
+          
 
           <h1 className={styles.h1}>
             Services &nbsp;<span className="accent">and Pricing</span>
@@ -84,11 +87,11 @@ export default function Services() {
                       </ul>
                     </div>
 
-                    <div className={styles.pricePill}>from $3,000</div>
+                    <div className={styles.price}>from $3,000</div>
                   </article>
 
                   {/* Subscription */}
-                  <article className={`${styles.plan} ${styles.planEmphasis} card`}>
+                  <article className={`${styles.plan} card`}>
                     <div className={styles.planHead}>
                       <h3 className={styles.planTitle}>Website Monthly</h3>
                     </div>
@@ -105,7 +108,7 @@ export default function Services() {
                       </ul>
                     </div>
 
-                    <div className={styles.pricePill}>$165 / month</div>
+                    <div className={styles.price}>$165 / month</div>
                   </article>
                 </div>
               </>
@@ -132,7 +135,7 @@ export default function Services() {
                         <li>Design &amp; development</li>
                       </ul>
                     </div>
-                    <div className={styles.pricePill}>$1.5k–$3k</div>
+                    <div className={styles.price}>$1.5k–$3k</div>
                   </article>
 
                   <article className={`${styles.plan} card`}>
@@ -149,7 +152,7 @@ export default function Services() {
                         <li>Design &amp; development</li>
                       </ul>
                     </div>
-                    <div className={styles.pricePill}>$3.5k–$7.5k</div>
+                    <div className={styles.price}>$3.5k–$7.5k</div>
                   </article>
                 </div>
               </>
@@ -178,7 +181,7 @@ export default function Services() {
                         <li>Security &amp; basic audit logging</li>
                       </ul>
                     </div>
-                    <div className={styles.pricePill}>from $5k+</div>
+                    <div className={styles.price}>from $5k+</div>
                   </article>
 
                   <article className={`${styles.plan} card`}>
@@ -195,11 +198,39 @@ export default function Services() {
                         <li>Yours to keep — no lock-in</li>
                       </ul>
                     </div>
-                    <div className={styles.pricePill}>$750–$1.5k</div>
+                    <div className={styles.price}>$750–$1.5k</div>
                   </article>
                 </div>
               </>
             )}
+                            {/* Add-ons & upgrades (inline on the same view) */}
+<div className={styles.addonsInline}>
+  <h2 className={styles.addonsTitle}>
+    <span className="accent">Add-ons</span> & upgrades
+  </h2>
+  <p className={styles.addonsSub}>
+    Pick extras when you need them — all optional.
+  </p>
+
+  <ul className={styles.addonGrid} role="list">
+    <li className={`${styles.addonCard} card`}>
+      <h3>Extra pages</h3>
+      <p className={styles.cardSub}><strong className={styles.priceInline}>$100/page</strong></p>
+    </li>
+    <li className={`${styles.addonCard} card`}>
+      <h3>Blog setup</h3>
+      <p className={styles.cardSub}><strong className={styles.priceInline}>$300</strong> (listing + post template)</p>
+    </li>
+    <li className={`${styles.addonCard} card`}>
+      <h3>Email &amp; automations</h3>
+      <p className={styles.cardSub}>Mailchimp/Resend basics — quoted</p>
+    </li>
+    <li className={`${styles.addonCard} card`}>
+      <h3>New features</h3>
+      <p className={styles.cardSub}><strong className={styles.priceInline}>Scoped &amp; quoted</strong></p>
+    </li>
+  </ul>
+</div>
           </div>
 
           {/* Page CTA under lineup */}
@@ -210,32 +241,6 @@ export default function Services() {
         </div>
       </section>
 
-      {/* ADD-ONS (kept your simple grid; styled like Home) */}
-      <section id="addons" className={`${styles.bandDark} vh snap anchor`}>
-        <div className="container">
-          <h2 className={styles.h1}><span className="accent">Add-ons</span> & upgrades</h2>
-          <p className={styles.sub}>Pick extras when you need them — all optional.</p>
-
-          <ul className={styles.addonGrid} role="list">
-            <li className="card">
-              <h3>Extra pages</h3>
-              <p className={styles.cardSub}><strong>$100/page</strong></p>
-            </li>
-            <li className="card">
-              <h3>Blog setup</h3>
-              <p className={styles.cardSub}><strong>$300</strong> (listing + post template)</p>
-            </li>
-            <li className="card">
-              <h3>Email &amp; automations</h3>
-              <p className={styles.cardSub}>Mailchimp/Resend basics — quoted</p>
-            </li>
-            <li className="card">
-              <h3>New features</h3>
-              <p className={styles.cardSub}><strong>Scoped &amp; quoted</strong></p>
-            </li>
-          </ul>
-        </div>
-      </section>
     </>
   )
 }

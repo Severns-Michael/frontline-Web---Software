@@ -287,6 +287,8 @@
 .secondaryCta{
   padding:.85rem 1.rem; border-radius:999px; border:1px solid var(--border-strong);
   background: color-mix(in oklab, var(--surface), transparent 60%);margin-top: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 .card{

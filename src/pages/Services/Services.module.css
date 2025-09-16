@@ -67,12 +67,29 @@
   display:flex; flex-direction:column;
   min-height: var(--plan-min);
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
   border-radius: var(--radius);
   padding: 1rem;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.20),
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 0 0 8px color-mix(in oklab, var(--brand), transparent 90%); /* soft halo */
+  transition: transform .12s ease, box-shadow .15s ease, border-color .15s ease;
 }
+.plan:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.24),
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 0 0 10px color-mix(in oklab, var(--brand), transparent 86%);
+  border-color: rgba(255,255,255,.16);
+}
+
 .planEmphasis{
-  box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand), transparent 60%) inset, 0 12px 28px rgba(0,0,0,.22);
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--brand), transparent 60%) inset,
+    0 12px 28px rgba(0,0,0,.22),
+    0 0 0 8px color-mix(in oklab, var(--brand), transparent 88%);
   border-color: color-mix(in oklab, var(--brand), transparent 40%);
 }
 .planHead{ display:flex; justify-content:space-between; align-items:flex-start; gap:.75rem; margin-bottom:.4rem; }
@@ -94,15 +111,17 @@
 }
 
 /* compact price pill (smaller than before) */
-.pricePill{
+.price{
   align-self:center;
-  margin-top:auto; margin-bottom:.35rem;
-  font-weight:900; letter-spacing:-0.01em;
+  margin-top:auto;
+  font-weight:900;
+  letter-spacing:-0.01em;
   font-size: clamp(1rem, .85rem + .9vw, 1.25rem);
-  padding:.45rem .9rem; border-radius:999px;
-  background: rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  color: var(--brand);      /* blue text */
+}
+.priceInline{
+  color: var(--brand);
+  font-weight: 800;
 }
 
 /* page ctas under lineup (match Home) */
@@ -114,7 +133,7 @@
 
 /* Add-ons */
 .bandDark{ background:#0c111d; }
-.h1{ /* already above */ }
+
 .addonGrid{
   margin-top: .75rem;
   list-style:none; padding:0;
@@ -125,3 +144,52 @@
 
 /* responsive tweak */
 @media (max-width: 560px){ .plansRow{ --plan-min: 300px; } }
+
+.addonsInline{
+  margin: clamp(18px, 3vw, 36px) auto 0;
+  max-width: 1100px;
+  text-align: left;
+}
+
+.addonsTitle{
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.35rem, 1.1rem + .9vw, 1.8rem);
+}
+.addonsSub{
+  color: var(--muted);
+  margin: .25rem 0 0.6rem;
+}
+
+.addonGrid{
+  margin-top: .75rem;
+  list-style: none; padding: 0;
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* add-on cards with a light inner blue glow */
+.addonCard{
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.18),
+    0 0 0 1px rgba(255,255,255,.05) inset,
+    0 0 0 6px color-mix(in oklab, var(--brand), transparent 92%);
+  transition: transform .12s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.addonCard:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 26px rgba(0,0,0,.22),
+    0 0 0 1px rgba(255,255,255,.07) inset,
+    0 0 0 8px color-mix(in oklab, var(--brand), transparent 88%);
+  border-color: rgba(255,255,255,.16);
+}
+.tabShell{ margin-bottom: .8rem; }  /* a touch less space below tabs */
+.pageCtas{ margin-top: .8rem; }      /* keep CTAs close */
+
+.badgesCenter {
+  display: flex;
+  justify-content: center;
+}
