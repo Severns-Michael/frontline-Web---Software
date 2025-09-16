@@ -1,131 +1,51 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./FeaturedHeroProjects.module.css";
-import aboutPicture200w from '../../assets/aboutPicture-200.webp';
-import aboutPicture400w from '../../assets/aboutPicture-400.webp';
 
-export type Slide = {
+type Slide = {
   title: string;
   kpi?: string;
   link: string;
-
-  laptopSrc: string;
-  laptopSrcSet?: string;   // NEW (optional)
-  laptopSizes?: string;    // NEW (optional)
-
-  phoneSrc: string;
-  phoneSrcSet?: string;    // NEW (optional)
-  phoneSizes?: string;     // NEW (optional)
-
-  laptopAlt: string;
-  phoneAlt: string;
-
-  laptopWidth?: number;    // optional intrinsic sizes (prevents CLS)
-  laptopHeight?: number;
-  phoneWidth?: number;
-  phoneHeight?: number;
+  comingSoon: true;   // for now, all slides are “coming soon”
 };
 
-  const DEFAULT_SLIDES: Slide[] = [
-  {
-    title: "Local Barber — bookings that convert",
-    kpi: "+40% appointments",
-    link: "/portfolio/barber",
+const SLIDES: Slide[] = [
+  { title: "Local Barber — bookings that convert", kpi: "+40% appointments", link: "/portfolio/barber", comingSoon: true },
+  { title: "Café — online menu & orders",          kpi: "+22% orders",       link: "/portfolio/cafe",   comingSoon: true },
+  { title: "Contractor — lead generation",         kpi: "3× local leads",     link: "/portfolio/contractor", comingSoon: true },
+];
 
-    laptopSrc: aboutPicture400w,
-    laptopSrcSet: `${aboutPicture200w} 200w, ${aboutPicture400w} 400w`,
-    laptopSizes: "(max-width: 600px) 90vw, 720px",
-    laptopAlt: "Barber site homepage on a laptop",
-    laptopWidth: 400,
-    laptopHeight: 250, // pick the right ratio for your image
-
-    phoneSrc: aboutPicture400w,
-    phoneSrcSet: `${aboutPicture200w} 200w, ${aboutPicture400w} 400w`,
-    phoneSizes: "(max-width: 600px) 45vw, 260px",
-    phoneAlt: "Barber booking flow on a phone",
-    phoneWidth: 200,
-    phoneHeight: 300
-  },
-  {
-    title: "Café — online menu & orders",
-    kpi: "+22% orders",
-    link: "/portfolio/cafe",
-
-    laptopSrc: aboutPicture400w,
-    laptopSrcSet: `${aboutPicture200w} 200w, ${aboutPicture400w} 400w`,
-    laptopSizes: "(max-width: 600px) 90vw, 720px",
-    laptopAlt: "Cafe menu and ordering on a laptop",
-    laptopWidth: 400,
-    laptopHeight: 250,
-
-    phoneSrc: aboutPicture400w,
-    phoneSrcSet: `${aboutPicture200w} 200w, ${aboutPicture400w} 400w`,
-    phoneSizes: "(max-width: 600px) 45vw, 260px",
-    phoneAlt: "Cafe checkout UI on a phone",
-    phoneWidth: 200,
-    phoneHeight: 300
-  },
-  {
-    title: "Contractor — lead generation",
-    kpi: "3× local leads",
-    link: "/portfolio/contractor",
-
-    laptopSrc: aboutPicture400w,
-    laptopSrcSet: `${aboutPicture200w} 200w, ${aboutPicture400w} 400w`,
-    laptopSizes: "(max-width: 600px) 90vw, 720px",
-    laptopAlt: "Contractor services page on a laptop",
-    laptopWidth: 400,
-    laptopHeight: 250,
-
-    phoneSrc: aboutPicture400w,
-    phoneSrcSet: `${aboutPicture200w} 200w, ${aboutPicture400w} 400w`,
-    phoneSizes: "(max-width: 600px) 45vw, 260px",
-    phoneAlt: "Contractor contact form on a phone",
-    phoneWidth: 200,
-    phoneHeight: 300
-  }
-]; 
-
-function useAutoAdvance(length: number, delayMs = 4500) {
+function useAutoAdvance(length: number, delayMs = 5500) {
   const [index, setIndex] = useState(0);
-  const pausedRef = useRef(true); // start paused so LCP can settle
+  const pausedRef = useRef(true);
   const mq = useMemo(
-    () =>
-      typeof window !== "undefined"
-        ? window.matchMedia("(prefers-reduced-motion: reduce)")
-        : null,
+    () => (typeof window !== "undefined" ? window.matchMedia("(prefers-reduced-motion: reduce)") : null),
     []
   );
 
-  // Resume after idle or ~4s
+  // let first paint/LCP settle before starting
   useEffect(() => {
     const resume = () => (pausedRef.current = false);
-    const t = window.setTimeout(resume, 4000);
-    if (typeof window.requestIdleCallback === "function") {
-      
+    const t = window.setTimeout(resume, 6000);
+    if ("requestIdleCallback" in window) {
       window.requestIdleCallback(resume, { timeout: 3000 });
     }
     return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
-    if (mq?.matches) return; // honor reduced motion
+    if (mq?.matches) return;
     const id = window.setInterval(() => {
-      if (!pausedRef.current) setIndex((n) => (n + 1) % length);
+      if (!pausedRef.current) setIndex(n => (n + 1) % length);
     }, delayMs);
     return () => clearInterval(id);
   }, [length, delayMs, mq]);
 
-  return {
-    index,
-    setIndex,
-    pause: () => (pausedRef.current = true),
-    resume: () => (pausedRef.current = false),
-  };
+  return { index, setIndex, pause: () => (pausedRef.current = true), resume: () => (pausedRef.current = false) };
 }
 
-export default function FeaturedHeroProjects({ slides = DEFAULT_SLIDES }: { slides?: Slide[] }) {
-  const { index, setIndex, pause, resume } = useAutoAdvance(slides.length, 4500);
+export default function FeaturedHeroProjects() {
+  const { index, setIndex, pause, resume } = useAutoAdvance(SLIDES.length, 5500);
 
   return (
     <div className={styles.widget}>
@@ -137,49 +57,28 @@ export default function FeaturedHeroProjects({ slides = DEFAULT_SLIDES }: { slid
         aria-label="Featured projects"
       >
         <div className={styles.slides}>
-{slides.map((s, n) => {
-  const isFirst = n === 0;
-  return (
-    <Link
-      id={`slide-${n}`}
-      key={s.title}
-      to={s.link}
-      className={`${styles.slide} ${n === index ? styles.active : ""}`}
-      aria-roledescription="slide"
-      aria-label={`${s.title}${s.kpi ? `, ${s.kpi}` : ""}`}
-    >
-      <img
-        className={styles.screenLaptop}
-        src={s.laptopSrc}
-        srcSet={s.laptopSrcSet}
-        sizes={s.laptopSizes}
-        alt={s.laptopAlt}
-        loading={isFirst ? "eager" : "lazy"}
-        decoding={isFirst ? "sync" : "async"}
-        fetchPriority={isFirst ? "high" : "low"}
-        width={s.laptopWidth ?? 1200}
-        height={s.laptopHeight ?? 750}
-      />
-      <img
-        className={styles.screenPhone}
-        src={s.phoneSrc}
-        srcSet={s.phoneSrcSet}
-        sizes={s.phoneSizes}
-        alt={s.phoneAlt}
-        loading="lazy"
-        decoding="async"
-        width={s.phoneWidth}
-        height={s.phoneHeight}
-      />
-    </Link>
-  );
-})}
+          {SLIDES.map((s, n) => (
+            <Link
+              id={`slide-${n}`}
+              key={s.title}
+              to={s.link}
+              className={`${styles.slide} ${n === index ? styles.active : ""}`}
+              aria-roledescription="slide"
+              aria-label={`${s.title}${s.kpi ? `, ${s.kpi}` : ""}`}
+            >
+              {/* Placeholder “device” blocks (no <img> = no alt text showing) */}
+              <div className={`${styles.screenLaptop} ${styles.skeleton}`} aria-hidden="true" />
+              <div className={`${styles.screenPhone} ${styles.skeleton}`} aria-hidden="true" />
+              <div className={styles.badge} aria-hidden="true">COMING SOON</div>
+            </Link>
+          ))}
         </div>
       </div>
 
+      {/* dots only */}
       <div className={styles.carouselMetaBelow}>
         <div className={styles.dots} role="tablist" aria-label="Featured project selector">
-          {slides.map((_, n) => (
+          {SLIDES.map((_, n) => (
             <button
               key={n}
               role="tab"
@@ -191,11 +90,6 @@ export default function FeaturedHeroProjects({ slides = DEFAULT_SLIDES }: { slid
             />
           ))}
         </div>
-
-        <Link to={slides[index].link} className={styles.caption} aria-label={`Open ${slides[index].title}`}>
-          <span className={styles.captionTitle}>{slides[index].title}</span>
-          {slides[index].kpi && <span className={styles.captionKpi}>{slides[index].kpi}</span>}
-        </Link>
       </div>
     </div>
   );

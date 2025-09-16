@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../../components/SEO/SEO';
 import styles from './Home.module.css';
 import FeaturedHeroProjects from '../../components/FeaturedHeroProjects/FeaturedHeroProjects';
-import firstLaptop400 from '../../assets/aboutPicture-400.webp';
-import firstLaptop200 from '../../assets/aboutPicture-200.webp';
+
 import React from 'react';
 import { useRef } from 'react';
 
@@ -82,13 +81,13 @@ export default function Home() {
         extraHead={
           <>
             {/* Preload the LCP image for the first slide */}
-            <link
+            {/* <link
               rel="preload"
               as="image"
               href={firstLaptop400}
               imageSrcSet={`${firstLaptop200} 200w, ${firstLaptop400} 400w`}
               imageSizes="(max-width: 600px) 90vw, 720px"
-            />
+            /> */}
 
             {/* Small critical CSS to paint hero quickly */}
             <style

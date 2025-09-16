@@ -26,33 +26,40 @@
   .deviceCarousel { animation-delay: 1.5s; }
 }
 </style>
-<link
+<!-- <link
   rel="preload"
   as="image"
   href="/assets/aboutPicture-400.webp"
   imagesrcset="/assets/aboutPicture-200.webp 200w, /assets/aboutPicture-400.webp 400w"
   imagesizes="(max-width: 600px) 90vw, 720px"
-/>
-<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous">
-<link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous">
-<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-<link rel="dns-prefetch" href="https://www.google-analytics.com">
+/> -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous">
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous">
+  <!-- optional fallback -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
 <script>
-  (function(){
+  (function () {
     var loaded = false;
     function loadGA() {
       if (loaded) return; loaded = true;
+
       var s = document.createElement('script');
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W6SCBR27PW';
       s.async = true;
       document.head.appendChild(s);
+
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
       window.gtag = gtag;
+
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      // IMPORTANT: disable auto page_view; we'll send manually on route changes
+      gtag('config', 'G-XXXXXXXXXX', { send_page_view: false });
     }
+
+    // idle/interaction load = good
     window.addEventListener('load', () => {
       if ('requestIdleCallback' in window) {
         // @ts-ignore
@@ -74,7 +81,7 @@
 <meta property="og:type" content="website" />
 <link rel="icon" href="/favicon.svg" />
 <link rel="manifest" href="/site.webmanifest" />
-<title>MS Labs Web Solutions</title>
+<title>Frontline Web & Software</title>
 </head>
 <body>
     

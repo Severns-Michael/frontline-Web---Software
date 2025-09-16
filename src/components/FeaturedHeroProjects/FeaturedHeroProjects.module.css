@@ -1,111 +1,200 @@
-/* Bigger hero visual with nice shadow */
-.deviceCarousel{
-  position: relative;
-  overflow: visible;
-  isolation: isolate;
-  width: clamp(320px, 64vw, 720px); /* bigger cap */
-  aspect-ratio: 16/10;
-  filter: drop-shadow(0 24px 48px rgba(0,0,0,.35));
-  margin-bottom: 18px; /* room for meta below */
+.widget {
+  display: grid;
+  justify-items: center;
+  width: clamp(320px, 54vw, 560px);
+  margin-inline: auto;
 }
 
-/* Optional generated frames (replace with PNG frames later if preferred) */
-.deviceCarousel::before{
-  content:"";
-  position:absolute; inset:0;
-  border-radius:16px;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.12);
+.deviceCarousel {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 16/10;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.35));
+  margin-bottom: 14px;
+}
+
+.deviceCarousel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
   z-index: 0;
 }
-.deviceCarousel::after{
-  content:"";
-  position:absolute; width:34%; height:64%;
-  right:-4%; bottom:-6%;
-  border-radius:24px;
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.12);
+.deviceCarousel::after {
+  content: "";
+  position: absolute;
+  width: 32%;
+  height: 60%;
+  right: -4%;
+  bottom: -6%;
+  border-radius: 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transform: rotate(-6deg);
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
-  z-index: 0; /* behind slides */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  z-index: 0;
 }
 
-/* Slides */
-.slides{ position:absolute; inset:0; z-index: 1; }
 .slide{
-  position:absolute; inset:0; opacity:0; pointer-events:none;
+  position:absolute;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
   transition: opacity .45s ease;
 }
 .active{ opacity:1; pointer-events:auto; }
 
-/* Screen windows */
-.screenLaptop{
-  position:absolute; inset:6% 6% 18% 6%;
-  width:auto; height:auto; max-width:100%; max-height:100%;
-  object-fit:cover; border-radius:12px;
-}
-.screenPhone{
-  position:absolute; width:36%; height:60%;
-  right:-3.5%; bottom:-5%;
-  object-fit:cover; border-radius:18px; transform: rotate(-6deg);
-  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+.badge{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);   /* perfect center */
+  z-index: 3;                         /* above the skeleton blocks */
+
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  background: rgba(20,22,28,.85);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
+  color: #e9eefc;
+  pointer-events: none;               /* keep the whole slide clickable */
 }
 
-/* Meta BELOW (no absolute positioning = no overlap surprises) */
-.carouselMetaBelow{
-  display:grid; gap:6px; justify-items:center; width: min(100%, 720px);
+/* optional: scale down on small screens so it never overflows */
+@media (max-width: 520px){
+  .badge{ transform: translate(-50%,-50%) scale(.92); }
 }
 
-/* Dots with 44px hit target */
-.dots{ display:flex; gap:14px; }
-.dot{
+.laptopWindow {
+  position: absolute;
+  inset: 9% 9% 22% 9%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.screenLaptop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.screenPhone {
+  position: absolute;
+  width: 28%;
+  height: 54%;
+  right: -2%;
+  bottom: -4%;
+  object-fit: cover;
+  border-radius: 18px;
+  transform: rotate(-6deg);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Coming soon overlay */
+.comingOverlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 12, 18, 0.55),
+    rgba(10, 12, 18, 0.35)
+  );
+  backdrop-filter: blur(2px);
+  z-index: 2;
+}
+.comingText {
+  padding: 0.65rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+/* Meta below */
+.carouselMetaBelow {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  width: 100%;
+}
+
+.dots {
+  display: flex;
+  gap: 12px;
+}
+.dot {
   position: relative;
-  width: 14px; height: 14px; border-radius: 999px;
-  background: rgba(255,255,255,.3);
-  border: 2px solid rgba(255,255,255,.4);
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.4);
   cursor: pointer;
 }
-.dot::after{
-  content:"";
-  position:absolute; inset:-15px; /* ~44px target */
-  border-radius:999px;
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 999px;
 }
-.dotActive{ background: var(--brand); border-color: var(--brand); }
-
-/* Caption (clickable) */
-.caption{
-  display:flex; gap:10px; align-items:baseline;
-  font-size:.95rem; text-decoration:none;
-}
-.caption:hover{ text-decoration: underline; }
-.captionTitle{ font-weight:700; }
-.captionKpi{ color: var(--brand); font-weight:800; }
-
-/* Motion flourish (optional) */
-@media (prefers-reduced-motion: no-preference){
-  .deviceCarousel{ animation: float 6s ease-in-out infinite; }
-  @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+.dotActive {
+  background: var(--brand);
+  border-color: var(--brand);
 }
 
-/* Mobile tweaks */
-@media (max-width: 600px){
-  .deviceCarousel{
-    width: min(94vw, 640px);
-    aspect-ratio: 16/11; /* taller frame so laptop area is bigger */
-  }
-  .screenLaptop{ inset: 5% 5% 16% 5%; }
-  .screenPhone{
-    width: 42%;
-    height: 64%;
-    right: -5%;
-    bottom: -7%;
-  }
-  .caption{ font-size:.9rem; }
-}
-
-.widget{
+.caption {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.caption:hover {
+  text-decoration: underline;
+}
+.captionTitle {
+  font-weight: 700;
+}
+.captionKpi {
+  color: var(--brand);
+  font-weight: 800;
+}
+
+
+
+@media (max-width: 600px) {
+  .widget {
+    width: min(92vw, 560px);
+  }
+  .laptopWindow {
+    inset: 8% 8% 20% 8%;
+  }
+  .screenPhone {
+    width: 34%;
+    height: 60%;
+    right: -3%;
+    bottom: -6%;
+  }
+  .caption {
+    font-size: 0.9rem;
+  }
 }
