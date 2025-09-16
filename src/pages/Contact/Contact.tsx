@@ -1,14 +1,50 @@
-import { SEO } from '../../components/SEO/SEO'
-import styles from './Contact.module.css'
+import { useState, useRef } from 'react';
+import { SEO } from '../../components/SEO/SEO';
+import styles from './Contact.module.css';
 
-const PROJECT_TYPES = ['Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const
+const PROJECT_TYPES = ['Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const;
+
+function encode(data: Record<string, FormDataEntryValue>) {
+  return new URLSearchParams(data as Record<string, string>).toString();
+}
 
 export default function Contact() {
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSent(false);
+    setError(null);
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    // required for Netlify to route it to the right form
+    fd.set('form-name', 'contact');
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(Object.fromEntries(fd.entries())),
+      });
+
+      form.reset();
+      setSent(true);
+      // fire GA (non-blocking)
+      window.gtag?.('event', 'generate_lead', { form: 'contact' });
+    } catch (err) {
+      console.error(err)
+      setError('Something went wrong. Please try again or email us.');
+    }
+  }
+
   return (
     <>
       <SEO title="Contact" description="Tell us about your project. Free consultation and a fast, detailed proposal." />
 
-      {/* HERO (copy + left form + right info cards) */}
       <section className={`${styles.hero} snap anchor`}>
         <div className="container">
           <div className={styles.heroGrid}>
@@ -30,25 +66,20 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* FORM — Netlify Forms */}
+            {/* FORM — Netlify Forms (AJAX) */}
             <article className={`card ${styles.formCardHero} ${styles.areaForm}`}>
               <form
+                ref={formRef}
                 name="contact"
                 method="POST"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
-                action="/thank-you"
                 className={styles.form}
                 aria-labelledby="contact-title"
-                onSubmitCapture={() => {
-                  // fire GA without blocking submit
-                  window.gtag?.('event', 'generate_lead', { form: 'contact' })
-                }}
+                onSubmit={onSubmit}
               >
-                {/* Required hidden input (Netlify form name) */}
+                {/* Netlify needs this hidden input */}
                 <input type="hidden" name="form-name" value="contact" />
-                {/* Redirect (optional; action also works) */}
-                {/* <input type="hidden" name="redirect" value="/thank-you" /> */}
 
                 {/* Honeypot (hidden) */}
                 <p hidden>
@@ -109,6 +140,9 @@ export default function Contact() {
                 {/* <div data-netlify-recaptcha="true"></div> */}
 
                 <button className={`button ${styles.submit}`} type="submit">Send Inquiry →</button>
+
+                {sent && <p className={styles.success} aria-live="polite">Thanks! We’ll reply within one business day.</p>}
+                {error && <p className={styles.error} role="alert">{error}</p>}
               </form>
             </article>
 
@@ -117,14 +151,8 @@ export default function Contact() {
               <div className={`card ${styles.infoCard}`}>
                 <h3>Contact</h3>
                 <ul className={styles.contactList}>
-                  <li>📧 <a href="mailto:frontline.web.and.software@gmail.com"
-                         onClick={() => window.gtag?.('event', 'click_email', { location: 'contact_hero' })}>
-                         frontline.web.and.software@gmail.com
-                      </a></li>
-                  <li>📞 <a href="tel:+1419261685"
-                         onClick={() => window.gtag?.('event', 'click_call', { location: 'contact_hero' })}>
-                         (419) 261-6857
-                      </a></li>
+                  <li>📧 <a href="mailto:frontline.web.and.software@gmail.com">frontline.web.and.software@gmail.com</a></li>
+                  <li>📞 <a href="tel:+1419261685">(419) 261-6857</a></li>
                   <li>📍 Based in Pocatello, ID</li>
                 </ul>
               </div>
@@ -143,5 +171,5 @@ export default function Contact() {
         </div>
       </section>
     </>
-  )
+  );
 }
