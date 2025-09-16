@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#121621">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
   /* only what's needed to paint the hero & LCP image */
   :root { --brand:#7bb0ff; --muted:#a8b1c4; --header-h:64px; }
@@ -84,11 +89,21 @@
 <title>Frontline Web & Software</title>
 </head>
 <body>
-  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+<form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
   <input type="text" name="name" />
   <input type="email" name="email" />
+  <input type="tel" name="phone" />
+  <input type="text" name="company" />
+  <select name="projectType">
+    <option>Websites</option>
+    <option>Web Apps / Portals</option>
+    <option>E-commerce</option>
+    <option>Integrations & Automation</option>
+  </select>
   <textarea name="message"></textarea>
+  <input type="text" name="bot-field" />
 </form>
+
 <div id="root"></div>
 <script type="module" src="/src/main.tsx"></script>
 </body>

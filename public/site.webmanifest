@@ -2,8 +2,19 @@
   "name": "Frontline Web & Software",
   "short_name": "Frontline",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0b0d12",
-  "theme_color": "#0b0d12",
-  "icons": []
+  "theme_color": "#121621",
+  "description": "Custom-coded websites and software for small businesses.",
+  "icons": [
+    { "src": "/icons/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512x512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Contact", "short_name": "Contact", "url": "/contact" },
+    { "name": "Services", "short_name": "Services", "url": "/services" }
+  ],
+  "categories": ["business", "productivity"]
 }
