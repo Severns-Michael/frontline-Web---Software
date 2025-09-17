@@ -167,3 +167,4 @@ a, button, summary, [role="button"] { -webkit-tap-highlight-color: transparent; 
   display: flex;
   justify-content: center;
 }
+.anchor { scroll-margin-top: calc(var(--header-h, 64px) + 12px); }
