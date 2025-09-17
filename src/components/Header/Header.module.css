@@ -22,14 +22,18 @@
   gap: .75rem;
   padding: .75rem 0;
 }
+:root{
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+body { font-family: var(--font-sans); }
+
 .logo{
+  font-family: var(--font-sans);     /* remove cursive */
   font-weight: 800;
   letter-spacing: .4px;
-  text-decoration: none;
-  color:--brand;
-  font-size: 1.25rem;
-  font-family: cursive, 'Trebuchet MS';
-  white-space: nowrap;
+  color: var(--brand);               /* was color:--brand; */
 }
 
 /* ---------- Desktop nav ---------- */

@@ -405,4 +405,101 @@
   .pushL,.pushR{ translate:0 0; }
   .stickyCol{ position:static; }
 }
+/* Use areas so we can re-order cleanly */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.2fr;
+  grid-template-areas: "copy visual";
+  gap: 2rem;
+  align-items: center;
+}
+.heroCopy { grid-area: copy; }
+.heroVisual { grid-area: visual; display:flex; justify-content:center; }
+
+/* Constrain the device on all sizes */
+.deviceCarousel {
+  position: relative;
+  width: clamp(280px, 80vw, 560px);
+  aspect-ratio: 16 / 10;
+  isolation: isolate;
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,.35));
+}
+
+/* Phone overlay stays tasteful on tablet/desktop */
+.screenPhone {
+  position: absolute;
+  width: 32%;
+  height: 58%;
+  right: -2.5%;
+  bottom: -3%;
+  object-fit: cover;
+  border-radius: 18px;
+  transform: rotate(-6deg);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+
+/* Meta below device; prevent overlap on tight screens */
+.carouselMeta { inset: auto; margin-top: 10px; }
+
+/* --- MOBILE RULES --- */
+@media (max-width: 900px) {
+  .hero {
+    padding: 4rem 0 2rem; /* tighter vertical rhythm on phones */
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "visual";
+    gap: 1.25rem;
+  }
+
+  /* Put the device first, center it, and keep it inside viewport */
+  .heroVisual {
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+  }
+
+  .deviceCarousel {
+    width: min(92vw, 520px);   /* no horizontal scroll */
+    aspect-ratio: 16 / 10;
+  }
+
+  /* Dial back or hide the phone overlay so it doesn't push outside */
+  .screenPhone {
+    width: 36%;
+    height: 54%;
+    right: -1%;
+    bottom: -2%;
+    transform: rotate(-3deg);
+  }
+
+  /* If you prefer to fully remove the phone on very small devices: */
+  @media (max-width: 520px) {
+    .screenPhone { display: none; }
+    /* Also remove the decorative ::after “phone frame” if you use it */
+    .deviceCarousel::after { display: none; }
+  }
+
+  /* Keep captions snug under the device */
+  .carouselMeta {
+    position: static;
+    margin-top: 8px;
+  }
+
+  .sub { margin: 1.2rem 0 1.6rem; }
+  .ctaRow { gap: .7rem; }
+}
+
+/* --- SAFETY: avoid overflow from decorative frame on small screens --- */
+@media (max-width: 900px) {
+  .deviceCarousel::after {
+    right: -2%;
+    bottom: -4%;
+    transform: rotate(-4deg);
+    width: 34%;
+    height: 58%;
+  }
+}
 

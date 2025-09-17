@@ -4,13 +4,16 @@ import { SEO } from '../../components/SEO/SEO'
 import styles from './FAQ.module.css'
 
 type QA = { q: string; a: string | JSX.Element }
-type GroupKey = 'General' | 'Websites' | 'E-commerce' | 'Web Apps' | 'Process & Pricing' | 'Care & Hosting'
+type GroupKey = 'General' | 'Websites' | 'E-commerce' | 'Web Apps' | 'Process' 
 
 const GROUPS: Record<GroupKey, QA[]> = {
   General: [
     { q: 'What do you actually build?', a: 'Custom-coded marketing websites, e-commerce stores, and lightweight web apps/portals. No page builders; modern React/TypeScript, accessible and fast.' },
     { q: 'Do you work with small businesses?', a: 'Yes—that’s our sweet spot. Local service businesses, clinics, trades, nonprofits, boutiques, and solo founders.' },
     { q: 'Do you work with individuals?', a: 'Of course our aim is to help people get an online platform without all the hassle of todays market.' },
+    { q: 'What’s included in hosting/care?', a: 'Uptime monitoring, SSL, backups, security updates. Care plans add small monthly edits and priority response.' },
+    { q: 'How fast do you respond?', a: 'Business-day replies (typically ≤48h).' },
+    { q: 'Can we leave later?', a: 'Of course. We’ll export your content/assets and help you transition cleanly.' },
     { q: 'How do we start?', a: <>Book a 15-minute intro on the <Link to="/contact">contact page</Link>. If we’re a fit, we’ll send a short questionnaire and a fixed-scope quote.</> },
   ],
   Websites: [
@@ -28,16 +31,12 @@ const GROUPS: Record<GroupKey, QA[]> = {
     { q: 'How do you price an app?', a: 'Scope-based. We usually start with a short Discovery Sprint to define flows, wireframes, and an estimate, then build in milestones.' },
     { q: 'Can you maintain our existing app?', a: 'Often, yes—after a brief audit to understand stack, risks, and handoff needs.' },
   ],
-  'Process & Pricing': [
+  'Process': [
     { q: 'What’s the process like?', a: 'Intro call → questionnaire → fixed scope/quote → design preview → build in weekly check-ins → launch → care/hosting.' },
     { q: 'Do you offer payment options?', a: 'Yes. Websites can be lump-sum or monthly. Apps/e-commerce are milestone-based. We keep it straightforward—no gotchas.' },
     { q: 'Do you guarantee your work?', a: 'If you’re not happy with the finished product, you don’t move forward—no hard feelings.' },
   ],
-  'Care & Hosting': [
-    { q: 'What’s included in hosting/care?', a: 'Uptime monitoring, SSL, backups, security updates. Care plans add small monthly edits and priority response.' },
-    { q: 'How fast do you respond?', a: 'Business-day replies (typically ≤48h).' },
-    { q: 'Can we leave later?', a: 'Of course. We’ll export your content/assets and help you transition cleanly.' },
-  ],
+  
 }
 
 const GROUP_ORDER: GroupKey[] = [
@@ -45,8 +44,8 @@ const GROUP_ORDER: GroupKey[] = [
   'Websites',
   'E-commerce',
   'Web Apps',
-  'Process & Pricing',
-  'Care & Hosting',
+  'Process'
+  
 ]
 
 // for JSON-LD
