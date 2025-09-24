@@ -1,48 +1,61 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 
-export function Footer() {
-  const year = new Date().getFullYear();
-
+export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} role="contentinfo">
       <div className="container">
-        <div className={styles.row}>
-          {/* Left: Brand */}
-          <div className={styles.left}>
-            <Link to="/" className={styles.brand}>
-              <span className={styles.logo}>F</span>
-              <span className={styles.brandName}>Frontline Web & Software</span>
-            </Link>
-            <span className={styles.copy} aria-hidden="true">·</span>
-            <span className={styles.copy}>© {year}</span>
+        {/* Top grid */}
+        <div className={styles.top}>
+          {/* Brand + contact */}
+          <div className={styles.brandCol}>
+            <div className={styles.brandRow}>
+              <div className={styles.logo}>F</div>
+              <span className={styles.brandName}>Frontline Web &amp; Software</span>
+            </div>
+
+            <ul className={styles.contactList} role="list">
+              <li>
+                <a href="mailto:frontline.web.and.software@gmail.com">
+                  frontline.web.and.software@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+14192616957">+1 (419) 261-6957</a>
+              </li>
+              <li>Based in Pocatello, ID</li>
+            </ul>
           </div>
 
-          {/* Center: Minimal nav */}
-          <nav className={styles.center} aria-label="Footer">
-            <Link to="/about">About</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/portfolio">Portfolio</Link>
-            <Link to="/faq">FAQ</Link>
-            <Link to="/contact">Contact</Link>
+          {/* Site nav */}
+          <nav aria-labelledby="site-nav-title" className={styles.navCol}>
+            <h3 id="site-nav-title" className={styles.colTitle}>Site</h3>
+            <ul className={styles.list} role="list">
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/services">Services</Link></li>
+              <li><Link to="/portfolio">Portfolio</Link></li>
+              <li><Link to="/faq">FAQ</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+            </ul>
           </nav>
 
-          {/* Right: Quick contact */}
-          <div className={'${styles.right} accent'}>
-            <a
-              href="mailto:frontline.web.and.software@gmail.com"
-              className={styles.link}
-            >
-              Email
-            </a>
-            <span className={styles.dot} aria-hidden="true">•</span>
-            <a
-              href="tel:+14192616857"
-              className={styles.link}
-            >
-              (419) 261-6857
-            </a>
-          </div>
+          {/* Areas we serve */}
+          <nav aria-labelledby="areas-title" className={styles.navCol}>
+            <h3 id="areas-title" className={styles.colTitle}>Areas we serve</h3>
+            <ul className={styles.list} role="list">
+              <li><Link to="/locations/pocatello">Pocatello, ID</Link></li>
+              <li><Link to="/locations/idaho-falls">Idaho Falls, ID</Link></li>
+            </ul>
+          </nav>
+        </div>
+
+        {/* Bottom bar */}
+        <div className={styles.bottom}>
+          <p className={styles.copy}>© {new Date().getFullYear()} Frontline Web &amp; Software</p>
+          <ul className={styles.bottomLinks} role="list">
+            <li><Link to="/privacy">Privacy</Link></li>
+            <li><Link to="/terms">Terms</Link></li>
+          </ul>
         </div>
       </div>
     </footer>

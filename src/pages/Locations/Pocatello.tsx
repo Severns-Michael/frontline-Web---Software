@@ -33,7 +33,12 @@ export default function Pocatello() {
       <main id="main" tabIndex={-1} className="container">
         <h1>Web Design in Pocatello, ID</h1>
         <p>
-          We build clean, fast websites for Pocatello businesses—focused on results, not bloat.
+          Pocatello businesses deserve websites that work as hard as they do. We build lean, custom-coded sites—no bloated themes—so pages load fast, rank better, and are simple to update. Accessibility and SEO come standard, along with analytics so you can see what’s working.
+
+          We’re local and easy to reach. Most projects start with a quick intro, a short questionnaire, and a fixed-scope quote. From there it’s design → build → launch, usually in a few weeks.
+
+          Industries we often help: local services, clinics, contractors, restaurants, retailers, and community orgs.
+
         </p>
 
         <p><Link className="button" to="/contact?city=pocatello">Start your project</Link></p>

@@ -9,6 +9,8 @@ type Slide = {
   comingSoon: true;   // for now, all slides are “coming soon”
 };
 
+const PROJECTS_URL = "/portfolio"; 
+
 const SLIDES: Slide[] = [
   { title: "Local Barber — bookings that convert", kpi: "+40% appointments", link: "/portfolio/barber", comingSoon: true },
   { title: "Café — online menu & orders",          kpi: "+22% orders",       link: "/portfolio/cafe",   comingSoon: true },
@@ -61,7 +63,7 @@ export default function FeaturedHeroProjects() {
             <Link
               id={`slide-${n}`}
               key={s.title}
-              to={s.link}
+              to={PROJECTS_URL}
               className={`${styles.slide} ${n === index ? styles.active : ""}`}
               aria-roledescription="slide"
               aria-label={`${s.title}${s.kpi ? `, ${s.kpi}` : ""}`}

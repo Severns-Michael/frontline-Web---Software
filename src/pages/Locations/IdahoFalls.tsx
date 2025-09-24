@@ -33,8 +33,13 @@ export default function IdahoFalls() {
       <main id="main" tabIndex={-1} className="container">
         <h1>Web Design in Idaho Falls, ID</h1>
         <p>
-          We help Idaho Falls businesses launch fast, modern, and SEO-ready websites. Popular with trades,
-          clinics, and local shops.
+          Idaho Falls is full of busy, no-nonsense businesses. We build websites that match that energy—clean, fast, and focused on results. No page builders or templates. Every site is custom-coded for performance, accessibility, and SEO so customers find you and pages load instantly on mobile.
+
+          We’re a veteran-owned, USA-based shop that keeps things simple: clear scope, honest pricing, and fast turnaround. Most small business sites launch in 2–4 weeks with a smooth hand-off (or we can handle hosting and ongoing edits for you).
+
+          Industries we often help: trades & home services, clinics, restaurants, retail, professional services, and nonprofits.
+
+          Ready for a modern site that’s easy to maintain? We’ll look at what you have now and outline the three fastest wins for Idaho Falls.
         </p>
 
         {/* Ideas to add: 1 short testimonial, 3 local industries, small map embed, CTA */}

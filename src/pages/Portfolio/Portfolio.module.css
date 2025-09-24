@@ -1,10 +1,15 @@
-/* ==== Hero (match Home/Services) ==== */
-.hero{
-  padding: 1rem 0 1rem;     
+/* ==== Page-wide continuous background ==== */
+.pageBg{
   background:
     radial-gradient(800px 400px at 70% -10%, rgba(255,255,255,.06), transparent),
     linear-gradient(180deg, #0b0d12, #121621);
+}
+
+/* ==== Hero (spacing + center only; background is on .pageBg) ==== */
+.hero{
+  padding: 1rem 0 1rem;
   text-align: center;
+  background: transparent;
 }
 .sub{
   color: var(--muted);
@@ -14,8 +19,8 @@
   line-height: 1.45;
 }
 
-/* ==== Filters -> segmented control (like Services) ==== */
-.filters{ background:#0e1320; padding: 1rem 0; }
+/* ==== Filters -> segmented control ==== */
+.filters{ background: transparent; padding: 1rem 0 1.25rem; }
 .segmented{
   display:inline-flex; gap:.25rem; padding:.25rem; border-radius:999px;
   background: rgba(255,255,255,.04);
@@ -30,14 +35,14 @@
   background: var(--brand); color:#0b0d12; box-shadow:0 6px 16px rgba(0,0,0,.18);
 }
 
-/* ==== Grid band ==== */
-.gridBand{ background:#0c111d; padding: 2rem 0; }
+/* ==== Grid band (transparent so it blends into pageBg) ==== */
+.gridBand{ background: transparent; padding: 2rem 0; }
 .grid{
   display:grid; gap:1rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-/* ==== Cards (use global .card base + light tweaks) ==== */
+/* ==== Cards ==== */
 .card{
   display:grid; gap:.75rem;
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
@@ -49,7 +54,6 @@
   display:flex; justify-content:space-between; align-items:center; gap:.75rem;
   color: var(--muted);
 }
-
 .badge{
   font-size:.75rem; padding:.2rem .6rem; border-radius:999px;
   background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
@@ -67,19 +71,8 @@
   font-size:.8rem; padding:.25rem .5rem; border-radius:999px;
   background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
 }
-/* No dark tap overlay on the filter chips */
-.chip { -webkit-tap-highlight-color: transparent; }
 
-/* If you want a hover effect, scope it to mouse devices only */
-@media (hover: hover) and (pointer: fine) {
-  .chip:hover { filter: brightness(1.06); }
-}
-
-/* Keep keyboard focus ring sane */
-.chip:focus { outline: none; }
-.chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-/* Tech stack pills (brand-tinted) */
+/* Tech stack pills */
 .stackRow{ display:flex; gap:.35rem; flex-wrap:wrap; }
 .stack{
   font-size:.75rem; font-weight:700; padding:.22rem .5rem; border-radius:999px;
@@ -94,83 +87,15 @@
 /* Empty state */
 .empty{ color:var(--muted); text-align:center; margin-top:1rem; }
 
-/* Final CTA (kept consistent with Home) */
-.finalCta{ padding:2.5rem 0; background:#0e1320; }
+/* ==== Final CTA (transparent to keep background continuous) ==== */
+.finalCta{ padding:2.5rem 0; background: transparent; }
 .finalCard{
   text-align:center; padding:2rem; border-radius:var(--radius);
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
   border:1px solid rgba(255,255,255,.08); display:grid; gap:.75rem;
 }
 
-/* --- Mobile tap/hover fixes (Portfolio) --- */
-.chip {
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  touch-action: manipulation;
-}
-
-/* Prevent sticky hover on touch */
-@media (hover: none) and (pointer: coarse) {
-  .chip:hover { background: inherit; }
-}
-
-/* Kill pressed darkening on iOS while keeping selection color */
-.chip:active,
-.chipActive:active {
-  background: inherit;   /* no temporary dark tint */
-  filter: none;
-  opacity: 1;
-}
-
-/* Keep keyboard focus ring only when keyboard is used */
-.chip:focus { outline: none; }
-.chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-/* If you had any transition/brightness elsewhere, neutralize it on touch */
-@media (hover: none) and (pointer: coarse) {
-  .chip { transition: none; }
-}
-/* --- iOS sticky tap highlight fix for filter chips --- */
-.chip {
-  -webkit-tap-highlight-color: transparent; /* remove gray oval */
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: none;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-/* Keep the same bg on press; no temporary darkening */
-.chip:active,
-.chip:focus {
-  background-color: rgba(255,255,255,.04);
-  outline: none;
-}
-
-/* Selected state (by class OR aria-selected) */
-.chipActive,
-.chip[aria-selected="true"] {
-  background-color: var(--brand);
-  color: #0b0d12;
-  border-color: transparent;
-}
-
-/* When selected, don't darken on press/focus */
-.chipActive:active,
-.chipActive:focus,
-.chip[aria-selected="true"]:active,
-.chip[aria-selected="true"]:focus {
-  background-color: var(--brand);
-}
-
-/* On touch devices, kill hover darkening entirely */
-@media (hover: none) and (pointer: coarse) {
-  .chip:hover { background-color: inherit; }
-  .chipActive:hover,
-  .chip[aria-selected="true"]:hover { background-color: var(--brand); }
-}
-
+/* Promo card */
 .promo {
   grid-column: 1 / -1;
   display: grid;
@@ -179,60 +104,30 @@
   border: 1px solid rgba(255,255,255,.10);
   border-radius: var(--radius);
   padding: clamp(1rem, 2.5vw, 1.5rem);
-  
 }
 .promoGlow{
-  /* soft outer glow + subtle inner ring */
-  box-shadow:
-    0 18px 48px rgba(0, 0, 0, .35),
-    0 0 0 10px color-mix(in oklab, var(--brand), transparent 88%);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .35), 0 0 0 10px color-mix(in oklab, var(--brand), transparent 88%);
   border-color: color-mix(in oklab, var(--brand), transparent 70%);
   backdrop-filter: saturate(120%) blur(2px);
-  margin: 1rem auto 0;              /* center the card */
+  margin: 1rem auto 0;
   max-width: 980px;
 }
-.filters{
-  background: #0e1320;       /* already close to hero palette */
-  padding: 1rem 0 1.25rem;   /* add a bit more bottom space so it breathes */
-}
-
-.promoTop {
-  display: flex; justify-content: space-between; align-items: center; gap: .75rem;
-  color: var(--muted);
-}
-
+.promoTop { display: flex; justify-content: space-between; align-items: center; gap: .75rem; color: var(--muted); }
 .promoBadge {
   font-size: .75rem; padding: .2rem .6rem; border-radius: 999px;
   background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
 }
-
 .promoCode { font-size: .9rem; opacity: .9; }
 .promoTitle { margin: 0; }
 .promoSub { margin: 0; color: var(--muted); }
-
-.promoBullets {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; gap: .4rem;
-}
-.promoBullets li {
-  display: inline-flex; align-items: center; gap: .5rem;
-}
-.promoBullets li::before {
-  content: "•"; opacity: .6;
-}
-
-.promoActions {
-  display: flex; gap: .75rem; align-items: center; justify-content: space-between;
-  flex-wrap: wrap;
-}
+.promoBullets { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.promoBullets li { display: inline-flex; align-items: center; gap: .5rem; }
+.promoBullets li::before { content: "•"; opacity: .6; }
+.promoActions { display: flex; gap: .75rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
 .promoFootnote { color: var(--muted); font-size: .9rem; }
 
-/* Touch: kill sticky dark press on segmented buttons (your filter control uses .segment) */
-.segment {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  touch-action: manipulation;
-}
-@media (hover: none) and (pointer: coarse) {
-  .segment:active { background: inherit !important; filter: none !important; opacity: 1 !important; }
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .grid { gap: .85rem; }
+  .finalCard { padding: 1.5rem; }
 }
