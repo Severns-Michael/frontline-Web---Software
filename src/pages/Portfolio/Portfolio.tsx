@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Portfolio.module.css'
+import { canonicalFor, webPageJsonLd } from '../../lib/seo'
 
 const categories = ['All', 'Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const
 type Category = typeof categories[number]
@@ -60,7 +61,37 @@ export default function Portfolio() {
 
   return (
     <>
-      <SEO title="Projects" description="Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations." />
+<SEO
+  title="Portfolio"
+  description="Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations."
+  canonical={canonicalFor('/portfolio')}
+  
+  jsonLd={[
+    // Describe the page itself
+    webPageJsonLd({
+      path: '/portfolio',
+      name: 'Portfolio',
+      description:
+        'Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations.',
+      
+    }),
+    // The portfolio listing
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': `${canonicalFor('/portfolio')}#collection`,
+      'name': 'Portfolio projects',
+      'hasPart': projects.map(p => ({
+        '@type': 'CreativeWork',
+        'name': p.title,
+        ...(p.year ? { 'datePublished': String(p.year) } : {}),
+        ...(p.result ? { 'abstract': p.result } : {}),
+        ...(p.features?.length ? { 'keywords': p.features.join(', ') } : {}),
+        ...(p.link ? { 'url': p.link } : {}),
+      })),
+    }
+  ]}
+/>
 
 <section className={`${styles.hero} snap anchor`}>
   <div className="container">

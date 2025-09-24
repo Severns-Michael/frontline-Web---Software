@@ -2,6 +2,7 @@ import { useState, type JSX } from 'react'
 import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './FAQ.module.css'
+import { webPageJsonLd, canonicalFor } from '../../lib/seo';
 
 type QA = { q: string; a: string | JSX.Element }
 type GroupKey = 'General' | 'Websites' | 'E-commerce' | 'Web Apps' | 'Process' 
@@ -48,31 +49,34 @@ const GROUP_ORDER: GroupKey[] = [
   
 ]
 
-// for JSON-LD
-const faqs = [
-  { q: 'How long does a typical website take?', a: 'Most sites launch in 2–4 weeks depending on scope and content readiness.' },
-  { q: 'Do you offer hosting?', a: 'Yes, we set up modern hosting and connect your domain.' },
-];
 
 export default function Faq() {
   const [active, setActive] = useState<GroupKey>('General')
 
   return (
     <>
-      <SEO
-        title="FAQs"
-        description="Common questions about timelines, hosting, editing your site, and more."
-        canonical="https://frontline.example/faq"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": faqs.map(({ q, a }) => ({
-            "@type": "Question",
-            "name": q,
-            "acceptedAnswer": { "@type": "Answer", "text": a }
-          }))
-        }}
-      />
+<SEO
+  title="FAQs"
+  description="Common questions about timelines, hosting, editing your site, and how projects run."
+  canonical={canonicalFor('/faq')}
+  jsonLd={[
+    webPageJsonLd({
+      path: '/faq',
+      name: 'FAQs',
+      description: 'Common questions about timelines, hosting, editing your site, and how projects run.',
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      '@id': `${canonicalFor('/faq')}#faq`,
+      mainEntity: GROUPS[active].map(({ q, a }: QA) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: typeof a === 'string' ? a : '' },
+      })),
+    },
+  ]}
+/>
 
       {/* SINGLE HERO that contains centered selector above the box */}
       <section className={`${styles.hero} `}>

@@ -2,16 +2,130 @@ import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Services.module.css'
 import { useState } from 'react'
+import { canonicalFor, webPageJsonLd, } from '../../lib/seo'
+
+
 
 export default function Services() {
   const [active, setActive] = useState<'websites' | 'ecommerce' | 'apps'>('websites')
 
   return (
     <>
-      <SEO
-        title="Services & Pricing | Frontline Web & Software"
-        description="Custom-coded websites, e-commerce, and web apps for small business. Fast, accessible, SEO-ready."
-      />
+        <SEO
+  title="Services & Pricing | Frontline Web & Software"
+  description="Custom-coded websites, e-commerce, and web apps for small business. Fast, accessible, SEO-ready."
+  canonical={canonicalFor('/services')}
+  jsonLd={[
+    // Describe the page itself
+    webPageJsonLd({
+      path: '/services',
+      name: 'Services & Pricing',
+      description: 'Custom-coded websites, e-commerce, and web apps for small business. Fast, accessible, SEO-ready.',
+    }),
+    // List your services (each a Service with a simple Offer)
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': `${canonicalFor('/services')}#services`,
+      'name': 'Service lineup',
+      'itemListElement': [
+        {
+          '@type': 'ListItem',
+          'position': 1,
+          'item': {
+            '@type': 'Service',
+            'name': 'Websites',
+            'description': 'Clean, fast marketing sites with mobile-first design, performance/accessibility checks, and SEO hygiene.',
+            'offers': [
+              {
+                '@type': 'Offer',
+                'name': 'Lump Sum',
+                'price': 3000,
+                'priceCurrency': 'USD',
+                'priceSpecification': {
+                  '@type': 'PriceSpecification',
+                  'priceCurrency': 'USD',
+                  'price': 3000
+                }
+              },
+              {
+                '@type': 'Offer',
+                'name': 'Website Monthly',
+                'price': 165,
+                'priceCurrency': 'USD',
+                'category': 'subscription'
+              }
+            ]
+          }
+        },
+        {
+          '@type': 'ListItem',
+          'position': 2,
+          'item': {
+            '@type': 'Service',
+            'name': 'E-commerce',
+            'description': 'Shopify or WooCommerce—kept lean with the essentials.',
+            'offers': [
+              {
+                '@type': 'Offer',
+                'name': 'Starter Store',
+                'priceCurrency': 'USD',
+                'price': 1500,
+                'priceSpecification': {
+                  '@type': 'PriceSpecification',
+                  'priceCurrency': 'USD',
+                  'minPrice': 1500,
+                  'maxPrice': 3000
+                }
+              },
+              {
+                '@type': 'Offer',
+                'name': 'Standard Store',
+                'priceCurrency': 'USD',
+                'price': 3500,
+                'priceSpecification': {
+                  '@type': 'PriceSpecification',
+                  'priceCurrency': 'USD',
+                  'minPrice': 3500,
+                  'maxPrice': 7500
+                }
+              }
+            ]
+          }
+        },
+        {
+          '@type': 'ListItem',
+          'position': 3,
+          'item': {
+            '@type': 'Service',
+            'name': 'Web Apps / Software',
+            'description': 'Scope-based builds for portals, dashboards, bookings, payments, and integrations.',
+            'offers': [
+              {
+                '@type': 'Offer',
+                'name': 'Scope-based',
+                'priceCurrency': 'USD',
+                'price': 5000
+              },
+              {
+                '@type': 'Offer',
+                'name': 'Discovery Sprint',
+                'priceCurrency': 'USD',
+                'price': 750,
+                'priceSpecification': {
+                  '@type': 'PriceSpecification',
+                  'priceCurrency': 'USD',
+                  'minPrice': 750,
+                  'maxPrice': 1500
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]}
+/>
 
       {/* HERO + LINEUP (tabs) */}
       <section id="services-hero" className={`${styles.hero}`}>

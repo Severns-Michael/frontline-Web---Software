@@ -2,14 +2,31 @@ import { Link } from "react-router-dom";
 import { SEO } from "../../components/SEO/SEO";
 import styles from "./About.module.css";
 import aboutPic from '../../assets/aboutPicture.webp';
+import { webPageJsonLd, localBusinessJsonLd, canonicalFor, normalizeImageUrl } from '../../lib/seo';
+
+
 
 export default function About() {
+  const ABOUT_IMAGE = '/about-picture.webp';
+  
   return (
     <>
-      <SEO
-        title="About"
-        description="Veteran-owned, USA-based. Michael Severns builds fast, accessible websites and small web apps—clean code, no bloat."
-      />
+<SEO
+  title="About"
+  description="Veteran-owned, USA-based. Michael Severns builds fast, accessible websites and small web apps—clean code, no bloat."
+  canonical={canonicalFor('/about')}
+  image={normalizeImageUrl(ABOUT_IMAGE)}
+  jsonLd={[
+    webPageJsonLd({
+      path: '/about',
+      name: 'About',
+      description:
+        'Veteran-owned, USA-based. Michael Severns builds fast, accessible websites and small web apps—clean code, no bloat.',
+      image: ABOUT_IMAGE,
+    }),
+    localBusinessJsonLd(),
+  ]}
+/>
 
       {/* HERO (personal intro + photo) */}
         <section id="about-hero" className={`${styles.bioHero} vh snap anchor`}>

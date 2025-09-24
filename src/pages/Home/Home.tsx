@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../../components/SEO/SEO';
 import styles from './Home.module.css';
 import FeaturedHeroProjects from '../../components/FeaturedHeroProjects/FeaturedHeroProjects';
+import { websiteJsonLd, webPageJsonLd, localBusinessJsonLd, canonicalFor, OG_IMAGE } from '../../lib/seo';
+
 
 import React from 'react';
 import { useRef } from 'react';
@@ -15,13 +17,7 @@ const Pricing = lazy(() => import('./sections/Pricing'));
 const FinalCta = lazy(() => import('./sections/FinalCta'));
 
 export default function Home() {
-  const origin =
-    typeof window !== 'undefined'
-      ? window.location.origin
-      : 'https://frontline-web-software.netlify.app';
-
-  // Mount sections after first paint to improve LCP
-
+ 
   function Defer({
   children,
   rootMargin = "600px",
@@ -53,31 +49,20 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Custom Web & Software"
-        description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
-        canonical={`${origin}/`}
-        image={`${origin}/og.jpg`}
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: 'Frontline Web & Software',
-          url: origin,
-          image: `${origin}/og.jpg`,
-          telephone: '+1-208-555-1234',
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: '123 Example St',
-            addressLocality: 'Idaho Falls',
-            addressRegion: 'ID',
-            postalCode: '83401',
-            addressCountry: 'US',
-          },
-          areaServed: ['Idaho Falls', 'Pocatello', 'Rexburg'],
-          sameAs: [
-            'https://www.facebook.com/yourpage',
-            'https://www.linkedin.com/company/yourcompany',
-          ],
-        }}
+  title="Custom Web & Software"
+  description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
+  canonical={canonicalFor('/')}
+  image={OG_IMAGE}
+  jsonLd={[
+    websiteJsonLd(),
+    webPageJsonLd({
+      path: '/',
+      name: 'Custom Web & Software',
+      description: 'Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready.',
+      image: OG_IMAGE,
+    }),
+    localBusinessJsonLd(),
+  ]}
         extraHead={
           <>
             {/* Preload the LCP image for the first slide */}

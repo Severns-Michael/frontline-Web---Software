@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { SEO } from '../../components/SEO/SEO';
 import styles from './Contact.module.css';
+import { webPageJsonLd, localBusinessJsonLd, canonicalFor } from '../../lib/seo';
 
 const PROJECT_TYPES = ['Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const;
 
@@ -43,8 +44,21 @@ export default function Contact() {
 
   return (
     <>
-      <SEO title="Contact" description="Tell us about your project. Free consultation and a fast, detailed proposal." />
-
+    <SEO
+  title="Contact"
+  description="Tell us about your project. Free consultation and a fast, detailed proposal."
+  canonical={canonicalFor('/contact')}
+  jsonLd={[
+    webPageJsonLd({
+      path: '/contact',
+      name: 'Contact',
+      description: 'Tell us about your project. Free consultation and a fast, detailed proposal.',
+    }),
+    localBusinessJsonLd(),
+  ]}
+/>
+      
+      {/* HERO with form, contact info, and notes */}
       <section className={`${styles.hero} snap anchor`}>
         <div className="container">
           <div className={styles.heroGrid}>
@@ -150,11 +164,11 @@ export default function Contact() {
             <aside className={`${styles.infoColHero} ${styles.areaInfo}`} aria-label="Contact information">
               <div className={`card ${styles.infoCard}`}>
                 <h3>Contact</h3>
-                <ul className={styles.contactList}>
-                  <li>📧 <a href="mailto:frontline.web.and.software@gmail.com">frontline.web.and.software@gmail.com</a></li>
-                  <li>📞 <a href="tel:+1419261685">(419) 261-6857</a></li>
-                  <li>📍 Based in Pocatello, ID</li>
-                </ul>
+               <ul className={styles.contactList}>
+                <li>📧 <a href="mailto:frontline.web.and.software@gmail.com">frontline.web.and.software@gmail.com</a></li>
+                <li>📞 <a href="tel:+14192616957">+1 (419) 261-6957</a></li>
+                <li>📍 Based in Pocatello, ID</li>
+              </ul>
               </div>
 
               <div className={`card ${styles.noteBlue}`}>

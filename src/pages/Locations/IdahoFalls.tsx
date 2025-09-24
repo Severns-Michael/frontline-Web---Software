@@ -1,4 +1,6 @@
 import { SEO } from '../../components/SEO/SEO'
+import { canonicalFor, webPageJsonLd } from '../../lib/seo'
+import { Link } from 'react-router-dom'
 
 export default function IdahoFalls() {
   return (
@@ -6,25 +8,37 @@ export default function IdahoFalls() {
       <SEO
         title="Web Design in Idaho Falls, ID"
         description="Custom-coded websites for Idaho Falls small businesses. Fast, SEO-ready, and easy to maintain."
-        canonical="https://frontline.example/locations/idaho-falls"
-        jsonLd={{
-          "@context":"https://schema.org",
-          "@type":"LocalBusiness",
-          "name":"Frontline Web & Software",
-          "url":"https://frontline.example/locations/idaho-falls",
-          "address":{
-            "@type":"PostalAddress",
-            "addressLocality":"Idaho Falls",
-            "addressRegion":"ID",
-            "addressCountry":"US"
-          },
-          "areaServed":"Idaho Falls"
-        }}
+        canonical={canonicalFor('/locations/idaho-falls')}
+        jsonLd={[
+          webPageJsonLd({
+            path: '/locations/idaho-falls',
+            name: 'Web Design in Idaho Falls, ID',
+            description:
+              'Custom-coded websites for Idaho Falls small businesses. Fast, SEO-ready, and easy to maintain.'
+          }),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            '@id': `${canonicalFor('/locations/idaho-falls')}#service`,
+            'serviceType': 'Web Design',
+            'areaServed': {
+              '@type': 'City',
+              'name': 'Idaho Falls'
+            },
+            'provider': { '@id': 'https://frontlinewebsoftware.com/#identity' }
+          }
+        ]}
       />
+
       <main id="main" tabIndex={-1} className="container">
         <h1>Web Design in Idaho Falls, ID</h1>
-        <p>We help Idaho Falls businesses launch fast, modern, and SEO-ready websites.</p>
-        {/* Short testimonial, 3-4 local clients or industries, a map embed, and a contact CTA */}
+        <p>
+          We help Idaho Falls businesses launch fast, modern, and SEO-ready websites. Popular with trades,
+          clinics, and local shops.
+        </p>
+
+        {/* Ideas to add: 1 short testimonial, 3 local industries, small map embed, CTA */}
+        <p><Link className="button" to="/contact?city=idaho-falls">Get a free plan</Link></p>
       </main>
     </>
   )
