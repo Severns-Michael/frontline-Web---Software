@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { SEO } from "../../components/SEO/SEO";
 import styles from "./About.module.css";
 import aboutPic from '../../assets/aboutPicture.webp';
-import { webPageJsonLd, localBusinessJsonLd, canonicalFor, normalizeImageUrl } from '../../lib/seo';
+import { webPageJsonLd, canonicalFor, normalizeImageUrl, organizationJsonLd, breadcrumbJsonLd } from '../../lib/seo';
 
 
 
@@ -17,6 +17,7 @@ export default function About() {
   canonical={canonicalFor('/about')}
   image={normalizeImageUrl(ABOUT_IMAGE)}
   jsonLd={[
+    // 1) WebPage
     webPageJsonLd({
       path: '/about',
       name: 'About',
@@ -24,7 +25,45 @@ export default function About() {
         'Veteran-owned, USA-based. Michael Severns builds fast, accessible websites and small web apps—clean code, no bloat.',
       image: ABOUT_IMAGE,
     }),
-    localBusinessJsonLd(),
+
+    // 2) AboutPage (lightweight)
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      '@id': `${canonicalFor('/about')}#aboutpage`,
+      url: canonicalFor('/about'),
+      isPartOf: { '@id': 'https://frontlinewebsoftware.com/#website' },
+      name: 'About • Frontline Web & Software',
+    },
+
+    // 3) Organization
+    organizationJsonLd({
+      logo: '/logo-512.png',
+      // sameAs: ['https://www.linkedin.com/company/...','https://github.com/...'],
+    }),
+
+    // 4) Person (the founder)
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': `${canonicalFor('/about')}#founder`,
+      name: 'Michael Severns',
+      jobTitle: 'Founder & Lead Developer',
+      url: canonicalFor('/about'),
+      image: normalizeImageUrl(ABOUT_IMAGE) ?? '',
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Frontline Web & Software',
+        url: 'https://frontlinewebsoftware.com',
+      },
+      // sameAs: ['https://www.linkedin.com/in/...']  // add when ready
+    },
+
+    // 5) Breadcrumbs
+    breadcrumbJsonLd([
+      { name: 'Home', url: 'https://frontlinewebsoftware.com' },
+      { name: 'About', url: 'https://frontlinewebsoftware.com/about' },
+    ]),
   ]}
 />
 

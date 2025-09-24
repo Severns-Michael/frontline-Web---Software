@@ -503,3 +503,188 @@
   }
 }
 
+/* --- TRUST SECTION: bigger image, blue accents --- */
+
+/* full-bleed trust section */
+.trustFull{
+  background: linear-gradient(180deg,#0b0d12,#111625);
+  padding: 4rem 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+/* two-column layout */
+.trustGrid{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* left image card */
+.proofFigure{
+  margin: 0;
+  background: #0b0d12;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  box-shadow: 0 24px 48px rgba(0,0,0,.35);
+  padding: .75rem;
+}
+.proofFigure img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius: 10px;
+}
+.proofCaption{
+  color: #9fb1cc;
+  font-size: .85rem;
+  margin-top: .5rem;
+  text-align: right;
+}
+
+/* right content */
+.proofCopy{}
+.h2{
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  margin: 0 0 .75rem;
+}
+.lede{
+  color: #cfd6e6;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  margin: 0 0 1.25rem;
+  max-width: 60ch;
+}
+.proofList{
+  margin: 0 0 1.5rem;
+  display: grid;
+  gap: .5rem;
+  color: #c2cbe0;
+}
+.proofList strong{ color:#e9efff; }
+
+/* KPIs */
+.kpis{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: .75rem;
+  margin: 1rem 0 1.25rem;
+}
+.kpi{
+  background: #0f1422;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  text-align: center;
+  padding: .9rem .5rem;
+}
+.kpiNum{
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #8fd18f;
+}
+.kpiLabel{
+  font-size: .85rem;
+  color: #b6c1d6;
+  margin-top: .35rem;
+}
+
+/* CTA row */
+.ctaRow{
+  display:flex;
+  gap: .75rem;
+  align-items:center;
+  margin-top: .5rem;
+}
+.secondaryCta{
+  color:#bcd1ff;
+  text-decoration: underline;
+}
+.secondaryCta:hover{ text-decoration: none; }
+
+
+/* === TRUST — Final polish === */
+
+/* A bit wider than the global .container, only here */
+.trustContainer{
+  width: min(1440px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+/* Give the left column more room; tighter gutter; align to top */
+.trustGrid{
+  display: grid;
+  grid-template-columns: minmax(700px, 62vw) 1fr; /* ~62/38 split */
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Let the screenshot “hang” a little to the left so it feels larger */
+.proofFigure{
+  justify-self: start;
+  margin-inline-start: clamp(-72px, -5vw, -120px); /* tasteful left bleed */
+  padding: .5rem;
+  background: #0b0d12;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  box-shadow: 0 20px 48px rgba(0,0,0,.35);
+}
+.proofFigure img{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.proofCaption{
+  text-align: center;
+  color: #9fb1cc;
+  font-size: .85rem;
+  margin-top: .45rem;
+}
+
+/* Copy column */
+.proofCopy{ padding-top: .25rem; max-width: 38rem; }
+
+/* Blue accents */
+.proofList{ margin: 0 0 1.25rem; display: grid; gap: .5rem; color: #c2cbe0; }
+.proofList strong{ color: var(--brand); }
+
+/* KPI tiles */
+.kpis{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: .75rem;
+  margin: 1rem 0 1.25rem;
+}
+.kpi{
+  background: #0f1422;
+  border: 1px solid rgba(138,177,255,.18);
+  border-radius: 12px;
+  text-align: center;
+  padding: .9rem .5rem;
+}
+.kpiNum{
+  color: #89b4ff;
+  font-weight: 800;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.kpiLabel{ color: #b6c1d6; font-size: .85rem; margin-top: .35rem; }
+
+/* Buttons */
+.ctaRow{ margin-top: .75rem; display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+
+/* Extra-wide desktops: a touch more width & bleed */
+@media (min-width: 1600px){
+  .trustGrid{ grid-template-columns: minmax(760px, 64vw) 1fr; }
+  .proofFigure{ margin-inline-start: clamp(-96px, -6vw, -140px); }
+}
+
+/* Mobile/Tablet: image first, text under; KPIs wrap to 2 cols */
+@media (max-width: 1024px){
+  .trustContainer{ width: min(1100px, 100% - 2rem); }
+  .trustGrid{ grid-template-columns: 1fr; gap: 1rem; }
+  .proofFigure{ order: 1; margin-inline-start: 0; justify-self: stretch; }
+  .proofCopy{ order: 2; max-width: none; }
+  .kpis{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}

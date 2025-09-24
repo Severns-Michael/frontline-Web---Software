@@ -2,7 +2,12 @@ import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './Services.module.css'
 import { useState } from 'react'
-import { canonicalFor, webPageJsonLd, } from '../../lib/seo'
+import {
+  webPageJsonLd,
+  breadcrumbJsonLd,
+  localBusinessJsonLd,
+  canonicalFor,
+} from '../../lib/seo';
 
 
 
@@ -11,119 +16,137 @@ export default function Services() {
 
   return (
     <>
-        <SEO
+     <SEO
   title="Services & Pricing | Frontline Web & Software"
   description="Custom-coded websites, e-commerce, and web apps for small business. Fast, accessible, SEO-ready."
   canonical={canonicalFor('/services')}
   jsonLd={[
-    // Describe the page itself
+    // Page descriptor
     webPageJsonLd({
       path: '/services',
       name: 'Services & Pricing',
-      description: 'Custom-coded websites, e-commerce, and web apps for small business. Fast, accessible, SEO-ready.',
+      description:
+        'Custom-coded websites, e-commerce, and web apps for small business. Fast, accessible, SEO-ready.',
     }),
-    // List your services (each a Service with a simple Offer)
+
+    // Breadcrumbs via helper
+    breadcrumbJsonLd([
+      { name: 'Home', url: 'https://frontlinewebsoftware.com' },
+      { name: 'Services', url: 'https://frontlinewebsoftware.com/services' },
+    ]),
+
+    // LocalBusiness via helper (keep it lean; add phone/address if you want them on this page too)
+    localBusinessJsonLd({
+      // phone: '+14192616957',
+      city: 'Pocatello',
+      region: 'ID',
+      areaServed: ['Pocatello', 'Idaho Falls', 'Rexburg', 'Idaho'],
+    }),
+
+    // ItemList of services (page-specific; fine to inline)
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
       '@id': `${canonicalFor('/services')}#services`,
-      'name': 'Service lineup',
-      'itemListElement': [
+      name: 'Service lineup',
+      itemListElement: [
         {
           '@type': 'ListItem',
-          'position': 1,
-          'item': {
+          position: 1,
+          item: {
             '@type': 'Service',
-            'name': 'Websites',
-            'description': 'Clean, fast marketing sites with mobile-first design, performance/accessibility checks, and SEO hygiene.',
-            'offers': [
+            name: 'Websites',
+            description:
+              'Clean, fast marketing sites with mobile-first design, performance/accessibility checks, and SEO hygiene.',
+            offers: [
               {
                 '@type': 'Offer',
-                'name': 'Lump Sum',
-                'price': 3000,
-                'priceCurrency': 'USD',
-                'priceSpecification': {
+                name: 'Lump Sum',
+                price: 3000,
+                priceCurrency: 'USD',
+                priceSpecification: {
                   '@type': 'PriceSpecification',
-                  'priceCurrency': 'USD',
-                  'price': 3000
-                }
+                  priceCurrency: 'USD',
+                  price: 3000,
+                },
               },
               {
                 '@type': 'Offer',
-                'name': 'Website Monthly',
-                'price': 165,
-                'priceCurrency': 'USD',
-                'category': 'subscription'
-              }
-            ]
-          }
+                name: 'Website Monthly',
+                price: 165,
+                priceCurrency: 'USD',
+                category: 'subscription',
+              },
+            ],
+          },
         },
         {
           '@type': 'ListItem',
-          'position': 2,
-          'item': {
+          position: 2,
+          item: {
             '@type': 'Service',
-            'name': 'E-commerce',
-            'description': 'Shopify or WooCommerce—kept lean with the essentials.',
-            'offers': [
+            name: 'E-commerce',
+            description: 'Shopify or WooCommerce—kept lean with the essentials.',
+            offers: [
               {
                 '@type': 'Offer',
-                'name': 'Starter Store',
-                'priceCurrency': 'USD',
-                'price': 1500,
-                'priceSpecification': {
+                name: 'Starter Store',
+                priceCurrency: 'USD',
+                price: 1500,
+                priceSpecification: {
                   '@type': 'PriceSpecification',
-                  'priceCurrency': 'USD',
-                  'minPrice': 1500,
-                  'maxPrice': 3000
-                }
+                  priceCurrency: 'USD',
+                  minPrice: 1500,
+                  maxPrice: 3000,
+                },
               },
               {
                 '@type': 'Offer',
-                'name': 'Standard Store',
-                'priceCurrency': 'USD',
-                'price': 3500,
-                'priceSpecification': {
+                name: 'Standard Store',
+                priceCurrency: 'USD',
+                price: 3500,
+                priceSpecification: {
                   '@type': 'PriceSpecification',
-                  'priceCurrency': 'USD',
-                  'minPrice': 3500,
-                  'maxPrice': 7500
-                }
-              }
-            ]
-          }
+                  priceCurrency: 'USD',
+                  minPrice: 3500,
+                  maxPrice: 7500,
+                },
+              },
+            ],
+          },
         },
         {
           '@type': 'ListItem',
-          'position': 3,
-          'item': {
+          position: 3,
+          item: {
             '@type': 'Service',
-            'name': 'Web Apps / Software',
-            'description': 'Scope-based builds for portals, dashboards, bookings, payments, and integrations.',
-            'offers': [
+            name: 'Web Apps / Software',
+            description:
+              'Scope-based builds for portals, dashboards, bookings, payments, and integrations.',
+            offers: [
               {
                 '@type': 'Offer',
-                'name': 'Scope-based',
-                'priceCurrency': 'USD',
-                'price': 5000
+                name: 'Scope-based',
+                priceCurrency: 'USD',
+                price: 5000,
               },
               {
                 '@type': 'Offer',
-                'name': 'Discovery Sprint',
-                'priceCurrency': 'USD',
-                'price': 750,
-                'priceSpecification': {
+                name: 'Discovery Sprint',
+                priceCurrency: 'USD',
+                price: 750,
+                priceSpecification: {
                   '@type': 'PriceSpecification',
-                  'priceCurrency': 'USD',
-                  'minPrice': 750,
-                  'maxPrice': 1500
-                }
-              }
-            ]
-          }
-        }
-      ]
-    }
+                  priceCurrency: 'USD',
+                  minPrice: 750,
+                  maxPrice: 1500,
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
   ]}
 />
 

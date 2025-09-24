@@ -1,7 +1,13 @@
 import { useState, useRef } from 'react';
 import { SEO } from '../../components/SEO/SEO';
 import styles from './Contact.module.css';
-import { webPageJsonLd, localBusinessJsonLd, canonicalFor } from '../../lib/seo';
+import {
+  webPageJsonLd,
+  breadcrumbJsonLd,
+  localBusinessJsonLd,
+  canonicalFor,
+} from '../..//lib/seo';
+
 
 const PROJECT_TYPES = ['Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const;
 
@@ -44,19 +50,42 @@ export default function Contact() {
 
   return (
     <>
-    <SEO
-  title="Contact"
-  description="Tell us about your project. Free consultation and a fast, detailed proposal."
-  canonical={canonicalFor('/contact')}
-  jsonLd={[
-    webPageJsonLd({
-      path: '/contact',
-      name: 'Contact',
-      description: 'Tell us about your project. Free consultation and a fast, detailed proposal.',
-    }),
-    localBusinessJsonLd(),
-  ]}
-/>
+ <SEO
+        title="Services"
+        description="Websites, web apps/portals, e-commerce, and integrations built for growth."
+        canonical={canonicalFor('/services')}
+        jsonLd={[
+          webPageJsonLd({
+            path: '/services',
+            name: 'Services',
+            description:
+              'Websites, web apps/portals, e-commerce, and integrations built for growth.',
+          }),
+          breadcrumbJsonLd([
+            { name: 'Home', url: 'https://frontlinewebsoftware.com' },
+            { name: 'Services', url: 'https://frontlinewebsoftware.com/services' },
+          ]),
+          // Local signals (optional but recommended)
+          localBusinessJsonLd({
+            phone: '+14192616957',
+            city: 'Pocatello',
+            region: 'ID',
+            areaServed: ['Pocatello', 'Idaho Falls', 'Rexburg', 'Idaho'],
+          }),
+          // (Optional) simple Service catalog
+          {
+            '@context': 'https://schema.org',
+            '@type': 'OfferCatalog',
+            name: 'Web services',
+            itemListElement: [
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Website Design & Build' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web App / Client Portal' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'E-commerce Setup' } },
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Integrations & Automation' } },
+            ],
+          },
+        ]}
+      />
       
       {/* HERO with form, contact info, and notes */}
       <section className={`${styles.hero} snap anchor`}>

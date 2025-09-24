@@ -5,8 +5,8 @@ export const SITE = 'https://frontlinewebsoftware.com'; // no trailing slash
 export const SITE_NAME = 'Frontline Web & Software';
 
 // Common assets (put these in /public)
-export const OG_IMAGE = `${SITE}/og.jpg`;         // /public/og.jpg
-export const LOGO_512 = `${SITE}/logo-512.png`;   // /public/logo-512.png
+export const OG_IMAGE = `${SITE}/og.jpg`;       // /public/og.jpg
+export const LOGO_512 = `${SITE}/logo-512.png`; // /public/logo-512.png
 
 // ---- URL helpers ----
 export function absoluteUrl(path = '/'): string {
@@ -28,6 +28,8 @@ export function normalizeImageUrl(img?: string): string | undefined {
 }
 
 // ---- JSON-LD builders ----
+
+/** WebSite (site-wide) + optional SearchAction */
 export function websiteJsonLd() {
   return {
     '@context': 'https://schema.org',
@@ -35,14 +37,10 @@ export function websiteJsonLd() {
     '@id': `${SITE}/#website`,
     url: SITE,
     name: SITE_NAME,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   };
 }
 
+/** WebPage (per-page) */
 export function webPageJsonLd(opts: {
   path?: string;            // e.g., "/about"
   name: string;             // page title (no site name)
@@ -58,46 +56,105 @@ export function webPageJsonLd(opts: {
     '@id': `${url}#webpage`,
     url,
     name: `${opts.name} • ${SITE_NAME}`,
-    // 👇 only include if defined to satisfy JSONValue (no undefineds)
     ...(opts.description ? { description: opts.description } : {}),
-    ...(img ? { primaryImageOfPage: { '@type': 'ImageObject', url: img } } : {}),
+    ...(img
+      ? { primaryImageOfPage: { '@type': 'ImageObject', url: img } }
+      : {}),
     isPartOf: { '@id': `${SITE}/#website` },
   };
 }
 
-export function localBusinessJsonLd() {
+/** Organization (site-wide identity) */
+export function organizationJsonLd(opts?: {
+  name?: string;
+  url?: string;
+  logo?: string;        // absolute or /path
+  sameAs?: string[];    // social URLs
+}) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${SITE}/#identity`,
-    name: SITE_NAME,
-    url: SITE,
-    image: OG_IMAGE,
-    logo: LOGO_512,
-    telephone: '+14192616957', // E.164
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '1500 E Venture Way',
-      addressLocality: 'Pocatello',
-      addressRegion: 'ID',
-      postalCode: '83201',
-      addressCountry: 'US',
-    },
-    areaServed: ['Pocatello', 'Idaho Falls', 'Rexburg'],
-    contactPoint: [{
-      '@type': 'ContactPoint',
-      telephone: '+14192616957',
-      contactType: 'customer service',
-      areaServed: 'US',
-      availableLanguage: ['English'],
-    }],
-    knowsAbout: [
-      'Small business websites',
-      'Local SEO',
-      'React web apps',
-      'Performance optimization',
-      'Accessibility (WCAG)',
-    ],
-    // sameAs: ['https://www.linkedin.com/in/...','https://github.com/...'],
+    '@type': 'Organization',
+    '@id': `${SITE}/#org`,
+    name: opts?.name ?? SITE_NAME,
+    url: opts?.url ?? SITE,
+    ...(opts?.logo ? { logo: normalizeImageUrl(opts.logo) } : {}),
+    ...(opts?.sameAs && opts.sameAs.length ? { sameAs: opts.sameAs } : {}),
+  };
+}
+
+/** LocalBusiness (for local SEO) */
+
+export function localBusinessJsonLd(opts?: {
+  phone?: string;         // E.164 e.g. "+14192616857"
+  image?: string;         // absolute or /path
+  street?: string;
+  city?: string;
+  region?: string;        // 'ID'
+  postal?: string;
+  country?: string;       // 'US'
+  areaServed?: string[];  // ['Pocatello', 'Idaho Falls', 'Rexburg']
+  priceRange?: string;    // '$$'
+  logo?: string;          // absolute or /path
+}) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const obj: Record<string, any> = {
+    '@context': 'https://schema.org',
+    '@type'   : 'LocalBusiness',
+    '@id'     : `${SITE}/#identity`,
+    name      : SITE_NAME,
+    url       : SITE,
+  };
+
+  // only add when present (avoid undefined)
+  if (opts?.image) obj.image = normalizeImageUrl(opts.image); else obj.image = OG_IMAGE;
+  if (opts?.logo)  obj.logo  = normalizeImageUrl(opts.logo);  else obj.logo  = LOGO_512;
+  if (opts?.phone) obj.telephone = opts.phone;
+  if (opts?.priceRange) obj.priceRange = opts.priceRange;
+  if (opts?.areaServed?.length) obj.areaServed = opts.areaServed;
+
+  // address: build only with defined keys
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const address: Record<string, any> = { '@type': 'PostalAddress' };
+  if (opts?.street) address.streetAddress = opts.street;
+  if (opts?.city)   address.addressLocality = opts.city;
+  if (opts?.region) address.addressRegion   = opts.region;
+  if (opts?.postal) address.postalCode      = opts.postal;
+  address.addressCountry = opts?.country ?? 'US';
+
+  // include address only if we at least have street + city (or whatever rule you prefer)
+  if (address.streetAddress && address.addressLocality) {
+    obj.address = address;
+  }
+
+  return obj;
+}
+
+/** Breadcrumbs */
+export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      item: it.url,
+    })),
+  };
+}
+
+/** FAQ (must match visible Q&A) */
+export function faqPageJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
   };
 }

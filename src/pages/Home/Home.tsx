@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../../components/SEO/SEO';
 import styles from './Home.module.css';
 import FeaturedHeroProjects from '../../components/FeaturedHeroProjects/FeaturedHeroProjects';
-import { websiteJsonLd, webPageJsonLd, localBusinessJsonLd, canonicalFor, OG_IMAGE } from '../../lib/seo';
+import {
+  websiteJsonLd,
+  webPageJsonLd,
+  localBusinessJsonLd,
+  organizationJsonLd,  
+  canonicalFor,
+  OG_IMAGE
+} from '../../lib/seo';
 
 
 import React from 'react';
@@ -15,6 +22,7 @@ const Focus = lazy(() => import('./sections/Focus'));
 const Process = lazy(() => import('./sections/Process'));
 const Pricing = lazy(() => import('./sections/Pricing'));
 const FinalCta = lazy(() => import('./sections/FinalCta'));
+const Trust = lazy(() => import('./sections/Trust'));
 
 export default function Home() {
  
@@ -48,7 +56,7 @@ export default function Home() {
 
   return (
     <>
-      <SEO
+<SEO
   title="Custom Web & Software"
   description="Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready."
   canonical={canonicalFor('/')}
@@ -58,10 +66,26 @@ export default function Home() {
     webPageJsonLd({
       path: '/',
       name: 'Custom Web & Software',
-      description: 'Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready.',
+      description:
+        'Professional websites and lightweight web apps for small businesses. Fast, accessible, SEO-ready.',
       image: OG_IMAGE,
     }),
-    localBusinessJsonLd(),
+    organizationJsonLd({
+      logo: '/logo-512.png',
+      sameAs: [
+        // 'https://www.linkedin.com/company/...',
+        // 'https://github.com/...',
+        // 'https://x.com/...'
+      ],
+    }),
+    localBusinessJsonLd({
+      phone: '+14192616957',
+      street: '1500 E Venture Way',
+      city: 'Pocatello',
+      region: 'ID',
+      postal: '83201',
+      areaServed: ['Pocatello', 'Idaho Falls', 'Rexburg'],
+      })
   ]}
         extraHead={
           <>
@@ -136,6 +160,7 @@ export default function Home() {
           <Suspense fallback={null}>
           <Defer><Problems styles={styles} /></Defer>
           <Defer><Focus styles={styles} /></Defer>
+          <Defer><Trust styles={styles} /></Defer>
           <Defer><Process styles={styles} /></Defer>
           <Defer><Pricing styles={styles} /></Defer>
           <Defer><FinalCta styles={styles} /></Defer>

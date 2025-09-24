@@ -2,7 +2,7 @@ import { useState, type JSX } from 'react'
 import { Link } from 'react-router-dom'
 import { SEO } from '../../components/SEO/SEO'
 import styles from './FAQ.module.css'
-import { webPageJsonLd, canonicalFor } from '../../lib/seo';
+import { webPageJsonLd, canonicalFor, breadcrumbJsonLd, faqPageJsonLd } from '../../lib/seo';
 
 type QA = { q: string; a: string | JSX.Element }
 type GroupKey = 'General' | 'Websites' | 'E-commerce' | 'Web Apps' | 'Process' 
@@ -39,6 +39,36 @@ const GROUPS: Record<GroupKey, QA[]> = {
   ],
   
 }
+const SCHEMA_FAQS = [
+  // General
+  { question: 'What do you actually build?', answer: 'Custom-coded marketing websites, e-commerce stores, and lightweight web apps/portals. No page builders; modern React/TypeScript, accessible and fast.' },
+  { question: 'Do you work with small businesses?', answer: 'Yes—that’s our sweet spot. Local service businesses, clinics, trades, nonprofits, boutiques, and solo founders.' },
+  { question: 'Do you work with individuals?', answer: 'Our aim is to help individuals get an online platform without the hassle of today’s market.' },
+  { question: 'What’s included in hosting/care?', answer: 'Uptime monitoring, SSL, backups, security updates. Care plans add small monthly edits and priority response.' },
+  { question: 'How fast do you respond?', answer: 'Business-day replies, typically within 48 hours.' },
+  { question: 'Can we leave later?', answer: 'Yes. We will export your content and assets and help you transition cleanly.' },
+  { question: 'How do we start?', answer: 'Book a 15-minute intro on the contact page. If there is a fit, we will send a short questionnaire and a fixed-scope quote.' },
+
+  // Websites
+  { question: 'How long does a website take?', answer: 'Typically 2–4 weeks depending on pages, assets, and feedback speed. We provide a clear timeline up front.' },
+  { question: 'What’s included in a website build?', answer: 'Mobile-first design, clean code, performance and accessibility checks, SEO hygiene (meta, schema, sitemap), Analytics and Search Console, and a launch checklist.' },
+  { question: 'Who owns the code?', answer: 'For lump-sum projects, you own the code at final payment. For monthly websites, you license it while subscribed. We can always export your content and assets on request.' },
+
+  // E-commerce
+  { question: 'Which platforms do you use?', answer: 'Shopify or WooCommerce depending on catalog complexity, integrations, and budget.' },
+  { question: 'What’s the difference between Starter and Standard stores?', answer: 'Starter is for smaller catalogs with simple checkout and basics. Standard supports larger catalogs with filters/search, shipping rules, taxes, emails, and optional customer accounts.' },
+  { question: 'Can you migrate products?', answer: 'Yes. We can import products and customers from CSV or an existing platform and map variants and options.' },
+
+  // Web Apps
+  { question: 'What kinds of apps do you build?', answer: 'Dashboards, client portals, simple CRMs, bookings, quote calculators, Stripe billing, and integrations (QuickBooks, Google, Shopify, and more).' },
+  { question: 'How do you price an app?', answer: 'Scope-based. We usually start with a short Discovery Sprint to define flows, wireframes, and an estimate, then build in milestones.' },
+  { question: 'Can you maintain our existing app?', answer: 'Often yes, after a brief audit to understand stack, risks, and handoff needs.' },
+
+  // Process
+  { question: 'What’s the process like?', answer: 'Intro call → questionnaire → fixed scope/quote → design preview → build with weekly check-ins → launch → care/hosting.' },
+  { question: 'Do you offer payment options?', answer: 'Yes. Websites can be lump-sum or monthly. Apps and e-commerce are milestone-based.' },
+  { question: 'Do you guarantee your work?', answer: 'If you are not happy with the finished product, you do not move forward—no hard feelings.' },
+];
 
 const GROUP_ORDER: GroupKey[] = [
   'General',
@@ -65,16 +95,14 @@ export default function Faq() {
       name: 'FAQs',
       description: 'Common questions about timelines, hosting, editing your site, and how projects run.',
     }),
-    {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      '@id': `${canonicalFor('/faq')}#faq`,
-      mainEntity: GROUPS[active].map(({ q, a }: QA) => ({
-        '@type': 'Question',
-        name: q,
-        acceptedAnswer: { '@type': 'Answer', text: typeof a === 'string' ? a : '' },
-      })),
-    },
+    // Use all FAQs (not just the active tab)
+    faqPageJsonLd(
+      SCHEMA_FAQS.map(({ question, answer }) => ({ question, answer }))
+    ),
+    breadcrumbJsonLd([
+      { name: 'Home', url: 'https://frontlinewebsoftware.com' },
+      { name: 'FAQ', url: 'https://frontlinewebsoftware.com/faq' },
+    ]),
   ]}
 />
 

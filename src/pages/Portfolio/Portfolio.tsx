@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { SEO } from '../../components/SEO/SEO';
 import styles from './Portfolio.module.css';
-import { canonicalFor, webPageJsonLd } from '../../lib/seo';
+import { webPageJsonLd, breadcrumbJsonLd, canonicalFor } from '../../lib/seo';
+
 
 const categories = ['All', 'Websites', 'Web Apps / Portals', 'E-commerce', 'Integrations & Automation'] as const;
 type Category = typeof categories[number];
@@ -68,31 +69,55 @@ export default function Portfolio() {
   return (
     <>
       <SEO
-        title="Portfolio"
-        description="Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations."
-        canonical={canonicalFor('/portfolio')}
-        jsonLd={[
-          webPageJsonLd({
-            path: '/portfolio',
-            name: 'Portfolio',
-            description: 'Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations.',
-          }),
-          {
-            '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            '@id': `${canonicalFor('/portfolio')}#collection`,
-            name: 'Portfolio projects',
-            hasPart: projects.map(p => ({
-              '@type': 'CreativeWork',
-              name: p.title,
-              ...(p.year ? { datePublished: String(p.year) } : {}),
-              ...(p.result ? { abstract: p.result } : {}),
-              ...(p.features?.length ? { keywords: p.features.join(', ') } : {}),
-              ...(p.link ? { url: p.link } : {}),
-            })),
-          },
-        ]}
-      />
+  title="Portfolio"
+  description="Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations."
+  canonical={canonicalFor('/portfolio')}
+  jsonLd={[
+    // WebPage
+    webPageJsonLd({
+      path: '/portfolio',
+      name: 'Portfolio',
+      description:
+        'Selected projects across Websites, Web Apps/Portals, E-commerce, and Integrations.',
+    }),
+
+    // Breadcrumbs via helper
+    breadcrumbJsonLd([
+      { name: 'Home', url: 'https://frontlinewebsoftware.com' },
+      { name: 'Portfolio', url: 'https://frontlinewebsoftware.com/portfolio' },
+    ]),
+
+    // CollectionPage (grid)
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': `${canonicalFor('/portfolio')}#collection`,
+      url: canonicalFor('/portfolio'),
+      name: 'Portfolio projects',
+      hasPart: projects.map((p) => ({
+        '@type': 'CreativeWork',
+        name: p.title,
+        ...(p.year ? { datePublished: String(p.year) } : {}),
+        ...(p.result ? { abstract: p.result } : {}),
+        ...(p.features?.length ? { keywords: p.features.join(', ') } : {}),
+        ...(p.link ? { url: p.link } : {}),
+      })),
+    },
+
+    // ItemList (explicit order)
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': `${canonicalFor('/portfolio')}#items`,
+      itemListElement: projects.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: p.title,
+        ...(p.link ? { url: p.link } : { url: canonicalFor('/portfolio') }),
+      })),
+    },
+  ]}
+/>
 
       {/* PAGE-WIDE BACKGROUND */}
       <div className={styles.pageBg}>
