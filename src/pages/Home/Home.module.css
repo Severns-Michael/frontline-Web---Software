@@ -462,7 +462,7 @@
   }
 
   .deviceCarousel {
-    width: min(92vw, 520px);   /* no horizontal scroll */
+    width: min(92dvw, 520px);   /* no horizontal scroll */
     aspect-ratio: 16 / 10;
   }
 
@@ -687,4 +687,43 @@
   .proofFigure{ order: 1; margin-inline-start: 0; justify-self: stretch; }
   .proofCopy{ order: 2; max-width: none; }
   .kpis{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+/* Prevent hero decorations from causing sideways scroll */
+@media (max-width: 900px) {
+  /* ensure the section and its wrappers clip any overflow */
+  .hero,
+  .hero .container,
+  .heroVisual {
+    overflow: hidden;
+  }
+
+  /* keep the device strictly within the viewport width */
+  .deviceCarousel {
+    /* use dvw to avoid iOS 100vw quirks */
+    width: min(92dvw, 520px);
+  }
+
+  /* keep the overlayed phone inside the box */
+  .screenPhone {
+    right: 0;        /* was -1% / -2.5% */
+    bottom: -2%;
+    transform: rotate(-3deg);
+  }
+
+  /* clip or soften the decorative frame on mobile */
+  .deviceCarousel::after {
+    right: 0;        /* was -2% / -4% */
+    bottom: -3%;
+    transform: rotate(-3deg);
+    /* optional: slightly smaller so it never pokes out */
+    width: 30%;
+    height: 54%;
+  }
+}
+
+/* On very small phones, just hide the extra phone/frame entirely */
+@media (max-width: 520px) {
+  .screenPhone { display: none; }
+  .deviceCarousel::after { display: none; }
 }
