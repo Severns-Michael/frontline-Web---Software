@@ -52,10 +52,6 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className={styles.bottom}>
           <p className={styles.copy}>© {new Date().getFullYear()} Frontline Web &amp; Software</p>
-          <ul className={styles.bottomLinks} role="list">
-            <li><Link to="/privacy">Privacy</Link></li>
-            <li><Link to="/terms">Terms</Link></li>
-          </ul>
         </div>
       </div>
     </footer>

@@ -62,18 +62,18 @@ export default function Services() {
               {
                 '@type': 'Offer',
                 name: 'Lump Sum',
-                price: 3000,
+                price: 1500,
                 priceCurrency: 'USD',
                 priceSpecification: {
                   '@type': 'PriceSpecification',
                   priceCurrency: 'USD',
-                  price: 3000,
+                  price: 1500,
                 },
               },
               {
                 '@type': 'Offer',
                 name: 'Website Monthly',
-                price: 165,
+                price: 100,
                 priceCurrency: 'USD',
                 category: 'subscription',
               },
@@ -224,7 +224,7 @@ export default function Services() {
                       </ul>
                     </div>
 
-                    <div className={styles.price}>from $3,000</div>
+                    <div className={styles.price}>$1,500</div>
                   </article>
 
                   {/* Subscription */}
@@ -245,7 +245,7 @@ export default function Services() {
                       </ul>
                     </div>
 
-                    <div className={styles.price}>$165 / month</div>
+                    <div className={styles.price}>$100 / month</div>
                   </article>
                 </div>
               </>

@@ -47,6 +47,10 @@ export default function Header() {
             Frontline Web &amp; Software
           </Link>
 
+          <a href="tel:+14192616957" className={styles.phone}>
+            (419) 261-6957
+          </a>
+
           <button
             ref={btnRef}                                        
             type="button"
@@ -70,7 +74,7 @@ export default function Header() {
             <NavLink to="/about">About</NavLink>
             <NavLink to="/services">Services</NavLink>
             <NavLink to="/portfolio">Portfolio</NavLink>
-            <NavLink to="/Faq">FAQs</NavLink>
+            <NavLink to="/faq">FAQs</NavLink>
             <NavLink to="/contact" className={styles.cta}>Contact</NavLink>
           </nav>
 

@@ -36,6 +36,18 @@ body { font-family: var(--font-sans); }
   color: var(--brand);               /* was color:--brand; */
 }
 
+.phone{
+  color: var(--muted, #a8b1c4);
+  font-size: .9rem;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: 1rem;
+  transition: color .15s;
+}
+.phone:hover{
+  color: var(--brand);
+}
+
 /* ---------- Desktop nav ---------- */
 .nav{
   display: flex;
@@ -87,6 +99,8 @@ body { font-family: var(--font-sans); }
 
 /* ---------- Mobile layout ---------- */
 @media (max-width: 900px){
+  .phone{ display: none; }
+
   /* show/skin burger and make it solid blue */
   .menuBtn{
     display: inline-flex;

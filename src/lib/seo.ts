@@ -5,7 +5,7 @@ export const SITE = 'https://frontlinewebsoftware.com'; // no trailing slash
 export const SITE_NAME = 'Frontline Web & Software';
 
 // Common assets (put these in /public)
-export const OG_IMAGE = `${SITE}/og.jpg`;       // /public/og.jpg
+export const OG_IMAGE = `${SITE}/og.jpeg`;      // /public/og.jpeg
 export const LOGO_512 = `${SITE}/logo-512.png`; // /public/logo-512.png
 
 // ---- URL helpers ----

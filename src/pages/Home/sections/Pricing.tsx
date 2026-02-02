@@ -19,10 +19,10 @@ export default function Pricing({ styles, }: { styles: CSSModule;  }) {
             <h3>Website Lump Sum</h3>
             <ul className={styles.bullets}>
               <li>Up to 5 pages</li><li>Mobile-first + fast load</li><li>SEO+ analytics</li><li>Contact form</li>
-              <li>Google Business setup</li><li>Launch checklist</li><li>+40/mo unlimted edits</li><li>+25/mo hosting</li>
+              <li>Google Business setup</li><li>Launch checklist</li><li>+40/mo unlimited edits</li><li>+25/mo hosting</li>
             </ul>
             <div className={styles.metaRow}>
-              <span className={styles.priceTag}><strong>from $3000</strong></span>
+              <span className={styles.priceTag}><strong>$1,500</strong></span>
             </div>
             <Link to="/contact" className="button">Get exact quote</Link>
           </article>
@@ -34,10 +34,10 @@ export default function Pricing({ styles, }: { styles: CSSModule;  }) {
             <h3>Website Monthly</h3>
             <ul className={styles.bullets}>
               <li>Up to 5 pages</li><li>Mobile-first + fast load</li><li>SEO + analytics</li><li>Contact form</li>
-              <li>Google Business setup</li><li>Launch checklist</li><li>lifetime updates</li><li>unlimted edits</li><li>24/7 support</li>
+              <li>Google Business setup</li><li>Launch checklist</li><li>lifetime updates</li><li>unlimited edits</li><li>24/7 support</li>
             </ul>
             <div className={styles.metaRow}>
-              <span className={styles.priceTag}><strong>$160 /mo for 12 months</strong></span>
+              <span className={styles.priceTag}><strong>$100/month</strong></span>
             </div>
             <div className={styles.ctaRow}>
               <Link to="/contact" className="button">Start your estimate</Link>
@@ -62,7 +62,7 @@ export default function Pricing({ styles, }: { styles: CSSModule;  }) {
         </div>
 
         <div className={styles.pricingFoot}>
-          <p><strong className='accent'>Satisfaction Guarantee:</strong> If you’re not happy with the finished product, we don't move foward - no hard feelings.</p>
+          <p><strong className='accent'>Satisfaction Guarantee:</strong> If you're not happy with the finished product, we don't move forward - no hard feelings.</p>
           <p className={styles.muted}>Not sure where you land? <Link to="/services">Compare packages</Link> or <Link to="/contact">ask for a free 15-minute consult</Link>.</p>
         </div>
       </div>

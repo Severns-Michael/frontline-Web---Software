@@ -31,7 +31,7 @@ const launchOffer = {
   ],
   badge: 'Limited seats',
   code: 'LAUNCH25',
-  footnote: 'Available through Nov 30, 2025 or until seats fill, type code in the contact form.',
+  footnote: 'Available through March 31, 2026 or until seats fill. Type code in the contact form.',
   ctaHref: '/contact?offer=LAUNCH25',
   ctaText: 'Claim the Offer',
 };
@@ -41,7 +41,7 @@ const launchOffer = {
 // const PROMO_ONLY_MODE = false; // true = hide the grid (promo-only mode)
 
 const PROMO_ENABLED = true;   // true = show promo card
-const PROMO_ONLY_MODE = true;
+const PROMO_ONLY_MODE = true; // hide fake projects until we have real ones
 
 const projects: Project[] = [
   // Websites

@@ -51,19 +51,19 @@ export default function Contact() {
   return (
     <>
  <SEO
-        title="Services"
-        description="Websites, web apps/portals, e-commerce, and integrations built for growth."
-        canonical={canonicalFor('/services')}
+        title="Contact"
+        description="Get in touch with Frontline Web & Software. Tell us about your project and we'll reply quickly with next steps."
+        canonical={canonicalFor('/contact')}
         jsonLd={[
           webPageJsonLd({
-            path: '/services',
-            name: 'Services',
+            path: '/contact',
+            name: 'Contact',
             description:
-              'Websites, web apps/portals, e-commerce, and integrations built for growth.',
+              "Get in touch with Frontline Web & Software. Tell us about your project and we'll reply quickly with next steps.",
           }),
           breadcrumbJsonLd([
             { name: 'Home', url: 'https://frontlinewebsoftware.com' },
-            { name: 'Services', url: 'https://frontlinewebsoftware.com/services' },
+            { name: 'Contact', url: 'https://frontlinewebsoftware.com/contact' },
           ]),
           // Local signals (optional but recommended)
           localBusinessJsonLd({
