@@ -37,7 +37,7 @@ export default function Services() {
 
     // LocalBusiness via helper (keep it lean; add phone/address if you want them on this page too)
     localBusinessJsonLd({
-      // phone: '+14192616957',
+      // phone: '+14192616857',
       city: 'Pocatello',
       region: 'ID',
       areaServed: ['Pocatello', 'Idaho Falls', 'Rexburg', 'Idaho'],

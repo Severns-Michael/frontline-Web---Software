@@ -29,7 +29,7 @@ export default function Pocatello() {
     localBusinessJsonLd({
       areaServed: ['Pocatello', 'Idaho'],
       // optionally publish NAP here too if you want:
-      // phone: '+14192616957',
+      // phone: '+14192616857',
       // street: '1500 E Venture Way',
       // city: 'Pocatello',
       // region: 'ID',

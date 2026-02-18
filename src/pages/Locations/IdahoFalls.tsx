@@ -29,7 +29,7 @@ export default function IdahoFalls() {
     localBusinessJsonLd({
       areaServed: ['Idaho Falls', 'Idaho'],
       // optionally add: phone, street, city, region, postal to publish NAP here too
-      // phone: '+14192616957',
+      // phone: '+14192616857',
       // street: '1500 E Venture Way',
       // city: 'Pocatello',
       // region: 'ID',

@@ -67,7 +67,7 @@ export default function Contact() {
           ]),
           // Local signals (optional but recommended)
           localBusinessJsonLd({
-            phone: '+14192616957',
+            phone: '+14192616857',
             city: 'Pocatello',
             region: 'ID',
             areaServed: ['Pocatello', 'Idaho Falls', 'Rexburg', 'Idaho'],
@@ -195,7 +195,7 @@ export default function Contact() {
                 <h3>Contact</h3>
                <ul className={styles.contactList}>
                 <li>📧 <a href="mailto:frontline.web.and.software@gmail.com">frontline.web.and.software@gmail.com</a></li>
-                <li>📞 <a href="tel:+14192616957">+1 (419) 261-6957</a></li>
+                <li>📞 <a href="tel:+14192616857">+1 (419) 261-6857</a></li>
                 <li>📍 Based in Pocatello, ID</li>
               </ul>
               </div>

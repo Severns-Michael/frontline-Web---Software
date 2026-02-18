@@ -21,7 +21,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="tel:+14192616957">+1 (419) 261-6957</a>
+                <a href="tel:+14192616857">+1 (419) 261-6857</a>
               </li>
               <li>Based in Pocatello, ID</li>
             </ul>

@@ -79,7 +79,7 @@ export default function Home() {
       ],
     }),
     localBusinessJsonLd({
-      phone: '+14192616957',
+      phone: '+14192616857',
       street: '1500 E Venture Way',
       city: 'Pocatello',
       region: 'ID',

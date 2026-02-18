@@ -47,8 +47,8 @@ export default function Header() {
             Frontline Web &amp; Software
           </Link>
 
-          <a href="tel:+14192616957" className={styles.phone}>
-            (419) 261-6957
+          <a href="tel:+14192616857" className={styles.phone}>
+            (419) 261-6857
           </a>
 
           <button
